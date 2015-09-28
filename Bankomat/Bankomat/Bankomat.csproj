@@ -181,6 +181,7 @@
     <Compile Include="Models\Atm.cs" />
     <Compile Include="Models\Bank.cs" />
     <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\ClickLog.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -250,6 +251,7 @@
     <Content Include="Views\Atms\Details.cshtml" />
     <Content Include="Views\Atms\Edit.cshtml" />
     <Content Include="Views\Atms\Index.cshtml" />
+    <Content Include="Views\Atms\Withdrawal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
