@@ -14,12 +14,8 @@ namespace Bankomat.DAL
         {
         }
 
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<Card> Cards { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Atm> Atms { get; set; }
-        public DbSet<Bank> Banks { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
