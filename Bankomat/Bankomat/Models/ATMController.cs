@@ -14,6 +14,12 @@ namespace Bankomat.Models
 
         private void GetBalance()
         {
+            DanielTestStoredProcedureGetBalance();
+        }
+
+        private void DanielTestStoredProcedureGetBalance
+        {
+            
         }
 
         private void GetTransaction()
