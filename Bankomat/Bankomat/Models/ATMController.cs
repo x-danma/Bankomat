@@ -7,6 +7,7 @@ namespace Bankomat.Models
 {
     public class ATMController
     {
+
         private void ConnectToBank()
         {
         }
