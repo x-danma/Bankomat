@@ -15,6 +15,11 @@ namespace Bankomat.Controllers
     {
         private BankomatContext db = new BankomatContext();
 
+        public ActionResult Withdrawal(int id)
+        {
+            Atm atm = db.Atms.Find(id);
+            return View(atm);
+        }
 
         public ActionResult Index()
         {
