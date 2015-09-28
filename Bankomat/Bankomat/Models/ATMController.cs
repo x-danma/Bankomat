@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Bankomat.Models
 {
-    public class ATMController
+    public class AtmController
     {
 
         private void ConnectToBank()
