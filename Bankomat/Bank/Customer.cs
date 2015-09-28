@@ -8,7 +8,8 @@ namespace Bank
 {
     class Customer
     {
-        public Guid CustomerID { get; set; }
+        private Guid id;
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string SSN { get; set; }

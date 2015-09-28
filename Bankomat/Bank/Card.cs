@@ -8,7 +8,8 @@ namespace Bank
 {
     class Card
     {
-        public Guid CardID { get; set; }
+        public int id;
+
         public string CardNumber { get; set; }
         public int Pin { get; set; }
         public int PinFailsInRow { get; set; }

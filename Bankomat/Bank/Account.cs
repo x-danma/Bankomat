@@ -8,7 +8,9 @@ namespace Bank
 {
      class Account
     {
+        private int accountNumber; 
         private decimal balance;
+
 
         public void Withdrawal(int amount)
         {
