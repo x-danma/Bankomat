@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>*@
+    <div class="wrapper">
+
+
+        <div class="hardwareWrapper">
+            <div class="softButtonWrapper">
+                <input id="Button1" class="softButton" type="button" />
+                <br />
+                <input id="Button1" class="softButton" type="button" />
+                <br />
+                <input id="Button1" class="softButton" type="button" />
+                <br />
+                <input id="Button1" class="softButton" type="button" />
+            </div>
+            <div class="atmScreen">
+                <div class="infoBox">
+                    @RenderBody()
+
+
+                </div>
+
+
+            </div>
+
+            <div class="softRightButtonWrapper">
+
+                <input id="Button1" class="softButton" type="button" />
+                <br />
+                <input id="Button1" class="softButton" type="button" />
+                <br />
+                <input id="Button1" class="softButton" type="button" />
+                <br />
+                <input id="Button1" class="softButton" type="button" />
+
+            </div>
+
+        </div>
+
+        <div class="buttonWrapper">
+            <div class="numberButtons">
+                <input id="Button1" class="clickButton" type="button" value="1" />
+
+                <input id="Button1" class="clickButton" type="button" value="2" />
+
+                <input id="Button1" class="clickButton" type="button" value="3" />
+                <br />
+                <input id="Button1" class="clickButton" type="button" value="4" />
+
+                <input id="Button1" class="clickButton" type="button" value="5" />
+
+                <input id="Button1" class="clickButton" type="button" value="6" />
+                <br />
+                <input id="Button1" class="clickButton" type="button" value="7" />
+
+                <input id="Button1" class="clickButton" type="button" value="8" />
+
+                <input id="Button1" class="clickButton" type="button" value="9" />
+                <br />
+                <input id="Button1" class="clickButton" type="button" value="" />
+
+                <input id="Button1" class="clickButton" type="button" value="0" />
+
+                <input id="Button1" class="clickButton" type="button" value="" />
+
+                <br />
+            </div>
+            <div class="doButtons">
+                <br />
+                <input id="Button1" class="clickDoButton" type="button" value="Avbryt" />
+                <br />
+                <input id="Button1" class="clickDoButton" type="button" value="Ångra" />
+                <br />
+                <input id="Button1" class="clickDoButton" type="button" value="Ok" />
+            </div>
+        </div>
+
+        <div class="outputWrapper">
+
+
+            <div class="recipeOutput">
+
+
+            </div>
+
+            <div class="cardInput">
+                <div class"cardInputter">
+                    hejhej
+                </div>
+
+            </div>
+
+        </div>
+        <div class="moneyOutput">
+            -------
+        </div>
+
+
+
+    </div>
+
+    @*<div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>*@
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
