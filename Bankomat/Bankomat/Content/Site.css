@@ -1,12 +1,13 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
+    background-color: #00aae4;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    /*padding-left: 15px;
+    padding-right: 15px;*/
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -20,5 +21,118 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
+}
+
+.wrapper {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.softButtonWrapper {
+    width: 10%;
+    float: left;
+    height: 400px;
+}
+
+.softRightButtonWrapper {
+    width: 10%;
+    float: left;
+    height: 400px;
+}
+
+.hardwareWrapper {
+    margin-top: 10%;
+    width: 100%;
+    padding: 3%;
+    text-align: center;
+    background-color: #808080;
+    height: 400px;
+}
+
+.atmScreen {
+    width: 80%;
+    float: left;
+    background-color: #fff;
+    height: 400px;
+}
+
+.outputWrapper {
+    width: 50%;
+    float: left;
+    margin-top: 3%;
+}
+
+.moneyOutput {
+    width: 100%;
+    float: left;
+}
+
+.softButton {
+    margin: 15%;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 10%;
+    width: 50%;
+}
+
+.buttonWrapper {
+    width: 25%;
+    height: 250px;
+    float: left;
+    margin-left: 13%;
+    padding-left: 3%;
+    padding-top: 3%;
+    margin-top: 3%;
+    background-color: #808080;
+}
+
+.clickButton {
+    margin: 1%;
+    height: 52px;
+    width: 52px;
+}
+
+.numberButtons {
+    width: 70%;
+    float: left;
+}
+
+.doButtons {
+    margin-top: 73px;
+    width: 25%;
+    float: left;
+}
+
+.clickDoButton {
+    margin: 1%;
+    height: 42px;
+    width: 70px;
+}
+
+.recipeOutput {
+    float: left;
+    margin-left: 40%;
+    height: 5px;
+    width: 320px;
+    background-color: #000000;
+}
+
+.cardInput {
+    float: left;
+    margin-left: 40%;
+    margin-top: 10%;
+    border: solid;
+    border-color: #000;
+    border-radius: 5px;
+
+    padding: 5%;
+    height: 15px;
+    width: 250px;
+    background-color: #4cff00;
+}
+.cardinputter
+{
+    
+    background-color: #000;
 }
