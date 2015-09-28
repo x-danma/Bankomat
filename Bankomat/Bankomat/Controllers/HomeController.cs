@@ -16,7 +16,7 @@ namespace Bankomat.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
+            ViewBag.myMessage = "daniel test";
             return View();
         }
 
