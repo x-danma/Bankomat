@@ -17,7 +17,9 @@ namespace Bankomat.Controllers
 
         public ActionResult Withdrawal()
         {
-            Account account = db.Accounts.Find(0);
+            Account account = db.Accounts.Find(1);
+
+            
 
             return View(account);
         }

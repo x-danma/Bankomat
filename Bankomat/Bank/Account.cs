@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Bankomat.Models
+namespace Bank
 {
     public class Account
     {
-
         private decimal balance;
 
         public void Withdrawal(int amount)
