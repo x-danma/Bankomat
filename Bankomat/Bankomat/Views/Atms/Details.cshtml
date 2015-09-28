@@ -1,0 +1,42 @@
+﻿@model Bankomat.Models.Atm
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Atm</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Bills100)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bills100)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bills500)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bills500)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Receipts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Receipts)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AtmID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

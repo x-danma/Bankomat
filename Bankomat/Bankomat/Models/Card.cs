@@ -8,7 +8,7 @@ namespace Bankomat.Models
     public class Card
     {
         public int CardID { get; set; }
-        public int CustomerID { get; set; }
+        //public int CustomerID { get; set; }
         public int AccountID { get; set; }
         public string CardNumber { get; set; }
         public int Pin { get; set; }

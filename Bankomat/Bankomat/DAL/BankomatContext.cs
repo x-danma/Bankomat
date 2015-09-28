@@ -8,9 +8,9 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Bankomat.DAL
 {
-    public class BankContext : DbContext
+    public class BankomatContext : DbContext
     {
-        public BankContext() : base("BankContext")
+        public BankomatContext() : base("BankomatContext")
         {
         }
 
@@ -19,6 +19,7 @@ namespace Bankomat.DAL
         public DbSet<Card> Cards { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Atm> Atms { get; set; }
+        public DbSet<Bank> Banks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
