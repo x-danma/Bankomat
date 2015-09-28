@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bank
 {
-    public class Account
+     class Account
     {
         private decimal balance;
 
@@ -35,16 +35,14 @@ namespace Bank
             Transactions.Add(new Transaction { Amount = amount, Date = DateTime.Now, Description = description, AccountID = this.AccountID }); //Sätt dateTime automatiskt i Db, 
         }
 
-        public int AccountID { get; set; }
-        public int CustomerID { get; set; }
+        public Guid AccountID { get; set; }
         public int AccountNumber { get; set; }
         public int ClearingNumber { get; set; }
         public decimal Balance { get; set; }
         public decimal WithdrawalLimitPerTime { get; set; }
         public decimal WithdrawalLimitPerDay { get; set; }
 
-        public Customer Customer { get; set; }
         public List<Transaction> Transactions { get; set; }
-        public List<Card> Cards { get; set; }
+
     }
 }
