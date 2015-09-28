@@ -15,21 +15,14 @@ namespace Bankomat.Controllers
     {
         private BankomatContext db = new BankomatContext();
 
-        //public ActionResult UseAtm(int? id)
-        //{
 
-            
-        //    return View()
-        //}
-
-        // GET: Atm
         public ActionResult Index()
         {
             return View(db.Atms.ToList());
         }
 
         // GET: Atm/Details/5
-        public ActionResult UseAtm(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
