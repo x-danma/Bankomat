@@ -13,7 +13,9 @@ namespace Bankomat.DAL
         {
             var atms = new List<Atm>
             {
-                new Atm { Bills100 = 50, Bills500 = 20, Receipts = 1000 }
+                new Atm { Bills100 = 50, Bills500 = 20, Receipts = 8 },
+                new Atm { Bills100 = 100, Bills500 = 25, Receipts = 10 },
+                new Atm { Bills100 = 70, Bills500 = 30, Receipts = 1 }
             };
 
             atms.ForEach(c => context.Atms.Add(c));
