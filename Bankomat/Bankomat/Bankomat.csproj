@@ -168,7 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AtmsController.cs" />
+    <Compile Include="Controllers\AtmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\BankomatContext.cs" />
@@ -244,12 +244,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Atms\Create.cshtml" />
-    <Content Include="Views\Atms\Delete.cshtml" />
-    <Content Include="Views\Atms\Details.cshtml" />
-    <Content Include="Views\Atms\Edit.cshtml" />
-    <Content Include="Views\Atms\Index.cshtml" />
-    <Content Include="Views\Atms\Withdrawal.cshtml" />
+    <Content Include="Views\Atm\Create.cshtml" />
+    <Content Include="Views\Atm\Delete.cshtml" />
+    <Content Include="Views\Atm\UseAtm.cshtml" />
+    <Content Include="Views\Atm\Edit.cshtml" />
+    <Content Include="Views\Atm\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

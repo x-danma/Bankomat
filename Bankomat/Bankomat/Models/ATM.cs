@@ -11,5 +11,6 @@ namespace Bankomat.Models
         public int Bills100 { get; set; }
         public int Bills500 { get; set; }
         public int Receipts { get; set; }
+
     }
 }

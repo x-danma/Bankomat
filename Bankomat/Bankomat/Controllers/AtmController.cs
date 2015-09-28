@@ -11,21 +11,25 @@ using Bankomat.Models;
 
 namespace Bankomat.Controllers
 {
-    public class AtmsController : Controller
+    public class AtmController : Controller
     {
         private BankomatContext db = new BankomatContext();
 
+        //public ActionResult UseAtm(int? id)
+        //{
 
+            
+        //    return View()
+        //}
 
-
-        // GET: Atms
+        // GET: Atm
         public ActionResult Index()
         {
             return View(db.Atms.ToList());
         }
 
-        // GET: Atms/Details/5
-        public ActionResult Details(int? id)
+        // GET: Atm/Details/5
+        public ActionResult UseAtm(int? id)
         {
             if (id == null)
             {
@@ -39,13 +43,13 @@ namespace Bankomat.Controllers
             return View(atm);
         }
 
-        // GET: Atms/Create
+        // GET: Atm/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Atms/Create
+        // POST: Atm/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -62,7 +66,7 @@ namespace Bankomat.Controllers
             return View(atm);
         }
 
-        // GET: Atms/Edit/5
+        // GET: Atm/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,7 +81,7 @@ namespace Bankomat.Controllers
             return View(atm);
         }
 
-        // POST: Atms/Edit/5
+        // POST: Atm/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -93,7 +97,7 @@ namespace Bankomat.Controllers
             return View(atm);
         }
 
-        // GET: Atms/Delete/5
+        // GET: Atm/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,7 +112,7 @@ namespace Bankomat.Controllers
             return View(atm);
         }
 
-        // POST: Atms/Delete/5
+        // POST: Atm/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
