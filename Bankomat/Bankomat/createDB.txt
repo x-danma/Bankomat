@@ -1,0 +1,298 @@
+-- READ ME
+
+--KOPIERA DEN HÄR TEXTFILEN IN TILL EN EXECUTE QUERY I SQL SERVER.
+-- VID PROBLEM, FRÅGA DANIEL.
+
+
+
+
+
+
+-- =============================================
+-- Create database template
+-- =============================================
+USE master
+GO
+
+-- Drop the database if it already exists
+IF  EXISTS (
+	SELECT name 
+		FROM sys.databases 
+		WHERE name = N'BankDB'
+)
+DROP DATABASE BankDB
+GO
+
+CREATE DATABASE BankDB
+GO
+
+-- =========================================
+-- Create table template
+-- =========================================
+USE BankDB
+GO
+
+IF OBJECT_ID('dbo.Contact', 'U') IS NOT NULL
+  DROP TABLE dbo.Contact
+GO
+
+CREATE TABLE dbo.Contact
+(
+	[CID] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	[Firstname] [varchar](250) NOT NULL,
+	[Lastname] [varchar](250) NOT NULL,
+	[SSN] [varchar](20) NOT NULL,
+	
+)
+GO
+
+
+-- =========================================
+-- Create table template
+-- =========================================
+USE BankDB
+GO
+
+IF OBJECT_ID('dbo.Address', 'U') IS NOT NULL
+  DROP TABLE dbo.Address
+GO
+
+CREATE TABLE dbo.Address
+(
+	[AID] [INT] PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	[Type] [varchar](250) NOT NULL,
+	[Street] [varchar](250) NOT NULL,
+	[Streetnumber] [int] NOT NULL,
+	[Country] [varchar](250) NOT NULL,
+)
+GO
+
+CREATE TABLE dbo.ContactAddressRelation
+(
+	[CID] [INT] not null foreign key references Contact(CID),
+	[AID] [INT] NOT NULL FOREIGN KEY REFERENCES Address(AID),
+)
+GO
+
+CREATE TABLE dbo.Phonenumber
+(
+	[PID] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	[Phonenumber] [varchar](250) NOT NULL,
+	[Type] [varchar](50) NOT NULL,
+)
+GO
+
+CREATE TABLE dbo.ContactPhoneNumberRelation
+(
+	[ContactID] [int] NOT NULL FOREIGN KEY REFERENCES Contact(CID),
+	[PhonenumberID] [int] NOT NULL FOREIGN KEY REFERENCES Phonenumber(PID),
+)
+GO
+
+
+
+
+-- =============================================
+-- Create basic stored procedure template
+-- =============================================
+
+-- =============================================
+-- Author:	Daniel, Mårtensson
+-- Create date: 2015-09-22
+-- Description:	Adds a Contact to dbo.Contact and returns the new CID 
+-- =============================================
+-- ----------------------
+-- Drop stored procedure if it already exists
+IF EXISTS (
+  SELECT * 
+    FROM INFORMATION_SCHEMA.ROUTINES 
+   WHERE SPECIFIC_SCHEMA = N'dbo'
+     AND SPECIFIC_NAME = N'sp_AddContact' 
+)
+   DROP PROCEDURE dbo.sp_AddContact
+GO
+
+CREATE PROCEDURE dbo.sp_AddContact
+	@FirstName varchar(255),
+	@LastName varchar(255),
+	@SSN varchar(13),
+	@CID int output,
+	@ErrorMsg varchar(4000) output
+AS
+	
+		BEGIN TRY 
+
+			set nocount on;
+			
+			PRINT 'Adding a new contact'
+			BEGIN TRANSACTION [myTran]
+				insert into Contact(CID, FirstName, SSN, LastName) values (1, @FirstName, @SSN, @LastName)
+				set @CID=SCOPE_IDENTITY()
+				set nocount OFF
+			COMMIT TRANSACTION [myTran]
+		PRINT 'Contact(s) added'
+END TRY
+
+BEGIN CATCH
+	IF (@@TRANCOUNT>0)
+	BEGIN
+		PRINT ERROR_MESSAGE()
+		set @ErrorMsg = ERROR_MESSAGE()
+		PRINT 'Error, transaction will rollback'
+		ROLLBACK TRANSACTION [myTran]
+		PRINT 'Done.'
+	END
+END CATCH
+GO
+
+
+
+
+-- =============================================
+-- Author:	Daniel, Mårtensson
+-- Create date: 2015-09-22
+-- Description:	Adds an adress to dbo.Adress and returns the new ID 
+-- =============================================
+-- ----------------------
+-- Drop stored procedure if it already exists
+IF EXISTS (
+  SELECT * 
+    FROM INFORMATION_SCHEMA.ROUTINES 
+   WHERE SPECIFIC_SCHEMA = N'dbo'
+     AND SPECIFIC_NAME = N'sp_AddAddress' 
+)
+   DROP PROCEDURE dbo.sp_AddAddress
+GO
+
+CREATE PROCEDURE [dbo].[sp_AddAddress] 
+	-- Add the parameters for the stored procedure here
+	@ContactID int,
+	@Type varchar(250),
+	@Street varchar(250),
+	@Streetnumber int,
+	@Country varchar(250),
+	@AddressID int out
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	insert into Address (Type, Street, Streetnumber, Country) values (@Type, @Street, @Streetnumber, @Country)
+	set @AddressID=SCOPE_IDENTITY()
+	insert into ContactAddressRelation (CID, AID) values (@ContactID, @AddressID)
+
+END
+
+GO
+
+
+-- =============================================
+-- Author:	Daniel, Mårtensson
+-- Create date: 2015-09-22
+-- Description:	Deletes a Contact from dbo.Adress and returns the new ID 
+-- =============================================
+-- ----------------------
+-- Drop stored procedure if it already exists
+IF EXISTS (
+  SELECT * 
+    FROM INFORMATION_SCHEMA.ROUTINES 
+   WHERE SPECIFIC_SCHEMA = N'dbo'
+     AND SPECIFIC_NAME = N'sp_DeleteContact' 
+)
+   DROP PROCEDURE dbo.sp_DeleteContact
+GO
+
+CREATE PROCEDURE [dbo].[sp_DeleteContact] 
+	-- Add the parameters for the stored procedure here
+	@CID int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	DELETE FROM [dbo].[Contact]
+      WHERE CID=@CID
+END
+
+GO
+
+-- =============================================
+-- Example to execute the stored procedure
+-- =============================================
+
+
+
+-- =============================================
+-- Author:	Daniel, Mårtensson
+-- Create date: 2015-09-22
+-- Description:	Edits a Contact from dbo.Adress and returns the new ID 
+-- =============================================
+-- ----------------------
+-- Drop stored procedure if it already exists
+IF EXISTS (
+  SELECT * 
+    FROM INFORMATION_SCHEMA.ROUTINES 
+   WHERE SPECIFIC_SCHEMA = N'dbo'
+     AND SPECIFIC_NAME = N'sp_EditContact' 
+)
+   DROP PROCEDURE dbo.sp_EditContact
+GO
+
+CREATE PROCEDURE [dbo].[sp_EditContact] 
+	-- Add the parameters for the stored procedure here
+	@FirstName varchar(255),
+	@LastName varchar(255),
+	@SSN varchar(13),
+	@ContactID int out
+	
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	UPDATE [dbo].[Contact]
+   SET [Firstname] = @FirstName
+      ,[Lastname] = @LastName
+      ,[SSN] = @SSN
+ WHERE CID=@ContactID
+END
+
+GO
+
+
+declare @CID int, @AID int, @ErrorMessage varchar(4000);
+EXECUTE dbo.sp_AddContact 'Daniel', 'Mårtensson', '19890928-7479', @CID output, @ErrorMessage 
+EXECUTE dbo.sp_AddContact 'Bo' 	  , 'Bosson'	, '294847-3811'  , @CID output, @ErrorMessage 
+EXECUTE dbo.sp_AddContact 'Li', 'Lisson', '297237-8502', @CID output, @ErrorMessage 
+EXECUTE dbo.sp_AddContact 'Ulla', 'Sekreterare', '993829+2380', @CID output, @ErrorMessage 
+EXECUTE dbo.sp_AddContact 'Anna', 'Bokström', '294859-2390', @CID output, @ErrorMessage 
+EXECUTE dbo.sp_AddContact 'Andreas', 'Holmström', '930382-3492', @CID output, @ErrorMessage 
+EXECUTE dbo.sp_AddContact 'Hugh', 'Laurie', '774004-9202', @CID output, @ErrorMessage 
+EXECUTE dbo.sp_AddContact 'George', 'Clooney', '19660292-8282', @CID output, @ErrorMessage 
+EXECUTE dbo.sp_AddContact 'Matt', 'Damon', '292039-2944', @CID output, @ErrorMessage 
+EXECUTE dbo.sp_AddContact 'Mark', 'Hammond', '29183252-3493', @CID output, @ErrorMessage 
+EXECUTE dbo.sp_AddContact 'Marty', 'McFly', '19669420-9492', @CID output, @ErrorMessage 
+EXECUTE dbo.sp_AddContact 'Rowan', 'Atkinson', '19559283-7575', @CID output, @ErrorMessage 
+
+
+EXECUTE dbo.sp_AddAddress 1,'Home', 'Helenetorpsgatan', 42, 'Sweden',@AID
+EXECUTE dbo.sp_AddAddress 4,'Work', 'Arbetsgatan'     , 23, 'Sweden',@AID
+EXECUTE dbo.sp_AddAddress 7,'Home', 'Storvägen'       , 17, 'Sweden',@AID
+EXECUTE dbo.sp_AddAddress 12,'Sommarstuga', 'Finstigen' ,1, 'Sweden',@AID
+GO
+
+
+USE BankDB
+GO
+INSERT INTO [dbo].[ContactAddressRelation]
+		([CID], [AID])
+	VALUES
+		(2, 1)
+GO 
