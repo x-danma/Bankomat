@@ -32,19 +32,34 @@ GO
 USE BankDB
 GO
 
-IF OBJECT_ID('dbo.Contact', 'U') IS NOT NULL
-  DROP TABLE dbo.Contact
+IF OBJECT_ID('dbo.Account', 'U') IS NOT NULL
+  DROP TABLE dbo.Account
 GO
 
-CREATE TABLE dbo.Contact
-(
-	[CID] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	[Firstname] [varchar](250) NOT NULL,
-	[Lastname] [varchar](250) NOT NULL,
-	[SSN] [varchar](20) NOT NULL,
-	
-)
+
+/****** Object: Table [dbo].[Account] Script Date: 2015-09-28 14:57:44 ******/
+SET ANSI_NULLS ON
 GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Account] (
+    [AccountID]              INT             IDENTITY (1, 1) NOT NULL,
+    [CustomerID]             INT             NOT NULL,
+    [AccountNumber]          INT             NOT NULL,
+    [ClearingNumber]         INT             NOT NULL,
+    [Balance]                DECIMAL (18, 2) NOT NULL,
+    [WithdrawalLimitPerTime] DECIMAL (18, 2) NOT NULL,
+    [WithdrawalLimitPerDay]  DECIMAL (18, 2) NOT NULL
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_CustomerID]
+    ON [dbo].[Account]([CustomerID] ASC);
+
+
 
 
 -- =========================================
@@ -53,41 +68,96 @@ GO
 USE BankDB
 GO
 
-IF OBJECT_ID('dbo.Address', 'U') IS NOT NULL
-  DROP TABLE dbo.Address
+IF OBJECT_ID('dbo.Card', 'U') IS NOT NULL
+  DROP TABLE dbo.Card
 GO
 
-CREATE TABLE dbo.Address
-(
-	[AID] [INT] PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	[Type] [varchar](250) NOT NULL,
-	[Street] [varchar](250) NOT NULL,
-	[Streetnumber] [int] NOT NULL,
-	[Country] [varchar](250) NOT NULL,
-)
+
+/****** Object: Table [dbo].[Card] Script Date: 2015-09-28 15:15:01 ******/
+SET ANSI_NULLS ON
 GO
 
-CREATE TABLE dbo.ContactAddressRelation
-(
-	[CID] [INT] not null foreign key references Contact(CID),
-	[AID] [INT] NOT NULL FOREIGN KEY REFERENCES Address(AID),
-)
+SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE dbo.Phonenumber
-(
-	[PID] [int] PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	[Phonenumber] [varchar](250) NOT NULL,
-	[Type] [varchar](50) NOT NULL,
-)
+CREATE TABLE [dbo].[Card] (
+    [CardID]              INT            IDENTITY (1, 1) NOT NULL,
+    [AccountID]           INT            NOT NULL,
+    [CardNumber]          VARCHAR (MAX) NULL,
+    [Pin]                 INT            NOT NULL,
+    [PinFailsInRow]       INT            NOT NULL,
+    [isActivated]         BIT            NOT NULL,
+    [Customer_CustomerID] INT            NULL
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_AccountID]
+    ON [dbo].[Card]([AccountID] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_Customer_CustomerID]
+    ON [dbo].[Card]([Customer_CustomerID] ASC);
+
+
+
+
+
+-- =========================================
+-- Create table template
+-- =========================================
+
+
+
+/****** Object: Table [dbo].[Customer] Script Date: 2015-09-28 15:26:53 ******/
+SET ANSI_NULLS ON
 GO
 
-CREATE TABLE dbo.ContactPhoneNumberRelation
-(
-	[ContactID] [int] NOT NULL FOREIGN KEY REFERENCES Contact(CID),
-	[PhonenumberID] [int] NOT NULL FOREIGN KEY REFERENCES Phonenumber(PID),
-)
+SET QUOTED_IDENTIFIER ON
 GO
+
+CREATE TABLE [dbo].[Customer] (
+    [CustomerID] INT            IDENTITY (1, 1) NOT NULL,
+    [FirstName]  VARCHAR (MAX) NULL,
+    [LastName]   VARCHAR (MAX) NULL,
+    [SSN]        VARCHAR (MAX) NULL
+);
+
+
+-- =========================================
+-- Create table template
+-- =========================================
+
+
+
+/****** Object: Table [dbo].[Transaction] Script Date: 2015-09-28 15:31:31 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Transaction] (
+    [TransactionID] INT             IDENTITY (1, 1) NOT NULL,
+    [AccountID]     INT             NOT NULL,
+    [Amount]        DECIMAL (18, 2) NOT NULL,
+    [Date]          DATETIME        NOT NULL,
+    [Description]   NVARCHAR (MAX)  NULL
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_AccountID]
+    ON [dbo].[Transaction]([AccountID] ASC);
+
+
+
+
+-- =========================================
+-- Create table template
+-- =========================================
+
 
 
 
@@ -99,7 +169,7 @@ GO
 -- =============================================
 -- Author:	Daniel, Mårtensson
 -- Create date: 2015-09-22
--- Description:	Adds a Contact to dbo.Contact and returns the new CID 
+-- Description:	Adds a Contact to dbo.Account and returns the new CID 
 -- =============================================
 -- ----------------------
 -- Drop stored procedure if it already exists
@@ -107,192 +177,116 @@ IF EXISTS (
   SELECT * 
     FROM INFORMATION_SCHEMA.ROUTINES 
    WHERE SPECIFIC_SCHEMA = N'dbo'
-     AND SPECIFIC_NAME = N'sp_AddContact' 
+     AND SPECIFIC_NAME = N'sp_GetBalance' 
 )
-   DROP PROCEDURE dbo.sp_AddContact
+   DROP PROCEDURE dbo.sp_GetBalance
 GO
 
-CREATE PROCEDURE dbo.sp_AddContact
-	@FirstName varchar(255),
-	@LastName varchar(255),
-	@SSN varchar(13),
-	@CID int output,
-	@ErrorMsg varchar(4000) output
-AS
-	
-		BEGIN TRY 
+SET ANSI_NULLS ON
+GO
 
-			set nocount on;
-			
-			PRINT 'Adding a new contact'
-			BEGIN TRANSACTION [myTran]
-				insert into Contact(CID, FirstName, SSN, LastName) values (1, @FirstName, @SSN, @LastName)
-				set @CID=SCOPE_IDENTITY()
-				set nocount OFF
-			COMMIT TRANSACTION [myTran]
-		PRINT 'Contact(s) added'
-END TRY
-
-BEGIN CATCH
-	IF (@@TRANCOUNT>0)
-	BEGIN
-		PRINT ERROR_MESSAGE()
-		set @ErrorMsg = ERROR_MESSAGE()
-		PRINT 'Error, transaction will rollback'
-		ROLLBACK TRANSACTION [myTran]
-		PRINT 'Done.'
-	END
-END CATCH
+SET QUOTED_IDENTIFIER ON
 GO
 
 
-
-
--- =============================================
--- Author:	Daniel, Mårtensson
--- Create date: 2015-09-22
--- Description:	Adds an adress to dbo.Adress and returns the new ID 
--- =============================================
--- ----------------------
--- Drop stored procedure if it already exists
-IF EXISTS (
-  SELECT * 
-    FROM INFORMATION_SCHEMA.ROUTINES 
-   WHERE SPECIFIC_SCHEMA = N'dbo'
-     AND SPECIFIC_NAME = N'sp_AddAddress' 
-)
-   DROP PROCEDURE dbo.sp_AddAddress
-GO
-
-CREATE PROCEDURE [dbo].[sp_AddAddress] 
-	-- Add the parameters for the stored procedure here
-	@ContactID int,
-	@Type varchar(250),
-	@Street varchar(250),
-	@Streetnumber int,
-	@Country varchar(250),
-	@AddressID int out
+CREATE PROCEDURE [dbo].[sp_GetBalance]
+	@AccountID int,
+	@Balance int output
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-    -- Insert statements for procedure here
-	insert into Address (Type, Street, Streetnumber, Country) values (@Type, @Street, @Streetnumber, @Country)
-	set @AddressID=SCOPE_IDENTITY()
-	insert into ContactAddressRelation (CID, AID) values (@ContactID, @AddressID)
+	set @Balance=(SELECT  Balance from Account where AccountID=@AccountID)
 
 END
-
 GO
 
 
--- =============================================
--- Author:	Daniel, Mårtensson
--- Create date: 2015-09-22
--- Description:	Deletes a Contact from dbo.Adress and returns the new ID 
--- =============================================
--- ----------------------
--- Drop stored procedure if it already exists
-IF EXISTS (
-  SELECT * 
-    FROM INFORMATION_SCHEMA.ROUTINES 
-   WHERE SPECIFIC_SCHEMA = N'dbo'
-     AND SPECIFIC_NAME = N'sp_DeleteContact' 
-)
-   DROP PROCEDURE dbo.sp_DeleteContact
-GO
 
-CREATE PROCEDURE [dbo].[sp_DeleteContact] 
-	-- Add the parameters for the stored procedure here
-	@CID int
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
+ALTER TABLE [dbo].[Account]
+    ADD CONSTRAINT [PK_dbo.Account] PRIMARY KEY CLUSTERED ([AccountID] ASC);
 
-    -- Insert statements for procedure here
-	DELETE FROM [dbo].[Contact]
-      WHERE CID=@CID
-END
 
 GO
-
--- =============================================
--- Example to execute the stored procedure
--- =============================================
-
-
-
--- =============================================
--- Author:	Daniel, Mårtensson
--- Create date: 2015-09-22
--- Description:	Edits a Contact from dbo.Adress and returns the new ID 
--- =============================================
--- ----------------------
--- Drop stored procedure if it already exists
-IF EXISTS (
-  SELECT * 
-    FROM INFORMATION_SCHEMA.ROUTINES 
-   WHERE SPECIFIC_SCHEMA = N'dbo'
-     AND SPECIFIC_NAME = N'sp_EditContact' 
-)
-   DROP PROCEDURE dbo.sp_EditContact
-GO
-
-CREATE PROCEDURE [dbo].[sp_EditContact] 
-	-- Add the parameters for the stored procedure here
-	@FirstName varchar(255),
-	@LastName varchar(255),
-	@SSN varchar(13),
-	@ContactID int out
-	
-
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-    -- Insert statements for procedure here
-	UPDATE [dbo].[Contact]
-   SET [Firstname] = @FirstName
-      ,[Lastname] = @LastName
-      ,[SSN] = @SSN
- WHERE CID=@ContactID
-END
+--ALTER TABLE [dbo].[Account]
+--    ADD CONSTRAINT [FK_dbo.Account_dbo.Customer_CustomerID] FOREIGN KEY ([CustomerID]) REFERENCES [dbo].[Customer] ([CustomerID]) ON DELETE CASCADE;
 
 GO
+ALTER TABLE [dbo].[Card]
+    ADD CONSTRAINT [PK_dbo.Card] PRIMARY KEY CLUSTERED ([CardID] ASC);
 
 
-declare @CID int, @AID int, @ErrorMessage varchar(4000);
-EXECUTE dbo.sp_AddContact 'Daniel', 'Mårtensson', '19890928-7479', @CID output, @ErrorMessage 
-EXECUTE dbo.sp_AddContact 'Bo' 	  , 'Bosson'	, '294847-3811'  , @CID output, @ErrorMessage 
-EXECUTE dbo.sp_AddContact 'Li', 'Lisson', '297237-8502', @CID output, @ErrorMessage 
-EXECUTE dbo.sp_AddContact 'Ulla', 'Sekreterare', '993829+2380', @CID output, @ErrorMessage 
-EXECUTE dbo.sp_AddContact 'Anna', 'Bokström', '294859-2390', @CID output, @ErrorMessage 
-EXECUTE dbo.sp_AddContact 'Andreas', 'Holmström', '930382-3492', @CID output, @ErrorMessage 
-EXECUTE dbo.sp_AddContact 'Hugh', 'Laurie', '774004-9202', @CID output, @ErrorMessage 
-EXECUTE dbo.sp_AddContact 'George', 'Clooney', '19660292-8282', @CID output, @ErrorMessage 
-EXECUTE dbo.sp_AddContact 'Matt', 'Damon', '292039-2944', @CID output, @ErrorMessage 
-EXECUTE dbo.sp_AddContact 'Mark', 'Hammond', '29183252-3493', @CID output, @ErrorMessage 
-EXECUTE dbo.sp_AddContact 'Marty', 'McFly', '19669420-9492', @CID output, @ErrorMessage 
-EXECUTE dbo.sp_AddContact 'Rowan', 'Atkinson', '19559283-7575', @CID output, @ErrorMessage 
-
-
-EXECUTE dbo.sp_AddAddress 1,'Home', 'Helenetorpsgatan', 42, 'Sweden',@AID
-EXECUTE dbo.sp_AddAddress 4,'Work', 'Arbetsgatan'     , 23, 'Sweden',@AID
-EXECUTE dbo.sp_AddAddress 7,'Home', 'Storvägen'       , 17, 'Sweden',@AID
-EXECUTE dbo.sp_AddAddress 12,'Sommarstuga', 'Finstigen' ,1, 'Sweden',@AID
 GO
+ALTER TABLE [dbo].[Card]
+    ADD CONSTRAINT [FK_dbo.Card_dbo.Account_AccountID] FOREIGN KEY ([AccountID]) REFERENCES [dbo].[Account] ([AccountID]) ON DELETE CASCADE;
+
+
+GO
+--ALTER TABLE [dbo].[Card]
+--    ADD CONSTRAINT [FK_dbo.Card_dbo.Customer_Customer_CustomerID] FOREIGN KEY ([Customer_CustomerID]) REFERENCES [dbo].[Customer] ([CustomerID]);
+
+
+GO
+ALTER TABLE [dbo].[Transaction]
+    ADD CONSTRAINT [PK_dbo.Transaction] PRIMARY KEY CLUSTERED ([TransactionID] ASC);
+
+
+GO
+ALTER TABLE [dbo].[Transaction]
+    ADD CONSTRAINT [FK_dbo.Transaction_dbo.Account_AccountID] FOREIGN KEY ([AccountID]) REFERENCES [dbo].[Account] ([AccountID]) ON DELETE CASCADE;
+
 
 
 USE BankDB
 GO
-INSERT INTO [dbo].[ContactAddressRelation]
-		([CID], [AID])
+INSERT INTO [dbo].[Account]
+		([CustomerID], [AccountNumber], [ClearingNumber], [Balance], [WithdrawalLimitPerDay], [WithdrawalLimitPerTime])
 	VALUES
-		(2, 1)
+		(1, 1234, 1111, 10000, 5000, 20000)
 GO 
+
+INSERT INTO [dbo].[Card]
+		([AccountID], [CardNumber], [Pin], [PinFailsInRow], [isActivated])
+	VALUES
+		(1, 123456789, 1234, 0, 'True')
+GO
+
+
+
+-- CREATE PROCEDURE dbo.sp_GetBalance
+-- 	@FirstName varchar(255),
+-- 	@LastName varchar(255),
+-- 	@SSN varchar(13),
+-- 	@CID int output,
+-- 	@ErrorMsg varchar(4000) output
+-- AS
+	
+-- 		BEGIN TRY 
+
+-- 			set nocount on;
+			
+-- 			PRINT 'Adding a new contact'
+-- 			BEGIN TRANSACTION [myTran]
+-- 				insert into Contact(CID, FirstName, SSN, LastName) values (1, @FirstName, @SSN, @LastName)
+-- 				set @CID=SCOPE_IDENTITY()
+-- 				set nocount OFF
+-- 			COMMIT TRANSACTION [myTran]
+-- 		PRINT 'Contact(s) added'
+-- END TRY
+
+-- BEGIN CATCH
+-- 	IF (@@TRANCOUNT>0)
+-- 	BEGIN
+-- 		PRINT ERROR_MESSAGE()
+-- 		set @ErrorMsg = ERROR_MESSAGE()
+-- 		PRINT 'Error, transaction will rollback'
+-- 		ROLLBACK TRANSACTION [myTran]
+-- 		PRINT 'Done.'
+-- 	END
+-- END CATCH
+-- GO
+
+
+
+
+
