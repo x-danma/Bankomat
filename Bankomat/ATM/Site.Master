@@ -52,7 +52,7 @@
 
 
             </div>
-            <div id="moveCard" class="moveCard"Bankkort</div>
+            <div id="moveCard" class="moveCard">Bankkort</div>
             <div class="buttonWrapper">
                 <div class="numberButtons">
                     <asp:Button ID="numberButton1" runat="server" Text="1" CssClass="clickButton" OnClick="numberButton_Click" />
