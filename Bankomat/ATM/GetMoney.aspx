@@ -9,7 +9,7 @@
     </div>
 
 
-    <div class="atmScreen">
+    <%--<div class="atmScreen">--%>
         <div class="infoBox">
             <div class="softButtonTypeWrapper">
             <div class="softSoft">Uttag</div>
