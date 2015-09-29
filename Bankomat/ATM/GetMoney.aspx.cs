@@ -18,6 +18,7 @@ namespace ATM
             if (!theAtm.IsthereHundreds())
             {
                 getMoneyMessage.Text = "Det finns inga hundralappar i denna bankomat";
+                
             }
         
 
@@ -26,15 +27,15 @@ namespace ATM
 
         protected void button1Right_Click(object sender, EventArgs e)
         {
-            inputField.Text = "100";
+
         }
         protected void button2Right_Click(object sender, EventArgs e)
         {
-            inputField.Text = "200";
+            
         }
         protected void button3Right_Click(object sender, EventArgs e)
         {
-            inputField.Text = "300";
+            
         }
         protected void button4Right_Click(object sender, EventArgs e)
         {
@@ -45,6 +46,7 @@ namespace ATM
 
                 if (GetMyMoney(Convert.ToInt32(inputField.Text)))
                 {
+                    
                     getMoneyMessage.Text = "Uttaget genomförs";
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "Give money", "toggleMoney()", true);
                     System.Threading.Thread.Sleep(2000);

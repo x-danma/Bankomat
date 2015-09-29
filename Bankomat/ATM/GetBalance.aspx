@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GetMoney.aspx.cs" Inherits="ATM.GetMoney" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="GetBalance.aspx.cs" Inherits="ATM.GetBalance" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="softButtonWrapper">
@@ -12,16 +12,21 @@
     <div class="atmScreen">
         <div class="infoBox">
             <div class="softButtonTypeWrapper">
-            <div class="softSoft">Uttag</div>
-            <div class="softSoft">Saldo</div>
-            <div class="softSoft">Abryt</div>
-            <div class="softSoft">Något?</div>
+                <div class="softSoft">Uttag</div>
+                <div class="softSoft">Saldo</div>
+                <div class="softSoft">Abryt</div>
+                <div class="softSoft">Något?</div>
             </div>
             <h1>Saldo</h1>
-            <asp:Label ID="getMoneyMessage" runat="server" Visible="False" Font-Size="Large" ForeColor="Red"></asp:Label><br />
-            Ditt saldo är: <br />
+            <br />
+
+            Ditt saldo är:
+            <br />
+            <asp:Label ID="LabelBalance" runat="server" Text="Label"></asp:Label>
+
             
-            <asp:TextBox ID="inputField" runat="server"></asp:TextBox>
+
+
         </div>
 
         <div class="softRightButtonTypeWrapper">
