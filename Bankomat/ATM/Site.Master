@@ -88,9 +88,10 @@
                 </div>
 
                 <div id="cardInput" class="cardInput">
-                    <div class="cardInputter">
+                    <div class="cardMiddleInput">
+                        <div class="cardInputter">
+                        </div>
                     </div>
-
                 </div>
 
             </div>
