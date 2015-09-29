@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Bank;
+
 
 namespace ATM
 {
@@ -9,10 +11,31 @@ namespace ATM
     {
         decimal needOfHundreds;
         decimal needOfFivehundreds;
+        Bank.Bank bank;
+
+        public ATM()
+        {
+            bank = new Bank.Bank();
+        }
 
         public int Reciept { get; set; }
         public int Hundreds { get; set; }
         public int Fivehundreds { get; set; }
+
+        public decimal GetBalance(int cardNumber)
+        {
+            return bank.GetBalacne(cardNumber);
+        }
+
+        public string GetTransactions(int cardNumber, int count)
+        {
+            return bank.GetTransactions(cardNumber, count);
+        }
+
+        public bool Login(int cardNumber, int pin)
+        {
+            return bank.Login(cardNumber, pin);
+        }
 
         public void Withdrawal (decimal amount)
         {
@@ -83,5 +106,7 @@ namespace ATM
                 }            
             }
         }
+
+
     }
 }
