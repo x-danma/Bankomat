@@ -8,14 +8,15 @@ namespace Bank
 {
     class Bank
     {
-        private int bankNumber;
-        private string name;
-        private int accountSeed;
-        private string DbConnection;
-
         public Bank(string name)
         {
-            this.name = name;
+        }
+
+        public decimal GetBalacne(int cardNumber)
+        {
+            Customer customer = dbAdapter.GetCustomer(cardNumber);
+
+            return customer.GetBalance(cardNumber);
         }
 
     }

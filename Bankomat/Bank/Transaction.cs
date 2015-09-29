@@ -8,7 +8,7 @@ namespace Bank
 {
      class Transaction
     {
-        public Guid TransactionID { get; set; }
+        public int TransactionID { get; set; }
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }

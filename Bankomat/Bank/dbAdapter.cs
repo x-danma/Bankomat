@@ -10,27 +10,12 @@ namespace Bank
 {
     class dbAdapter
     {
-        static void Withdrawal()
+        public static void Withdrawal()
         {
-            SqlConnection connection = getConnection();
 
-            SqlDataReader reader = null;
-
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand();
-                command.Connection = connection;
-
-                command.CommandText = "SELECT account FROM Customer WHERE ";
-
-                reader = command.ExecuteReader();
-            }
-            catch
-            { }
         }
 
-        static Customer GetCustomer(int cardNumber)
+        public static Customer GetCustomer(int cardNumber)
         {
             Customer customer = new Customer();
 
@@ -67,7 +52,7 @@ namespace Bank
             return customer;
         }
 
-        static Account GetAccount(int cardNumber)
+        public static Account GetAccount(int cardNumber)
         {
             Account account = new Account();
 
@@ -106,7 +91,7 @@ namespace Bank
 
         }
 
-        static List<Transaction> GetTransaction(int accountID, int count)
+        public static List<Transaction> GetTransaction(int accountID, int count)
         {
             List<Transaction> transactions = new List<Transaction>();
 
@@ -128,13 +113,11 @@ namespace Bank
                 myReader = cmd.ExecuteReader();
                 while (myReader.Read())
                 {
-                    Transaction transaction = new Transaction(); 
-
-                    //account.AccountID = Convert.ToInt32(myReader["AccountID"]);
-                    //account.AccountNumber = Convert.ToInt32(myReader["AccountNumber"]);
-                    //account.Balance = Convert.ToDecimal(myReader["Balance"]);
-                    //account.WithdrawalLimitPerDay = Convert.ToDecimal(myReader["WithdrawalLimitPerDay"]);
-                    //account.WithdrawalLimitPerTime = Convert.ToDecimal(myReader["WithdrawalLimitPerTime"]);
+                    Transaction transaction = new Transaction();
+                    transaction.Amount = Convert.ToDecimal(myReader["Amount"]);
+                    transaction.Date = DateTime.Parse(myReader["Date"].ToString());
+                    transaction.Description = myReader["Description"].ToString();
+                    transaction.TransactionID = Convert.ToInt32(myReader["TransactionID"]);
                 }
             }
             catch (Exception)
@@ -149,50 +132,10 @@ namespace Bank
             return transactions;
         }
 
-        //static decimal GetBalance(int accountNumber)
-        //{
-        //    decimal balance;
+        static void WriteClickLog(int CustomerID, DateTime date, string type, string result)
+        {
 
-        //    SqlConnection myConnection = getConnection();
-        //    SqlDataReader myReader = null;
-        //    SqlCommand cmd = new SqlCommand();
-
-        //    try
-        //    {
-        //        myConnection.Open();
-        //        cmd.Connection = myConnection;
-        //        cmd.CommandText = "sp_getBalance";
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.Parameters.Clear();
-
-        //        cmd.Parameters.Add(new SqlParameter("@AccountNumber", accountNumber));
-
-        //        myReader = cmd.ExecuteReader();
-        //        myReader.Read();
-        //        balance = Convert.ToDecimal(myReader["Balance"]);
-
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw new Exception ("Kontakt till banken kunde inte skapas");
-        //    }
-        //    finally
-        //    {
-        //        myConnection.Close();
-        //    }
-
-        //    return balance;
-        //} 
-
-
-        //static List<Transaction> GetTransactions(int accountNumber, int count)
-        //{
-        //    List<Transaction> transactions = new List<Transaction>();
-
-
-
-        //    return transactions;
-        //}
+        }
 
         static SqlConnection getConnection()
         {

@@ -9,8 +9,6 @@ namespace Bank
 {
     class Card
     {
-        public int id;
-
         public string CardNumber { get; set; }
         public int Pin { get; set; }
         public int PinFailsInRow { get; set; }
@@ -18,7 +16,6 @@ namespace Bank
 
 
         public Account Account { get; set; }
-
 
 
         private void CardLogin()
@@ -32,7 +29,7 @@ namespace Bank
             SqlDataReader myReader = null;
             try
             {
-                
+
                 //öppnar en connection och startar SQL-commands för att selecta
                 myConnection.Open();
                 myCommand.Connection = myConnection;
@@ -44,10 +41,10 @@ namespace Bank
                 {
                     //Input från View:n
 
-                   // string cardNumberInput = textbox1.Text;
+                    // string cardNumberInput = textbox1.Text;
                     //string pinInput = textbox2.Text;
 
-                   // if (CardNumberinput == CardNumber && pinInput == Pin )
+                    // if (CardNumberinput == CardNumber && pinInput == Pin )
                     {
 
                     }
@@ -63,11 +60,6 @@ namespace Bank
                 if (myReader != null) myReader.Close();
                 if (myConnection != null) myConnection.Close();
             }
-
-          
-
-
-
 
 
         }

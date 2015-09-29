@@ -8,14 +8,8 @@ namespace Bank
 {
      class Account
     {
-        private int accountNumber; 
-        private decimal balance;
-
-
         public Account()
         {
-           // AccountID = id;
-            //Balacne = dbAdapter;
         }
 
         public void Withdrawal(int amount)
@@ -24,8 +18,8 @@ namespace Bank
             {
                 if (Transactions.Where(t => t.Date.Date == DateTime.Now.Date && t.Amount < 0).Select(t => t.Amount).Sum() < WithdrawalLimitPerDay)
                 {
-                    balance -= amount;
-                    logTransaction(amount, $"bankomat {DateTime.Now}");
+                    Balance -= amount;
+                    //logTransaction(amount, $"bankomat {DateTime.Now}");
                 }
                 else
                 {
@@ -38,14 +32,7 @@ namespace Bank
             }
         }
 
-        public void logTransaction(int amount, string description)
-        {
-            Transactions.Add(new Transaction { Amount = amount, Date = DateTime.Now, Description = description, AccountID = this.AccountID }); //Sätt dateTime automatiskt i Db, 
-        }
-
-        public int AccountID { get; set; }
         public int AccountNumber { get; set; }
-//        public int ClearingNumber { get; set; }
         public decimal Balance { get; set; }
         public decimal WithdrawalLimitPerTime { get; set; }
         public decimal WithdrawalLimitPerDay { get; set; }
