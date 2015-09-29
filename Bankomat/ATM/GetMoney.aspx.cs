@@ -7,12 +7,22 @@ using System.Web.UI.WebControls;
 
 namespace ATM
 {
-	public partial class GetMoney : System.Web.UI.Page
-	{
-		protected void Page_Load(object sender, EventArgs e)
-		{
+    public partial class GetMoney : System.Web.UI.Page
+    {
 
-		}
+        ATM theAtm;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            theAtm = new ATM();
+
+            if (!theAtm.IsthereHundreds())
+            {
+                getMoneyMessage.Text = "Det finns endast 500kr sedlar i denna bankomat";
+            }
+
+
+
+        }
 
         protected void button1Right_Click(object sender, EventArgs e)
         {
@@ -28,7 +38,40 @@ namespace ATM
         }
         protected void button4Right_Click(object sender, EventArgs e)
         {
-            
+            getMoneyMessage.Visible = true;
+
+            try
+            {
+
+
+                if (theAtm.IsMoneyAvailable(Convert.ToInt32(inputField.Text)))
+                {
+                    getMoneyMessage.Text = "Uttaget genomförs";
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Give money", "toggleMoney()", true);
+                    System.Threading.Thread.Sleep(2000);
+                    HttpContext.Current.Response.Redirect("Default.aspx");
+                }
+
+
+
+
+            }
+            catch (Exception)
+            {
+                getMoneyMessage.Text = "Fel";
+
+            }
+
         }
+
+        bool GetMyMoney(int input)
+        {
+            bool isItTrue = false;
+
+            isItTrue = true;
+
+            return isItTrue;
+        }
+
     }
 }

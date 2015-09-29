@@ -9,7 +9,7 @@
     </div>
 
 
-    <div class="atmScreen">
+    <%--<div class="atmScreen">--%>
         <div class="infoBox">
             <div class="softButtonTypeWrapper">
             <div class="softSoft">Uttag</div>
@@ -19,6 +19,7 @@
             </div>
             <h1>Uttag</h1>
             Välj önskat belopp på knappaarna eller skriv in belopp från knappsatsen.<br />
+            <asp:Label ID="getMoneyMessage" runat="server" Text="" Visible="false"></asp:Label>
             <asp:TextBox ID="inputField" runat="server"></asp:TextBox>
         </div>
 
