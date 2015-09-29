@@ -30,16 +30,16 @@ textarea {
 }
 
 .softButtonWrapper {
-    width: 8%;
+    width: 10%;
     float: left;
-    height: 450px;
+    height: 400px;
     padding-left: 10px;
 }
 
 .softRightButtonWrapper {
-    width: 8%;
+    width: 10%;
     float: left;
-    height: 450px;
+    height: 400px;
 }
 
 .hardwareWrapper {
@@ -76,7 +76,7 @@ textarea {
 
 .buttonLeft {
     float: right;
-    margin: 25%;
+    margin: 15%;
     margin-left: 15%;
     margin-right: 0px;
     height: 10%;
@@ -95,7 +95,7 @@ textarea {
 
 .buttonRight {
     float: left;
-    margin: 25%;
+    margin: 15%;
     margin-left: 0px;
     margin-right: 15%;
     height: 10%;
@@ -116,7 +116,7 @@ textarea {
     width: 25%;
     height: 300px;
     float: left;
-    margin-left: 35%;
+    margin-left: 9%;
     padding-left: 3%;
     padding-top: 3%;
     margin-top: 3%;
@@ -227,5 +227,14 @@ textarea {
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: 180px;
+    height: 230px;
+}
+
+.moveCard {
+    float: left;
+    background-image: url('../card.png');
+    width: 120px;
+    height: 190px;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
