@@ -7,16 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace ATM
 {
-    public partial class GetMoney : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+	public partial class GetMoney : System.Web.UI.Page
+	{
+		protected void Page_Load(object sender, EventArgs e)
+		{
 
-        }
-
-        protected void button1Left_Click(object sender, EventArgs e)
-        {
-
-        }
-    }
+		}
+	}
 }
