@@ -199,7 +199,7 @@ namespace Bank
 
         static SqlConnection getConnection()
         {
-            SqlConnection myConnection = new SqlConnection("Data Source=ANDREAS-PC\\SQLEXPRESS; Initial Catalog=Bank; Integrated Security=SSPI");
+            SqlConnection myConnection = new SqlConnection("Data Source=localhost\\SQLExpress;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             //ANDREAS-PC\\SQLEXPRESS
             return myConnection;
         }
