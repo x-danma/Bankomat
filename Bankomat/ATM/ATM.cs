@@ -41,7 +41,7 @@ namespace ATM
         {
             if (IsMoneyAvailable(amount))
             {
-
+                //Anropa metod i Bank som inte finns än
             }
             else
             {
