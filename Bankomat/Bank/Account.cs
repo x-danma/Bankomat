@@ -32,18 +32,17 @@ namespace Bank
             }
         }
 
-        public string GetTransactions(int cardNumber, int count)
+        public List<string> GetTransactions(int cardNumber, int count)
         {
             List<Transaction> transactions = dbAdapter.GetTransactions(cardNumber, count);
-
-            StringBuilder transactionsString = new StringBuilder();
+            List<string> transactionsList = new List<string>();
 
             foreach (var transaction in transactions)
             {
-                transactionsString.Append(transaction.Date + ";" + transaction.Amount + ";" + transaction.Description + ";" );
+                transactionsList.Add($"{transaction.Date}  {transaction.Amount} {transaction.Description}");
             }
 
-            return transactionsString.ToString();
+            return transactionsList;
         }
 
         public int AccountNumber { get; set; }

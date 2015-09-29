@@ -54,7 +54,7 @@ namespace Bank
 
         }
 
-        public string GetTransactions(int cardNumber, int count)
+        public List<string> GetTransactions(int cardNumber, int count)
         {
             try
             {

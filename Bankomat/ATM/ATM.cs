@@ -27,7 +27,7 @@ namespace ATM
             return bank.GetBalance(cardNumber);
         }
 
-        public string GetTransactions(int cardNumber, int count)
+        public List<string> GetTransactions(int cardNumber, int count)
         {
             return bank.GetTransactions(cardNumber, count);
         }
