@@ -103,7 +103,7 @@ namespace ATM
 
         }
 
-        protected void numberButtonOK_Click(object sender, EventArgs e)
+        protected void numberButtonOk_Click(object sender, EventArgs e)
         {
             Button tmpButton = sender as Button;
 
