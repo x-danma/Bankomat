@@ -22,8 +22,8 @@
         $(init);
 
         function init() {
-            $('#makeMeDraggable').draggable();
-            $('#makeMeDroppable').droppable({
+            $('#moveCard').draggable();
+            $('#cardInput').droppable({
                 drop: handleDropEvent
             });
         }
@@ -69,7 +69,7 @@
                 </div>
 
             </div>
-            <div id="makeMeDraggable">Bankkort</div>
+            <div id="moveCard" class="moveCard">Bankkort</div>
             <div class="buttonWrapper">
                 <div class="numberButtons">
                     <asp:Button ID="numberButton1" runat="server" Text="1" CssClass="clickButton" />
@@ -99,9 +99,9 @@
                 <div class="recipeOutput">
                 </div>
 
-                <div class="cardInput">
+                <div id="cardInput" class="cardInput">
                     <div class="cardInputter">
-                        <div id="makeMeDroppable">Sätt in kortet här </div>
+                        
                     </div>
 
                 </div>
