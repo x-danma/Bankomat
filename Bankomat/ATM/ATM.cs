@@ -38,6 +38,20 @@ namespace ATM
             }
         }
 
+        private bool IsthereHundreds()
+        {
+            bool hundreds = false;
+
+            if (Hundreds > 0)
+            {
+                hundreds = true;
+            }
+
+
+            return hundreds;
+
+        }
+
         private bool IsMoneyAvailable(decimal amount) //amount = 800
         {
             decimal needOfHundred = amount % 500;  //needOfHundred = 300
