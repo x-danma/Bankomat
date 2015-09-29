@@ -240,17 +240,17 @@ textarea {
     background-repeat: no-repeat;
     background-size: cover;
 }
-.infoBox
-{
+
+.infoBox {
     width: 80%;
     float: left;
 }
+
 .softButtonTypeWrapper {
     width: 10%;
     float: left;
     height: 400px;
     margin-top: 2%;
-    
 }
 
 .softRightButtonTypeWrapper {
@@ -259,11 +259,20 @@ textarea {
     height: 400px;
     margin-top: 2%;
 }
-.softSoft
-{
+
+.softSoft {
     width: 100%;
     margin-bottom: 42%;
     height: 10%;
     display: block;
     padding: 10px;
+}
+
+.myMoney {
+    width: 100%;
+    height: 100px;
+    background-image: url('../BankomatLogga.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    visibility: hidden;
 }
