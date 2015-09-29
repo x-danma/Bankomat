@@ -168,8 +168,32 @@ namespace Bank
             return transactions;
         }
 
-        static void WriteClickLog(int CustomerID, DateTime date, string type, string result)
+        public static void WriteClickLog(int CustomerID, DateTime date, string type, string result)
         {
+
+        }
+
+        public static void UpdateCardState(int pinFailsInRow, bool isActivated, int cardNumber)
+        {
+            SqlConnection myConnection = getConnection();
+            SqlCommand cmd = new SqlCommand();
+
+            try
+            {
+                myConnection.Open();
+                cmd.Connection = myConnection;
+                cmd.CommandText = $"UPDATE Card SET PinFailsInRow='{pinFailsInRow}', IsActivated='{isActivated}' WHERE CardNumber='{cardNumber}'";
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw new Exception("Kontakt till banken kunde inte skapas");
+            }
+            finally
+            {
+                myConnection.Close();
+            }
 
         }
 

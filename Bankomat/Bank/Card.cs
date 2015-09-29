@@ -10,55 +10,47 @@ namespace Bank
     class Card
     {
         public int CardNumber { get; set; }
-        //public int AcountNumber { get; set; }
         public int Pin { get; set; }
         public int PinFailsInRow { get; set; }
         public bool isActivated { get; set; }
 
-        private void CardLogin()
+        public bool LogIn(int cardNumber, int pin)
         {
+            bool isLoggedIn = false;
 
-            SqlConnection myConnection = new SqlConnection();
-            SqlCommand myCommand = new SqlCommand();
-
-            myConnection.ConnectionString = @"Data Source= localhost\SQLEXPRESS;Initial Catalog=Contacts;Integrated Security=SSPI";
-
-            SqlDataReader myReader = null;
-            try
+            if (isActivated)
             {
-
-                //öppnar en connection och startar SQL-commands för att selecta
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = "sp_SelectCardNumber";
-                myCommand.CommandText = "sp_SelectPinNumber";
-                myReader = myCommand.ExecuteReader();
-
-                while (myReader.Read())
+                if (pin == Pin)
                 {
-                    //Input från View:n
-
-                    // string cardNumberInput = textbox1.Text;
-                    //string pinInput = textbox2.Text;
-
-                    // if (CardNumberinput == CardNumber && pinInput == Pin )
+                    isLoggedIn = true;
+                    PinFailsInRow = 0;
+                    dbAdapter.UpdateCardState(PinFailsInRow, isActivated, CardNumber);
+                }
+                else
+                {
+                    if (PinFailsInRow + 1 >= 3)
                     {
-
+                        PinFailsInRow++;
+                        isActivated = false;
+                        dbAdapter.UpdateCardState(PinFailsInRow, isActivated, CardNumber);
+                        throw new Exception("Fel pin. Kortet spärrat.");
+                    }
+                    else
+                    {
+                        PinFailsInRow++;
+                        dbAdapter.UpdateCardState(PinFailsInRow, true, CardNumber);
+                        throw new Exception($"Fel pin. Du har {3 - PinFailsInRow} försök kvar");
                     }
                 }
             }
-            catch (Exception)
+            else
             {
-
+                throw new Exception("Kortet är spärrat!");
             }
 
-            finally
-            {
-                if (myReader != null) myReader.Close();
-                if (myConnection != null) myConnection.Close();
-            }
-
-
+            return isLoggedIn;
         }
+
+
     }
 }
