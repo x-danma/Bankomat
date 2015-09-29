@@ -12,6 +12,12 @@ namespace Bank
         private decimal balance;
 
 
+        public Account()
+        {
+           // AccountID = id;
+            //Balacne = dbAdapter;
+        }
+
         public void Withdrawal(int amount)
         {
             if (amount < WithdrawalLimitPerTime)
@@ -37,14 +43,13 @@ namespace Bank
             Transactions.Add(new Transaction { Amount = amount, Date = DateTime.Now, Description = description, AccountID = this.AccountID }); //Sätt dateTime automatiskt i Db, 
         }
 
-        public Guid AccountID { get; set; }
+        public int AccountID { get; set; }
         public int AccountNumber { get; set; }
-        public int ClearingNumber { get; set; }
+//        public int ClearingNumber { get; set; }
         public decimal Balance { get; set; }
         public decimal WithdrawalLimitPerTime { get; set; }
         public decimal WithdrawalLimitPerDay { get; set; }
 
         public List<Transaction> Transactions { get; set; }
-
     }
 }

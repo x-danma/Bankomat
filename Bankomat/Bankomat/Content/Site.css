@@ -131,23 +131,9 @@ textarea {
 
 
 .clickButton {
-    float: left;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    vertical-align: middle;
-    text-align: center;
-    padding-top: 20px;
+    margin: 1%;
     height: 52px;
     width: 52px;
-    display: block;
-    font: bold 11px Arial;
-    text-decoration: none;
-    background-color: #EEEEEE;
-    color: #333333;
-    border-top: 1px solid #CCCCCC;
-    border-right: 1px solid #333333;
-    border-bottom: 1px solid #333333;
-    border-left: 1px solid #CCCCCC;
 }
 
 .numberButtons {
@@ -166,7 +152,6 @@ textarea {
     height: 42px;
     width: 70px;
 }
-
 
 .recipeOutput {
     float: left;

@@ -8,19 +8,10 @@ namespace Bankomat.Controllers
 {
     public class HomeController : Controller
     {
-        [HttpGet]
-
-
         public ActionResult Index()
         {
-            
             return View();
         }
-        public ActionResult leftOne()
-        {
-            return View();
-        }
-
 
         public ActionResult About()
         {
