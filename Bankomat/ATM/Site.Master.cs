@@ -76,6 +76,45 @@ namespace ATM
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
+
+        protected void numberButton_Click(object sender, EventArgs e)
+        {
+            Button tmpButton = sender as Button;
+
+            string input = tmpButton.Text;
+
+            TextBox inputField = (TextBox)MainContent.FindControl("inputField");
+
+            inputField.Text = inputField.Text + input;
+           
+            
+        }
+
+        protected void numberButtonClear_Click(object sender, EventArgs e)
+        {
+            Button tmpButton = sender as Button;
+
+            string input = tmpButton.Text;
+
+            TextBox inputField = (TextBox)MainContent.FindControl("inputField");
+
+            inputField.Text = "";
+
+
+        }
+
+        protected void numberButtonOk_Click(object sender, EventArgs e)
+        {
+            Button tmpButton = sender as Button;
+
+            string input = tmpButton.Text;
+
+            TextBox inputField = (TextBox)MainContent.FindControl("inputField");
+
+            inputField.Text = "";
+
+
+        }
     }
 
 }

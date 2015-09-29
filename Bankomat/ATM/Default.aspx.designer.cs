@@ -49,13 +49,13 @@ namespace ATM {
         protected global::System.Web.UI.WebControls.Button button4Left;
         
         /// <summary>
-        /// loginField control.
+        /// inputField control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox loginField;
+        protected global::System.Web.UI.WebControls.TextBox inputField;
         
         /// <summary>
         /// button1Right control.
