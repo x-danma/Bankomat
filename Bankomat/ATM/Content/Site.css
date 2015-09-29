@@ -116,7 +116,7 @@ textarea {
     width: 25%;
     height: 300px;
     float: left;
-    margin-left: 9%;
+    margin-left: 36%;
     padding-left: 3%;
     padding-top: 3%;
     margin-top: 3%;
@@ -231,7 +231,9 @@ textarea {
 }
 
 .moveCard {
-    float: left;
+    position: absolute;
+    left: 40px;
+    top: 700px;
     background-image: url('../card.png');
     width: 120px;
     height: 190px;
