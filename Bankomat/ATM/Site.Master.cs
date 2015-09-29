@@ -84,10 +84,11 @@ namespace ATM
             string input = tmpButton.Text;
 
             TextBox inputField = (TextBox)MainContent.FindControl("inputField");
-
-            inputField.Text = inputField.Text + input;
-           
-            
+            if (inputField.Text.Length < 4)
+            {
+                inputField.Text = inputField.Text + "" + input;
+            }
+          
         }
 
         protected void numberButtonClear_Click(object sender, EventArgs e)

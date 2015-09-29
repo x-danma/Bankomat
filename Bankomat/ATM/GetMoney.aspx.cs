@@ -9,8 +9,18 @@ namespace ATM
 {
 	public partial class GetMoney : System.Web.UI.Page
 	{
-		protected void Page_Load(object sender, EventArgs e)
+
+        ATM theAtm;
+        protected void Page_Load(object sender, EventArgs e)
 		{
+            theAtm = new ATM();
+
+            if (!theAtm.IsthereHundreds())
+            {
+                getMoneyMessage.Text = "Det finns inga hundralappar i denna bankomat";
+            }
+        
+
 
 		}
 
@@ -28,7 +38,36 @@ namespace ATM
         }
         protected void button4Right_Click(object sender, EventArgs e)
         {
+            getMoneyMessage.Visible = true;
+         
+            try
+            {
+
+                if (GetMyMoney(Convert.ToInt32(inputField.Text)))
+                {
+                    getMoneyMessage.Text = "Uttaget genomförs";
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Give money", "toggleMoney()", true);
+                    System.Threading.Thread.Sleep(2000);
+                    HttpContext.Current.Response.Redirect("Default.aspx");
+                }
+
+            }
+            catch (Exception)
+            {
+                getMoneyMessage.Text = "Fel";
+                
+            }
             
         }
+
+        bool GetMyMoney(int input)
+        {
+            bool isItTrue = false;
+
+            isItTrue = true;
+
+            return isItTrue;
+        }
+
     }
 }

@@ -18,7 +18,9 @@
             <div class="softSoft">Något?</div>
             </div>
             <h1>Uttag</h1>
+            <asp:Label ID="getMoneyMessage" runat="server" Visible="False" Font-Size="Large" ForeColor="Red"></asp:Label><br />
             Välj önskat belopp på knappaarna eller skriv in belopp från knappsatsen.<br />
+            
             <asp:TextBox ID="inputField" runat="server"></asp:TextBox>
         </div>
 

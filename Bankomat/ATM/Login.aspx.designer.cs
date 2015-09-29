@@ -10,7 +10,7 @@
 namespace ATM {
     
     
-    public partial class GetMoney {
+    public partial class Login {
         
         /// <summary>
         /// button1Left control.
@@ -47,15 +47,6 @@ namespace ATM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button button4Left;
-        
-        /// <summary>
-        /// getMoneyMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label getMoneyMessage;
         
         /// <summary>
         /// inputField control.
