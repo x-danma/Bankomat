@@ -16,8 +16,3 @@ namespace Bank
     }
 }
 
-
-
-
-
-}
