@@ -9,9 +9,13 @@ namespace ATM
 {
     public partial class GetBalance : System.Web.UI.Page
     {
+        ATM theAtm;
         protected void Page_Load(object sender, EventArgs e)
         {
+            theAtm = new ATM();
+            LabelBalance.Text = theAtm.
 
         }
+
     }
 }
