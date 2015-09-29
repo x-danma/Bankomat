@@ -37,7 +37,7 @@ namespace Bank
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
                 card.CardNumber = Convert.ToInt32(myReader["CardNumber"]);
-                card.isActivated = Convert.ToBoolean(myReader["isActivated"]);
+                card.isActivated = Convert.ToBoolean(myReader["IsActivated"]);
                 card.Pin = Convert.ToInt32("Pin");
                 card.PinFailsInRow = Convert.ToInt32("PinFailsInRow");
                 
