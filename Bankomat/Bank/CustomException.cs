@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Bank
 {
-    class InterbankNetwork
+    class CustomException : Exception
     {
-        //public List<Bank> Banks { get; set; }
-
+        public CustomException(string message) : base(message)
+        { }
     }
 }

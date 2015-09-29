@@ -16,16 +16,13 @@ namespace Bank
 
         public bool LogIn(int cardNumber, int pin)
         {
-            bool isLoggedIn = false;
-
             if (isActivated)
             {
                 if (pin == Pin)
                 {
-                    isLoggedIn = true;
                     PinFailsInRow = 0;
-                  //  dbAdapter.WriteClickLog(c, DateTime.Now, "Enter Pin", "Correct Pin Entered"); Hur få in contactID?
                     dbAdapter.UpdateCardState(PinFailsInRow, isActivated, CardNumber);
+                    return true;
                 }
                 else
                 {
@@ -34,24 +31,20 @@ namespace Bank
                         PinFailsInRow++;
                         isActivated = false;
                         dbAdapter.UpdateCardState(PinFailsInRow, isActivated, CardNumber);
-                        throw new Exception("Fel pin. Kortet spärrat.");
+                        throw new CustomException("Fel pin. Kortet spärrat.");
                     }
                     else
                     {
                         PinFailsInRow++;
                         dbAdapter.UpdateCardState(PinFailsInRow, isActivated, CardNumber);
-                        throw new Exception($"Fel pin. Du har {3 - PinFailsInRow} försök kvar");
+                        throw new CustomException($"Fel pin. Du har {3 - PinFailsInRow} försök kvar");
                     }
                 }
             }
             else
             {
-                throw new Exception("Kortet är spärrat!");
+                throw new CustomException("Kortet är spärrat!");
             }
-
-            return isLoggedIn;
         }
-
-
     }
 }

@@ -10,15 +10,14 @@ namespace Bank
 {
     class dbAdapter
     {
-        public static bool Withdrawal(int accountNumber, int amount)
+        public static bool Withdrawal(int accountNumber, decimal amount)
         {
-            bool isComplete = false;
-
             SqlConnection myConnection = getConnection();
             SqlDataReader myReader = null;
             SqlCommand cmd = new SqlCommand();
 
             //ERROR ID
+            //0 = inget fel
             //1 = För lite pengar på konto
             //2 = större än dagens uttagsgrän
             //alt error message
@@ -40,21 +39,27 @@ namespace Bank
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
-                string error = myReader["ErrorMsg"].ToString();
-                //string errorMsg = cmd.Parameters["@ErrorMsg"].ToString();
-                // 0 = noError
+                int errorID = Convert.ToInt32(myReader["ErrorID"]);
+                int errorMsg = Convert.ToInt32(myReader["ErrorMsg"]);
+
+                if (errorID > 0 || errorMsg > 2)
+                    throw new CustomException("Tekniskt fel.");
+                else if (errorMsg == 1)
+                    throw new CustomException("Konotot saknar täckning för uttaget");
+                else if (errorMsg == 2)
+                    throw new CustomException("Maxgränsen för dagligt uttag överskriden");
+                else
+                    return true;
+
             }
             catch (Exception)
             {
-                throw new Exception("Kontakt till banken kunde inte skapas");
+                throw new Exception("Kontakt till banken misslyckades.");
             }
             finally
             {
                 myConnection.Close();
             }
-
-            return isComplete;
-
         }
         public static Card GetCard(int cardNumber)
         {
@@ -85,7 +90,7 @@ namespace Bank
             }
             catch (Exception)
             {
-                throw new Exception("Kontakt till banken kunde inte skapas");
+                throw new CustomException("Kortet kunde inte läsas. Kontakta ditt bankkontor.");
             }
             finally
             {
@@ -122,7 +127,7 @@ namespace Bank
             }
             catch (Exception)
             {
-                throw new Exception("Kontakt till banken kunde inte skapas");
+                throw new CustomException("Ogiltigt kort. Kontakta ditt bankkontor.");
             }
             finally
             {
@@ -160,7 +165,7 @@ namespace Bank
             }
             catch (Exception)
             {
-                throw new Exception("Kontakt till banken kunde inte skapas");
+                throw new CustomException("Ogiltigt kort. Kontakta ditt bankkontor.");
             }
             finally
             {
@@ -202,7 +207,7 @@ namespace Bank
             }
             catch (Exception)
             {
-                throw new Exception("Kontakt till banken kunde inte skapas");
+                throw new CustomException("Kontakt till banken misslyckades");
             }
             finally
             {
@@ -256,7 +261,7 @@ namespace Bank
             }
             catch (Exception)
             {
-                throw new Exception("Kontakt till banken kunde inte skapas");
+                throw new CustomException("Kontakt till banken misslyckades");
             }
             finally
             {

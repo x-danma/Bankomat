@@ -46,6 +46,7 @@
     <Compile Include="Card.cs" />
     <Compile Include="ClickLog.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="CustomException.cs" />
     <Compile Include="dbAdapter.cs" />
     <Compile Include="InterbankNetwork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

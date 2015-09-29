@@ -24,7 +24,7 @@ namespace ATM
 
         public decimal GetBalance(int cardNumber)
         {
-            return bank.GetBalacne(cardNumber);
+            return bank.GetBalance(cardNumber);
         }
 
         public string GetTransactions(int cardNumber, int count)
@@ -37,11 +37,11 @@ namespace ATM
             return bank.Login(cardNumber, pin);
         }
 
-        public void Withdrawal (decimal amount)
+        public void Withdrawal (int cardNumber, decimal amount)
         {
             if (IsMoneyAvailable(amount))
             {
-                //Anropa metod i Bank som inte finns än
+                bank.Withdrawal(cardNumber, amount);
             }
             else
             {
