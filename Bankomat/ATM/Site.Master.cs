@@ -102,6 +102,19 @@ namespace ATM
 
 
         }
+
+        protected void numberButtonOK_Click(object sender, EventArgs e)
+        {
+            Button tmpButton = sender as Button;
+
+            string input = tmpButton.Text;
+
+            TextBox inputField = (TextBox)MainContent.FindControl("inputField");
+
+            inputField.Text = "";
+
+
+        }
     }
 
 }
