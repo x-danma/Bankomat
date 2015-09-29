@@ -11,9 +11,9 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
+    <link href="Content/Site.css" rel="stylesheet" />
 </head>
 <body>
     <form runat="server">
@@ -34,102 +34,88 @@
                 <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
-
-
-
                 <%--Site Scripts--%>
             </Scripts>
-
-
-
         </asp:ScriptManager>
 
-        <div class="wrapper">
+             <div class="wrapper">
 
-            <div class="bankomatPicture">
-            </div>
-
-            <div class="hardwareWrapper">
-                <div class="softButtonWrapper">
-                    @Html.ActionLink(" ", "leftOne", null, new { @class = "softButtonLeft" })
-                @Html.ActionLink(" ", "2left", null, new { @class = "softButtonLeft" })
-                @Html.ActionLink(" ", "3left", null, new { @class = "softButtonLeft" })
-                @Html.ActionLink(" ", "4left", null, new { @class = "softButtonLeft" })
-
-                @using (Html.BeginForm("", "~/Controllers/HomeController", FormMethod.Get))
-                {
-                    <input type="submit" value="Click me" />
-                    }
-                </div>
-                <div class="atmScreen">
-                    <div class="infoBox">
-
-                        <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                        </asp:ContentPlaceHolder>
-                    </div>
-
-
-                </div>
-
-                <div class="softRightButtonWrapper">
-                    @Html.ActionLink(" ", "1right", null, new { @class = "softButton" })
-                @Html.ActionLink(" ", "2right", null, new { @class = "softButton" })
-                @Html.ActionLink(" ", "3right", null, new { @class = "softButton" })
-                @Html.ActionLink(" ", "4right", null, new { @class = "softButton" })
-                @Html.ActionLink("Controller", "Action", new { email = "test", parameters = "parameters" })
-
-                </div>
-
-            </div>
+        <div class="bankomatPicture">
             
-            <div class="buttonWrapper">
-                <div class="numberButtons">
-                    @Html.ActionLink("1", "1", null, new { @class = "clickButton" })
-                @Html.ActionLink("2", "2left", null, new { @class = "clickButton" })
-                @Html.ActionLink("3", "3left", null, new { @class = "clickButton" })
-                <br />
-                    @Html.ActionLink("4", "1", null, new { @class = "clickButton" })
-                @Html.ActionLink("5", "2left", null, new { @class = "clickButton" })
-                @Html.ActionLink("6", "3left", null, new { @class = "clickButton" })
-                <br />
-                    @Html.ActionLink("7", "1", null, new { @class = "clickButton" })
-                @Html.ActionLink("8", "2left", null, new { @class = "clickButton" })
-                @Html.ActionLink("9", "3left", null, new { @class = "clickButton" })
-                <br />
-                    @Html.ActionLink(" ", "1", null, new { @class = "clickButton" })
-                @Html.ActionLink("0", "2left", null, new { @class = "clickButton" })
-                @Html.ActionLink(" ", "3left", null, new { @class = "clickButton" })
+        </div>
+        
+        <div class="hardwareWrapper">
+            <div class="softButtonWrapper">
+                <asp:Button ID="button1Left" runat="server" Text="Button" CssClass="buttonLeft"/>
+                <asp:Button ID="button2Left" runat="server" Text="Button"  CssClass="buttonLeft"/>
+                <asp:Button ID="button3Left" runat="server" Text="Button"  CssClass="buttonLeft"/>
+                <asp:Button ID="button4Left" runat="server" Text="Button"  CssClass="buttonLeft"/>
+            </div>
+            <div class="atmScreen">
+                <div class="infoBox">
 
-                </div>
-                <div class="doButtons">
-                    <br />
-                    <input id="Button1" class="clickDoButton" type="button" value="Avbryt" />
-                    <br />
-                    <input id="Button1" class="clickDoButton" type="button" value="Ångra" />
-                    <br />
-                    <input id="Button1" class="clickDoButton" type="button" value="Ok" />
-                </div>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+ </div>
+
+
             </div>
 
-            <div class="outputWrapper">
+            <div class="softRightButtonWrapper">
+                <asp:Button ID="button1Right" runat="server" Text="Button" CssClass="buttonRight"/>
+                <asp:Button ID="button2Right" runat="server" Text="Button"  CssClass="buttonRight"/>
+                <asp:Button ID="button3Right" runat="server" Text="Button"  CssClass="buttonRight"/>
+                <asp:Button ID="button4Right" runat="server" Text="Button"  CssClass="buttonRight"/>
+            </div>
+
+        </div>
+
+        <div class="buttonWrapper">
+            <div class="numberButtons">
+                <asp:Button ID="numberButton1" runat="server" Text="1"  CssClass="clickButton"/>
+                <asp:Button ID="numberButton2" runat="server" Text="2"  CssClass="clickButton"/>
+                <asp:Button ID="numberButton3" runat="server" Text="3"  CssClass="clickButton"/>
+                <asp:Button ID="numberButton4" runat="server" Text="4"  CssClass="clickButton"/>
+                <asp:Button ID="numberButton5" runat="server" Text="5"  CssClass="clickButton"/>
+                <asp:Button ID="numberButton6" runat="server" Text="6"  CssClass="clickButton"/>
+                <asp:Button ID="numberButton7" runat="server" Text="7"  CssClass="clickButton"/>
+                <asp:Button ID="numberButton8" runat="server" Text="8"  CssClass="clickButton"/>
+                <asp:Button ID="numberButton9" runat="server" Text="9"  CssClass="clickButton"/>
+                <asp:Button ID="numberButton10" runat="server" Text=" "  CssClass="clickButton"/>
+                <asp:Button ID="numberButton11" runat="server" Text="0"  CssClass="clickButton"/>
+                <asp:Button ID="numberButton12" runat="server" Text=" "  CssClass="clickButton"/>
+            </div>
+            <div class="doButtons">
+
+                <asp:Button ID="Button1" runat="server" Text="Avbryt"  CssClass="clickDoButton"/>
+                <asp:Button ID="Button2" runat="server" Text="Ångra"  CssClass="clickDoButton"/>
+                <asp:Button ID="Button3" runat="server" Text="OK"  CssClass="clickDoButton"/>
+            </div>
+        </div>
+
+        <div class="outputWrapper">
 
 
-                <div class="recipeOutput">
-                </div>
+            <div class="recipeOutput">
 
-                <div class="cardInput">
-                    <div id="cardDrop" class="cardInputter">
-                         
-                    </div>
+
+            </div>
+
+            <div class="cardInput">
+                <div class="cardInputter">
+
 
                 </div>
 
             </div>
 
         </div>
-        <div class="moneyOutput">
-            <div class="moneyOutputter">
-            </div>
+
+    </div>
+    <div class="moneyOutput">
+        <div class="moneyOutputter">
+
+        </div>
         </div>
     </form>
 </body>
