@@ -8,15 +8,35 @@ namespace Bank
 {
     class Bank
     {
-        public Bank(string name)
+
+        public string Name { get; set; }
+        public int Number { get; set; }
+
+        public Bank()
         {
+            Name = "AWA Bank";
+            Number = 1234;
         }
 
         public decimal GetBalacne(int cardNumber)
         {
-            Customer customer = dbAdapter.GetCustomer(cardNumber);
+            try
+            {
+                Customer customer = dbAdapter.GetCustomer(cardNumber);
+                dbAdapter.WriteClickLog(customer.ID, "Check balance", "Checked balnace");
 
-            return customer.GetBalance(cardNumber);
+                return customer.GetBalance(cardNumber);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string GetTransactions(int cardNumber, int count)
+        {
+            Customer customer = dbAdapter.GetCustomer(cardNumber);
+            return customer.GetTransactions(cardNumber, count);
         }
 
         public bool Login(int cardNumber, int pin)

@@ -85,9 +85,16 @@ namespace ATM
 
             TextBox inputField = (TextBox)MainContent.FindControl("inputField");
 
-            inputField.Text = inputField.Text + input;
-           
-            
+            if (inputField.Text.Length >= 4)
+            {
+                Label warningLabel = (Label)MainContent.FindControl("warningLabel");
+                warningLabel.Text = "Varning, du kan endast fylla i 4 siffror!";
+            }
+            else
+            {
+                inputField.Text = inputField.Text + "" + input;
+            }
+          
         }
 
         protected void numberButtonClear_Click(object sender, EventArgs e)

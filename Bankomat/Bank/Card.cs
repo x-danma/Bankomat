@@ -24,6 +24,7 @@ namespace Bank
                 {
                     isLoggedIn = true;
                     PinFailsInRow = 0;
+                  //  dbAdapter.WriteClickLog(c, DateTime.Now, "Enter Pin", "Correct Pin Entered"); Hur få in contactID?
                     dbAdapter.UpdateCardState(PinFailsInRow, isActivated, CardNumber);
                 }
                 else
@@ -38,7 +39,7 @@ namespace Bank
                     else
                     {
                         PinFailsInRow++;
-                        dbAdapter.UpdateCardState(PinFailsInRow, true, CardNumber);
+                        dbAdapter.UpdateCardState(PinFailsInRow, isActivated, CardNumber);
                         throw new Exception($"Fel pin. Du har {3 - PinFailsInRow} försök kvar");
                     }
                 }

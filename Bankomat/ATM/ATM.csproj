@@ -182,7 +182,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="GetBalance.aspx" />
     <Content Include="GetMoney.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="metall.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -363,6 +365,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GetBalance.aspx.cs">
+      <DependentUpon>GetBalance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetBalance.aspx.designer.cs">
+      <DependentUpon>GetBalance.aspx</DependentUpon>
+    </Compile>
     <Compile Include="GetMoney.aspx.cs">
       <DependentUpon>GetMoney.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -372,6 +381,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

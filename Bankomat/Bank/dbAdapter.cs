@@ -10,8 +10,50 @@ namespace Bank
 {
     class dbAdapter
     {
-        public static void Withdrawal()
+        public static bool Withdrawal(int accountNumber, int amount)
         {
+            bool isComplete = false;
+
+            SqlConnection myConnection = getConnection();
+            SqlDataReader myReader = null;
+            SqlCommand cmd = new SqlCommand();
+
+            //ERROR ID
+            //1 = För lite pengar på konto
+            //2 = större än dagens uttagsgrän
+            //alt error message
+
+            try
+            {
+                myConnection.Open();
+                cmd.Connection = myConnection;
+                cmd.CommandText = "sp_Withdrawal";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(new SqlParameter("@AccountNumber", accountNumber));
+                cmd.Parameters.Add(new SqlParameter("@Amount", amount));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters.Add(new SqlParameter("@ErrorID", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
+                cmd.Parameters["@ErrorID"].Direction = ParameterDirection.Output;
+
+                myReader = cmd.ExecuteReader();
+                myReader.Read();
+                string error = myReader["ErrorMsg"].ToString();
+                //string errorMsg = cmd.Parameters["@ErrorMsg"].ToString();
+                // 0 = noError
+            }
+            catch (Exception)
+            {
+                throw new Exception("Kontakt till banken kunde inte skapas");
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+
+            return isComplete;
 
         }
         public static Card GetCard(int cardNumber)
@@ -31,8 +73,7 @@ namespace Bank
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
-                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
-                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
+
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
@@ -40,7 +81,7 @@ namespace Bank
                 card.isActivated = Convert.ToBoolean(myReader["IsActivated"]);
                 card.Pin = Convert.ToInt32("Pin");
                 card.PinFailsInRow = Convert.ToInt32("PinFailsInRow");
-                
+
             }
             catch (Exception)
             {
@@ -71,8 +112,6 @@ namespace Bank
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
-                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
-                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
@@ -110,8 +149,7 @@ namespace Bank
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
-                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
-                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
+
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
@@ -133,7 +171,7 @@ namespace Bank
 
         }
 
-        public static List<Transaction> GetTransaction(int accountID, int count)
+        public static List<Transaction> GetTransactions(int accountID, int count)
         {
             List<Transaction> transactions = new List<Transaction>();
 
@@ -151,8 +189,6 @@ namespace Bank
 
                 cmd.Parameters.Add(new SqlParameter("@AccountID", accountID));
                 cmd.Parameters.Add(new SqlParameter("@Count", count));
-                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
-                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 while (myReader.Read())
@@ -176,9 +212,33 @@ namespace Bank
             return transactions;
         }
 
-        public static void WriteClickLog(int CustomerID, DateTime date, string type, string result)
+        public static void WriteClickLog(int customerID, string type, string result)
         {
+            SqlConnection myConnection = getConnection();
+            SqlCommand cmd = new SqlCommand();
 
+            try
+            {
+                myConnection.Open();
+                cmd.Connection = myConnection;
+                cmd.CommandText = "sp_WriteToClickLog";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(new SqlParameter("@CustomerID", customerID));
+                cmd.Parameters.Add(new SqlParameter("@Type", type));
+                cmd.Parameters.Add(new SqlParameter("@Result", result));
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw ;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
         }
 
         public static void UpdateCardState(int pinFailsInRow, bool isActivated, int cardNumber)

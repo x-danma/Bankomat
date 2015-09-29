@@ -17,18 +17,18 @@
             <div class="softSoft">Abryt</div>
             <div class="softSoft">Något?</div>
             </div>
-            <h1>Uttag</h1>
+            <h1>Saldo</h1>
             <asp:Label ID="getMoneyMessage" runat="server" Visible="False" Font-Size="Large" ForeColor="Red"></asp:Label><br />
-            Välj önskat belopp på knappaarna eller skriv in belopp från knappsatsen.<br />
+            Ditt saldo är: <br />
             
             <asp:TextBox ID="inputField" runat="server"></asp:TextBox>
         </div>
 
         <div class="softRightButtonTypeWrapper">
-            <div class="softSoft">100</div>
-            <div class="softSoft">200</div>
-            <div class="softSoft">300</div>
-            <div class="softSoft">400</div>
+            <div class="softSoft">5 senaste</div>
+            <div class="softSoft">Skriv ut 25 senaste</div>
+            <div class="softSoft"></div>
+            <div class="softSoft"></div>
         </div>
     </div>
 
