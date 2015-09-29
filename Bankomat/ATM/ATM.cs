@@ -38,7 +38,7 @@ namespace ATM
             }
         }
 
-        private bool IsthereHundreds()
+        public bool IsthereHundreds()
         {
             bool hundreds = false;
 
