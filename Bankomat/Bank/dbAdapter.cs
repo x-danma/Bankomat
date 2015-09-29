@@ -31,6 +31,8 @@ namespace Bank
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
@@ -69,6 +71,8 @@ namespace Bank
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
@@ -106,6 +110,8 @@ namespace Bank
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
@@ -145,6 +151,8 @@ namespace Bank
 
                 cmd.Parameters.Add(new SqlParameter("@AccountID", accountID));
                 cmd.Parameters.Add(new SqlParameter("@Count", count));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 while (myReader.Read())
