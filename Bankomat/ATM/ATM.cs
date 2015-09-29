@@ -52,7 +52,7 @@ namespace ATM
 
         }
 
-        private bool IsMoneyAvailable(decimal amount) //amount = 800
+        public bool IsMoneyAvailable(decimal amount) //amount = 800
         {
             decimal needOfHundred = amount % 500;  //needOfHundred = 300
             needOfHundreds = needOfHundred / 100; //needOfHundreds = 3
