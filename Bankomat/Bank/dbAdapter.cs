@@ -22,10 +22,12 @@ namespace Bank
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
 
-                command.CommandText = "SELECT account FROM Customer WHERE "
+                command.CommandText = "SELECT account FROM Customer WHERE ";
 
-                    reader = command.ExecuteReader();
+                reader = command.ExecuteReader();
             }
+            catch
+            { }
         }
 
         static Customer GetCustomer(int cardNumber)
@@ -104,46 +106,46 @@ namespace Bank
 
         }
 
-        static List<Transaction> GetTransaction(int accountID, int count)
-        {
-            SqlConnection myConnection = getConnection();
-            SqlDataReader myReader = null;
-            SqlCommand cmd = new SqlCommand();
+        //static List<Transaction> GetTransaction(int accountID, int count)
+        //{
+        //    SqlConnection myConnection = getConnection();
+        //    SqlDataReader myReader = null;
+        //    SqlCommand cmd = new SqlCommand();
 
-            try
-            {
-                myConnection.Open();
-                cmd.Connection = myConnection;
-                cmd.CommandText = "sp_getAccount";
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Clear();
+        //    try
+        //    {
+        //        myConnection.Open();
+        //        cmd.Connection = myConnection;
+        //        cmd.CommandText = "sp_getAccount";
+        //        cmd.CommandType = CommandType.StoredProcedure;
+        //        cmd.Parameters.Clear();
 
-                cmd.Parameters.Add(new SqlParameter("@AccountID", accountID));
-                cmd.Parameters.Add(new SqlParameter("@Count", count));
+        //        cmd.Parameters.Add(new SqlParameter("@AccountID", accountID));
+        //        cmd.Parameters.Add(new SqlParameter("@Count", count));
 
-                myReader = cmd.ExecuteReader();
-                while (myReader.Read())
-                {
-                    Account 
+        //        myReader = cmd.ExecuteReader();
+        //        while (myReader.Read())
+        //        {
+        //            //Account 
 
-                    account.AccountID = Convert.ToInt32(myReader["AccountID"]);
-                    account.AccountNumber = Convert.ToInt32(myReader["AccountNumber"]);
-                    account.Balance = Convert.ToDecimal(myReader["Balance"]);
-                    account.WithdrawalLimitPerDay = Convert.ToDecimal(myReader["WithdrawalLimitPerDay"]);
-                    account.WithdrawalLimitPerTime = Convert.ToDecimal(myReader["WithdrawalLimitPerTime"]);
-                }
-            }
-            catch (Exception)
-            {
-                throw new Exception("Kontakt till banken kunde inte skapas");
-            }
-            finally
-            {
-                myConnection.Close();
-            }
-
-            return account;
-        }
+        //            //account.AccountID = Convert.ToInt32(myReader["AccountID"]);
+        //            //account.AccountNumber = Convert.ToInt32(myReader["AccountNumber"]);
+        //            //account.Balance = Convert.ToDecimal(myReader["Balance"]);
+        //            //account.WithdrawalLimitPerDay = Convert.ToDecimal(myReader["WithdrawalLimitPerDay"]);
+        //            //account.WithdrawalLimitPerTime = Convert.ToDecimal(myReader["WithdrawalLimitPerTime"]);
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw new Exception("Kontakt till banken kunde inte skapas");
+        //    }
+        //    finally
+        //    {
+        //        myConnection.Close();
+        //    }
+            
+        //    return account;
+        //}
 
         //static decimal GetBalance(int accountNumber)
         //{
