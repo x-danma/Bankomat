@@ -34,15 +34,18 @@
         <div class="bankomatPicture">
             @*<img src="pictures/bankomat.png" alt="bankomat.png" width="900">*@
         </div>
-
+        
         <div class="hardwareWrapper">
             <div class="softButtonWrapper">
-                @Html.ActionLink(" ","1left",null, new { @class = "softButtonLeft" })
+                @Html.ActionLink(" ", "leftOne", null, new { @class = "softButtonLeft" })
                 @Html.ActionLink(" ", "2left", null, new { @class = "softButtonLeft" })
                 @Html.ActionLink(" ", "3left", null, new { @class = "softButtonLeft" })
                 @Html.ActionLink(" ", "4left", null, new { @class = "softButtonLeft" })
 
-
+                @using (Html.BeginForm("", "~/Controllers/HomeController", FormMethod.Get))
+                {
+                    <input type="submit" value="Click me" />
+                }
             </div>
             <div class="atmScreen">
                 <div class="infoBox">
@@ -60,6 +63,7 @@
                 @Html.ActionLink(" ", "2right", null, new { @class = "softButton" })
                 @Html.ActionLink(" ", "3right", null, new { @class = "softButton" })
                 @Html.ActionLink(" ", "4right", null, new { @class = "softButton" })
+                @Html.ActionLink("Controller", "Action", new { email = "test", parameters = "parameters" })
 
             </div>
 
@@ -67,31 +71,23 @@
 
         <div class="buttonWrapper">
             <div class="numberButtons">
-                <input id="Button1" class="clickButton" type="button" value="1" />
 
-                <input id="Button1" class="clickButton" type="button" value="2" />
-
-                <input id="Button1" class="clickButton" type="button" value="3" />
+                @Html.ActionLink("1", "1", null, new { @class = "clickButton" })
+                @Html.ActionLink("2", "2left", null, new { @class = "clickButton" })
+                @Html.ActionLink("3", "3left", null, new { @class = "clickButton" })
                 <br />
-                <input id="Button1" class="clickButton" type="button" value="4" />
-
-                <input id="Button1" class="clickButton" type="button" value="5" />
-
-                <input id="Button1" class="clickButton" type="button" value="6" />
+                @Html.ActionLink("4", "1", null, new { @class = "clickButton" })
+                @Html.ActionLink("5", "2left", null, new { @class = "clickButton" })
+                @Html.ActionLink("6", "3left", null, new { @class = "clickButton" })
                 <br />
-                <input id="Button1" class="clickButton" type="button" value="7" />
-
-                <input id="Button1" class="clickButton" type="button" value="8" />
-
-                <input id="Button1" class="clickButton" type="button" value="9" />
+                @Html.ActionLink("7", "1", null, new { @class = "clickButton" })
+                @Html.ActionLink("8", "2left", null, new { @class = "clickButton" })
+                @Html.ActionLink("9", "3left", null, new { @class = "clickButton" })
                 <br />
-                <input id="Button1" class="clickButton" type="button" value="" />
+                @Html.ActionLink(" ", "1", null, new { @class = "clickButton" })
+                @Html.ActionLink("0", "2left", null, new { @class = "clickButton" })
+                @Html.ActionLink(" ", "3left", null, new { @class = "clickButton" })
 
-                <input id="Button1" class="clickButton" type="button" value="0" />
-
-                <input id="Button1" class="clickButton" type="button" value="" />
-
-                <br />
             </div>
             <div class="doButtons">
                 <br />
@@ -119,18 +115,18 @@
 
             </div>
 
-            </div>
-
-        </div>
-        <div class="moneyOutput">
-            <div class="moneyOutputter">
-
-            </div>
         </div>
 
+    </div>
+    <div class="moneyOutput">
+        <div class="moneyOutputter">
+
+        </div>
+    </div>
 
 
-    
+
+
 
     @*<div class="container body-content">
             @RenderBody()
