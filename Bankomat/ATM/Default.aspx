@@ -11,7 +11,7 @@
         <div class="infoBox">
             <h1>Welcome to da bank!</h1>
             Sätt in ditt kort i kortläsaren och få cash!!!!<br />
- <asp:TextBox ID="loginField" runat="server"></asp:TextBox>
+ <asp:TextBox ID="inputField" runat="server"></asp:TextBox>
         </div>
 
 
