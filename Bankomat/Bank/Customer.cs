@@ -15,6 +15,12 @@ namespace Bank
             return account.Balance;
         }
 
+        public string GetTransactions(int cardNumber, int count)
+        {
+            Account account = dbAdapter.GetAccount(cardNumber);
+            return account.GetTransactions(cardNumber, count);
+        }
+
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
