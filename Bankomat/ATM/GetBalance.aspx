@@ -23,8 +23,10 @@
             Ditt saldo är:
             <br />
             <asp:Label ID="LabelBalance" runat="server" Text="Label"></asp:Label>
+            <br /><br />
+            <asp:Panel ID="PanelTransactions" runat="server">
+            </asp:Panel>
 
-            
 
 
         </div>
