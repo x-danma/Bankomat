@@ -23,6 +23,6 @@
         <asp:Button ID="button3Right" runat="server" Text=" " CssClass="buttonRight" />
         <asp:Button ID="button4Right" runat="server" Text=" " CssClass="buttonRight" />
     </div>
-
+    <div id="moveCard" class="moveCard">Bankkort</div>
 
 </asp:Content>
