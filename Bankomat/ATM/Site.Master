@@ -45,28 +45,11 @@
             </div>
 
             <div class="hardwareWrapper">
-                <div class="softButtonWrapper">
-                    <asp:Button ID="button1Left" runat="server" Text="Button" CssClass="buttonLeft" />
-                    <asp:Button ID="button2Left" runat="server" Text="Button" CssClass="buttonLeft" />
-                    <asp:Button ID="button3Left" runat="server" Text="Button" CssClass="buttonLeft" />
-                    <asp:Button ID="button4Left" runat="server" Text="Button" CssClass="buttonLeft" />
-                </div>
-                <div class="atmScreen">
-                    <div class="infoBox">
+  
 
                         <asp:ContentPlaceHolder ID="MainContent" runat="server">
                         </asp:ContentPlaceHolder>
-                    </div>
 
-
-                </div>
-
-                <div class="softRightButtonWrapper">
-                    <asp:Button ID="button1Right" runat="server" Text="Button" CssClass="buttonRight" />
-                    <asp:Button ID="button2Right" runat="server" Text="Button" CssClass="buttonRight" />
-                    <asp:Button ID="button3Right" runat="server" Text="Button" CssClass="buttonRight" />
-                    <asp:Button ID="button4Right" runat="server" Text="Button" CssClass="buttonRight" />
-                </div>
 
             </div>
             <div id="moveCard" class="moveCard">Bankkort</div>
