@@ -38,48 +38,102 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
-                    </ul>
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
-                        <AnonymousTemplate>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Register">Register</a></li>
-                                <li><a runat="server" href="~/Account/Login">Log in</a></li>
-                            </ul>
-                        </AnonymousTemplate>
-                        <LoggedInTemplate>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
-                                <li>
-                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
-                                </li>
-                            </ul>
-                        </LoggedInTemplate>
-                    </asp:LoginView>
-                </div>
+             <div class="wrapper">
+
+        <div class="bankomatPicture">
+            
+        </div>
+        
+        <div class="hardwareWrapper">
+            <div class="softButtonWrapper">
+                @Html.ActionLink(" ", "leftOne", null, new { @class = "softButtonLeft" })
+                @Html.ActionLink(" ", "2left", null, new { @class = "softButtonLeft" })
+                @Html.ActionLink(" ", "3left", null, new { @class = "softButtonLeft" })
+                @Html.ActionLink(" ", "4left", null, new { @class = "softButtonLeft" })
+
+                @using (Html.BeginForm("", "~/Controllers/HomeController", FormMethod.Get))
+                {
+                    <input type="submit" value="Click me" />
+                }
+            </div>
+            <div class="atmScreen">
+                <div class="infoBox">
+
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+
+
+
+            </asp:ContentPlaceHolder>
+ </div>
+
+
+            </div>
+
+            <div class="softRightButtonWrapper">
+
+                @Html.ActionLink(" ", "1right", null, new { @class = "softButton" })
+                @Html.ActionLink(" ", "2right", null, new { @class = "softButton" })
+                @Html.ActionLink(" ", "3right", null, new { @class = "softButton" })
+                @Html.ActionLink(" ", "4right", null, new { @class = "softButton" })
+                @Html.ActionLink("Controller", "Action", new { email = "test", parameters = "parameters" })
+
+            </div>
+
+        </div>
+
+        <div class="buttonWrapper">
+            <div class="numberButtons">
+
+                @Html.ActionLink("1", "1", null, new { @class = "clickButton" })
+                @Html.ActionLink("2", "2left", null, new { @class = "clickButton" })
+                @Html.ActionLink("3", "3left", null, new { @class = "clickButton" })
+                <br />
+                @Html.ActionLink("4", "1", null, new { @class = "clickButton" })
+                @Html.ActionLink("5", "2left", null, new { @class = "clickButton" })
+                @Html.ActionLink("6", "3left", null, new { @class = "clickButton" })
+                <br />
+                @Html.ActionLink("7", "1", null, new { @class = "clickButton" })
+                @Html.ActionLink("8", "2left", null, new { @class = "clickButton" })
+                @Html.ActionLink("9", "3left", null, new { @class = "clickButton" })
+                <br />
+                @Html.ActionLink(" ", "1", null, new { @class = "clickButton" })
+                @Html.ActionLink("0", "2left", null, new { @class = "clickButton" })
+                @Html.ActionLink(" ", "3left", null, new { @class = "clickButton" })
+
+            </div>
+            <div class="doButtons">
+                <br />
+                <input id="Button1" class="clickDoButton" type="button" value="Avbryt" />
+                <br />
+                <input id="Button1" class="clickDoButton" type="button" value="Ångra" />
+                <br />
+                <input id="Button1" class="clickDoButton" type="button" value="Ok" />
             </div>
         </div>
-        <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
-            </footer>
+
+        <div class="outputWrapper">
+
+
+            <div class="recipeOutput">
+
+
+            </div>
+
+            <div class="cardInput">
+                <div class="cardInputter">
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="moneyOutput">
+        <div class="moneyOutputter">
+
+        </div>
         </div>
     </form>
 </body>
