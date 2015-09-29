@@ -19,5 +19,12 @@ namespace Bank
             return customer.GetBalance(cardNumber);
         }
 
+        public bool Login(int cardNumber, int pin)
+        {
+            Card card = dbAdapter.GetCard(cardNumber);
+
+            return card.LogIn(cardNumber, pin);
+        }
+
     }
 }

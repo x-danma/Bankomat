@@ -31,11 +31,13 @@ namespace Bank
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
                 card.CardNumber = Convert.ToInt32(myReader["CardNumber"]);
-                card.isActivated = Convert.ToBoolean(myReader["isActivated"]);
+                card.isActivated = Convert.ToBoolean(myReader["IsActivated"]);
                 card.Pin = Convert.ToInt32("Pin");
                 card.PinFailsInRow = Convert.ToInt32("PinFailsInRow");
                 
@@ -69,6 +71,8 @@ namespace Bank
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
@@ -106,6 +110,8 @@ namespace Bank
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
@@ -145,6 +151,8 @@ namespace Bank
 
                 cmd.Parameters.Add(new SqlParameter("@AccountID", accountID));
                 cmd.Parameters.Add(new SqlParameter("@Count", count));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 while (myReader.Read())
@@ -168,14 +176,38 @@ namespace Bank
             return transactions;
         }
 
-        static void WriteClickLog(int CustomerID, DateTime date, string type, string result)
+        public static void WriteClickLog(int CustomerID, DateTime date, string type, string result)
         {
+
+        }
+
+        public static void UpdateCardState(int pinFailsInRow, bool isActivated, int cardNumber)
+        {
+            SqlConnection myConnection = getConnection();
+            SqlCommand cmd = new SqlCommand();
+
+            try
+            {
+                myConnection.Open();
+                cmd.Connection = myConnection;
+                cmd.CommandText = $"UPDATE Card SET PinFailsInRow='{pinFailsInRow}', IsActivated='{isActivated}' WHERE CardNumber='{cardNumber}'";
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw new Exception("Kontakt till banken kunde inte skapas");
+            }
+            finally
+            {
+                myConnection.Close();
+            }
 
         }
 
         static SqlConnection getConnection()
         {
-            SqlConnection myConnection = new SqlConnection("Data Source=ANDREAS-PC\\SQLEXPRESS; Initial Catalog=Bank; Integrated Security=SSPI");
+            SqlConnection myConnection = new SqlConnection("Data Source=localhost\\SQLExpress;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             //ANDREAS-PC\\SQLEXPRESS
             return myConnection;
         }
