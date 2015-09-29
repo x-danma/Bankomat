@@ -14,7 +14,7 @@ namespace ATM
         protected void Page_Load(object sender, EventArgs e)
         {
             theAtm = new ATM();
-            cardNumber = 12345;
+            cardNumber = 1000;
             try
             {
                 LabelBalance.Text = theAtm.GetBalance(cardNumber).ToString(); // Vadå kortnummer????
@@ -117,6 +117,12 @@ namespace ATM
 
             }
 
+        }
+
+        protected void button3Left_Click(object sender, EventArgs e)
+        {
+            
+            HttpContext.Current.Response.Redirect("Default.aspx");
         }
     }
 }

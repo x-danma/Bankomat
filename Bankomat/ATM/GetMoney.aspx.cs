@@ -48,7 +48,8 @@ namespace ATM
                 {
                     
                     getMoneyMessage.Text = "Uttaget genomförs";
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Give money", "toggleMoney()", true);
+                    Session["GetMoney"] = 1;
+                    
                     System.Threading.Thread.Sleep(2000);
                     HttpContext.Current.Response.Redirect("Default.aspx");
                 }

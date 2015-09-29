@@ -100,7 +100,7 @@
         </div>
         <div class="moneyOutput">
             <div class="moneyOutputter">
-                <div class="myMoney"></div>
+                <div id="myMoney" class="myMoney"></div>
             </div>
         </div>
     </form>
