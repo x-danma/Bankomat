@@ -249,6 +249,7 @@
     <Content Include="Views\Atm\Details.cshtml" />
     <Content Include="Views\Atm\Edit.cshtml" />
     <Content Include="Views\Atm\Index.cshtml" />
+    <Content Include="Views\Atm\Withdrawal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
