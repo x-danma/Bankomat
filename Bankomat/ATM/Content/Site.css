@@ -223,7 +223,7 @@ textarea {
 }
 
 .bankomatPicture {
-    background-image: url('../Bankomat.png');
+    background-image: url('../BankomatLogga.png');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -237,4 +237,9 @@ textarea {
     height: 190px;
     background-repeat: no-repeat;
     background-size: cover;
+}
+.infoBox
+{
+    width: 80%;
+    float: left;
 }
