@@ -18,7 +18,7 @@ namespace Bank
             {
                 if (Transactions.Where(t => t.Date.Date == DateTime.Now.Date && t.Amount < 0).Select(t => t.Amount).Sum() < WithdrawalLimitPerDay)
                 {
-                    Balance -= amount;
+                    dbAdapter.Withdrawal(AccountNumber, amount);
                     //logTransaction(amount, $"bankomat {DateTime.Now}");
                 }
                 else
@@ -30,6 +30,20 @@ namespace Bank
             {
                 throw new Exception($"Du kan inte ta ut mer än {WithdrawalLimitPerTime} åt gången");
             }
+        }
+
+        public string GetTransactions(int cardNumber, int count)
+        {
+            List<Transaction> transactions = dbAdapter.GetTransactions(cardNumber, count);
+
+            StringBuilder transactionsString = new StringBuilder();
+
+            foreach (var transaction in transactions)
+            {
+                transactionsString.Append(transaction.Date + ";" + transaction.Amount + ";" + transaction.Description + ";" );
+            }
+
+            return transactionsString.ToString();
         }
 
         public int AccountNumber { get; set; }
