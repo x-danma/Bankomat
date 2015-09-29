@@ -106,46 +106,48 @@ namespace Bank
 
         }
 
-        //static List<Transaction> GetTransaction(int accountID, int count)
-        //{
-        //    SqlConnection myConnection = getConnection();
-        //    SqlDataReader myReader = null;
-        //    SqlCommand cmd = new SqlCommand();
+        static List<Transaction> GetTransaction(int accountID, int count)
+        {
+            List<Transaction> transactions = new List<Transaction>();
 
-        //    try
-        //    {
-        //        myConnection.Open();
-        //        cmd.Connection = myConnection;
-        //        cmd.CommandText = "sp_getAccount";
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.Parameters.Clear();
+            SqlConnection myConnection = getConnection();
+            SqlDataReader myReader = null;
+            SqlCommand cmd = new SqlCommand();
 
-        //        cmd.Parameters.Add(new SqlParameter("@AccountID", accountID));
-        //        cmd.Parameters.Add(new SqlParameter("@Count", count));
+            try
+            {
+                myConnection.Open();
+                cmd.Connection = myConnection;
+                cmd.CommandText = "sp_getAccount";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
 
-        //        myReader = cmd.ExecuteReader();
-        //        while (myReader.Read())
-        //        {
-        //            //Account 
+                cmd.Parameters.Add(new SqlParameter("@AccountID", accountID));
+                cmd.Parameters.Add(new SqlParameter("@Count", count));
 
-        //            //account.AccountID = Convert.ToInt32(myReader["AccountID"]);
-        //            //account.AccountNumber = Convert.ToInt32(myReader["AccountNumber"]);
-        //            //account.Balance = Convert.ToDecimal(myReader["Balance"]);
-        //            //account.WithdrawalLimitPerDay = Convert.ToDecimal(myReader["WithdrawalLimitPerDay"]);
-        //            //account.WithdrawalLimitPerTime = Convert.ToDecimal(myReader["WithdrawalLimitPerTime"]);
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw new Exception("Kontakt till banken kunde inte skapas");
-        //    }
-        //    finally
-        //    {
-        //        myConnection.Close();
-        //    }
-            
-        //    return account;
-        //}
+                myReader = cmd.ExecuteReader();
+                while (myReader.Read())
+                {
+                    Transaction transaction = new Transaction(); 
+
+                    //account.AccountID = Convert.ToInt32(myReader["AccountID"]);
+                    //account.AccountNumber = Convert.ToInt32(myReader["AccountNumber"]);
+                    //account.Balance = Convert.ToDecimal(myReader["Balance"]);
+                    //account.WithdrawalLimitPerDay = Convert.ToDecimal(myReader["WithdrawalLimitPerDay"]);
+                    //account.WithdrawalLimitPerTime = Convert.ToDecimal(myReader["WithdrawalLimitPerTime"]);
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Kontakt till banken kunde inte skapas");
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+
+            return transactions;
+        }
 
         //static decimal GetBalance(int accountNumber)
         //{
