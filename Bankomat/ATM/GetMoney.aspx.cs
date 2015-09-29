@@ -28,7 +28,35 @@ namespace ATM
         }
         protected void button4Right_Click(object sender, EventArgs e)
         {
+            getMoneyMessage.Visible = true;
+         
+            try
+            {
+                if (GetMyMoney(Convert.ToInt32(inputField.Text)))
+                {
+                    getMoneyMessage.Text = "Uttaget genomförs";
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Give money", "toggleMoney()", true);
+                    System.Threading.Thread.Sleep(2000);
+                    HttpContext.Current.Response.Redirect("Default.aspx");
+                }
+
+            }
+            catch (Exception)
+            {
+                getMoneyMessage.Text = "Fel";
+                throw;
+            }
             
         }
+
+        bool GetMyMoney(int input)
+        {
+            bool isItTrue = false;
+
+            isItTrue = true;
+
+            return isItTrue;
+        }
+
     }
 }
