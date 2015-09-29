@@ -122,18 +122,43 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Transaction] (
+CREATE TABLE [dbo].[TransactionHistory] (
     [TransactionID] INT             IDENTITY (1, 1) NOT NULL,
     [AccountID]     INT             NOT NULL FOREIGN KEY REFERENCES Account(AccountNumber) ON DELETE CASCADE,
     [Amount]        DECIMAL (18, 2) NOT NULL,
     [Date]          DATETIME        NOT NULL,
-    [Description]   NVARCHAR (MAX)  NULL
+    [Description]   VARCHAR (MAX)  NULL
 );
 
 
 GO
 
+CREATE TABLE [dbo].[ClickLog] (
+    [ClickLogID] INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+	[CustomerID] INT             ,
+    [Date]       datetime             NOT NULL ,
+    [Type]       VARCHAR(255)    NOT NULL,
+    [Result]          VARCHAR(MAX) NOT NULL,
+    
+);
 
+
+GO
+
+CREATE PROCEDURE [dbo].[sp_WriteToClickLog]
+	@CustomerID int,
+	@Type VARCHAR(255),
+	@Result VARCHAR(MAX)
+AS
+
+BEGIN
+SET NOCOUNT ON;
+	INSERT INTO [dbo].[ClickLog]
+		([CustomerID], [Date], [Type],[Result])
+	VALUES
+		(@CustomerID, GETDATE(), @Type, @Result)
+END
+GO 
 
 -- =========================================
 -- Create table template
@@ -172,110 +197,112 @@ GO
 
 CREATE PROCEDURE [dbo].[sp_GetBalance]
 	@AccountID int,
-	@Balance int output,
-	@ErrorMsg varchar(4000) output
+	@Balance int output	
 AS
 
-		BEGIN TRY 
+BEGIN 
 
-			set nocount on;
+	set nocount on;
 			
-			PRINT 'Getting Balance'
-			BEGIN TRANSACTION [myTran]
-				set @Balance=(SELECT  Balance from Account where AccountNumber=@AccountID)
-				set nocount OFF
-			COMMIT TRANSACTION [myTran]
-		PRINT 'Contact(s) added'
-END TRY
-
-BEGIN CATCH
-	IF (@@TRANCOUNT>0)
-	BEGIN
-		PRINT ERROR_MESSAGE()
-		set @ErrorMsg = ERROR_MESSAGE()
-		PRINT 'Error, transaction will rollback'
-		ROLLBACK TRANSACTION [myTran]
-		PRINT 'Done.'
-	END
-END CATCH
+	PRINT 'Getting Balance'
+		set @Balance=(SELECT  Balance from Account where AccountNumber=@AccountID)
+	PRINT 'Contact(s) added'
+END 
 GO
 
 
 CREATE PROCEDURE [dbo].[sp_getCard]
-	@CardNumber int,
+	@CardNumber int
 	
-	@ErrorMsg varchar(4000) output
 AS
 
-		BEGIN TRY 
+		BEGIN 
 
 			set nocount on;
 			
 			PRINT 'Getting CardInfo'
-			BEGIN TRANSACTION [myTran]
+			
 				select CardNumber, IsActivated, Pin, PinFailsInRow from Card where CardNumber=@CardNumber
-			COMMIT TRANSACTION [myTran]
+			
 		PRINT 'Card info retrieved'
-END TRY
-
-BEGIN CATCH
-	IF (@@TRANCOUNT>0)
-	BEGIN
-		PRINT ERROR_MESSAGE()
-		set @ErrorMsg = ERROR_MESSAGE()
-		PRINT 'Error, transaction will rollback'
-		ROLLBACK TRANSACTION [myTran]
-		PRINT 'Done.'
-	END
-END CATCH
+END 
 GO
 
 CREATE PROCEDURE [dbo].[sp_GetCustomer]
-	@CardNumber int,
-	
-	@ErrorMsg varchar(4000) output
+	@CardNumber int
 AS
 
-		BEGIN TRY 
+		BEGIN 
 
 			set nocount on;
 			
 			PRINT 'Getting Customer Info'
-			BEGIN TRANSACTION [myTran]
+			
 				select CustomerID, FirstName, LastName, SSN from CustomerInfoByCardNumberView where CardNumber=@CardNumber
-			COMMIT TRANSACTION [myTran]
+			
 		PRINT 'Customer info retrieved'
-END TRY
-
-BEGIN CATCH
-	IF (@@TRANCOUNT>0)
-	BEGIN
-		PRINT ERROR_MESSAGE()
-		set @ErrorMsg = ERROR_MESSAGE()
-		PRINT 'Error, transaction will rollback'
-		ROLLBACK TRANSACTION [myTran]
-		PRINT 'Done.'
-	END
-END CATCH
+END 
 GO
 
 
 CREATE PROCEDURE [dbo].[sp_getAccount]
-	@CardNumber int,
+	@CardNumber int
 	
-	@ErrorMsg varchar(4000) output
 AS
 
-		BEGIN TRY 
+		BEGIN 
 
 			set nocount on;
 			
-			PRINT 'Getting Customer Info'
-			BEGIN TRANSACTION [myTran]
+			PRINT 'Getting Account Info'
+			
 				select AccountNumber, Balance, WithdrawalLimitPerDay, WithdrawalLimitPerTime from AccountInfoByCardNumberView where CardNumber=@CardNumber
-			COMMIT TRANSACTION [myTran]
-		PRINT 'Customer info retrieved'
-END TRY
+			
+		PRINT 'Account info retrieved'
+END 
+GO
+
+
+
+CREATE PROCEDURE [dbo].[sp_Withdrawal]
+	@AccountNumber int,
+	@Amount int,
+	@ErrorMsg varchar(4000) output,
+	@ErrorID int output
+AS
+declare @TotalAmount int, @Withdrawallimit int 
+
+set @ErrorID = 0;
+set @TotalAmount = (select sum(Amount) from TransactionHistory where Amount<0 and CONVERT(date, Date)=CONVERT(date, GETDATE())) + @Amount;
+set @Withdrawallimit = (select WithdrawalLimitPerDay from Account where AccountNumber=@AccountNumber);
+
+-- kolla om pengar finns
+if (@Amount > (select Balance from Account where AccountNumber=@AccountNumber))
+begin
+	set @errorID=1
+	PRINT 'ERROR ID = 1'
+end
+-- kolla om uttagen idag blir större än tillåtna
+else if (@TotalAmount > @Withdrawallimit)
+begin			
+	set @errorID=2
+	PRINT 'ERROR ID = 2'
+end
+else
+
+BEGIN TRY 
+
+					set nocount on;
+			
+					PRINT 'Making Withdrawal'
+						BEGIN TRANSACTION [myTran]
+				
+					
+						COMMIT TRANSACTION [myTran]
+					PRINT 'Withdrawal made'
+				END TRY
+			
+
 
 BEGIN CATCH
 	IF (@@TRANCOUNT>0)
@@ -842,7 +869,9 @@ GO
 
 
 
-declare @ErrorMessage varchar(4000);
-Execute dbo.sp_getCard 1000, @ErrorMessage;
-Execute dbo.sp_GetCustomer 1001, @ErrorMessage;
-Execute dbo.sp_getAccount 1000, @ErrorMessage;
+declare @ErrorMessage varchar(4000), @ErrorID int;
+Execute dbo.sp_getCard 1000;
+Execute dbo.sp_GetCustomer 1001;
+Execute dbo.sp_getAccount 1000;
+
+Execute dbo.sp_Withdrawal 10, 100, @ErrorMessage, @ErrorID;

@@ -46,10 +46,7 @@ namespace ATM
             {
                 hundreds = true;
             }
-
-
             return hundreds;
-
         }
 
         public bool IsMoneyAvailable(decimal amount) //amount = 800
