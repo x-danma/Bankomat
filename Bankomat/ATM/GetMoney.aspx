@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="softButtonWrapper">
-        <asp:Button ID="button1Left" runat="server" Text=" " CssClass="buttonLeft" OnClick="button1Left_Click" />
+        <asp:Button ID="button1Left" runat="server" Text=" " CssClass="buttonLeft" />
         <asp:Button ID="button2Left" runat="server" Text=" " CssClass="buttonLeft" />
         <asp:Button ID="button3Left" runat="server" Text=" " CssClass="buttonLeft" />
         <asp:Button ID="button4Left" runat="server" Text=" " CssClass="buttonLeft" />
