@@ -21,7 +21,7 @@ namespace Bank
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
 
-                command.CommandText = "SELECT account FROM Customer WHERE "
+                command.CommandText = "SELECT account FROM Customer WHERE ";
 
                     reader = command.ExecuteReader();
             }
