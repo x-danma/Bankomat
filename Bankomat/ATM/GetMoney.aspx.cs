@@ -13,5 +13,22 @@ namespace ATM
 		{
 
 		}
-	}
+
+        protected void button1Right_Click(object sender, EventArgs e)
+        {
+            inputField.Text = "100";
+        }
+        protected void button2Right_Click(object sender, EventArgs e)
+        {
+            inputField.Text = "200";
+        }
+        protected void button3Right_Click(object sender, EventArgs e)
+        {
+            inputField.Text = "300";
+        }
+        protected void button4Right_Click(object sender, EventArgs e)
+        {
+            
+        }
+    }
 }

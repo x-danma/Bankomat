@@ -19,7 +19,7 @@
             </div>
             <h1>Uttag</h1>
             Välj önskat belopp på knappaarna eller skriv in belopp från knappsatsen.<br />
-            <asp:TextBox ID="loginField" runat="server"></asp:TextBox>
+            <asp:TextBox ID="inputField" runat="server"></asp:TextBox>
         </div>
 
         <div class="softRightButtonTypeWrapper">
@@ -31,10 +31,10 @@
     </div>
 
     <div class="softRightButtonWrapper">
-        <asp:Button ID="button1Right" runat="server" Text=" " CssClass="buttonRight" />
-        <asp:Button ID="button2Right" runat="server" Text=" " CssClass="buttonRight" />
-        <asp:Button ID="button3Right" runat="server" Text=" " CssClass="buttonRight" />
-        <asp:Button ID="button4Right" runat="server" Text=" " CssClass="buttonRight" />
+        <asp:Button ID="button1Right" runat="server" Text=" " CssClass="buttonRight" OnClick="button1Right_Click" />
+        <asp:Button ID="button2Right" runat="server" Text=" " CssClass="buttonRight" OnClick="button2Right_Click" />
+        <asp:Button ID="button3Right" runat="server" Text=" " CssClass="buttonRight" OnClick="button3Right_Click" />
+        <asp:Button ID="button4Right" runat="server" Text=" " CssClass="buttonRight" OnClick="button4Right_Click" />
     </div>
 
 
