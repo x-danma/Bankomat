@@ -10,27 +10,51 @@ namespace Bank
 {
     class dbAdapter
     {
-        static void Withdrawal()
+        public static void Withdrawal()
         {
-            SqlConnection connection = getConnection();
 
-            SqlDataReader reader = null;
+        }
+        public static Card GetCard(int cardNumber)
+        {
+            Card card = new Card();
+
+            SqlConnection myConnection = getConnection();
+            SqlDataReader myReader = null;
+            SqlCommand cmd = new SqlCommand();
 
             try
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand();
-                command.Connection = connection;
+                myConnection.Open();
+                cmd.Connection = myConnection;
+                cmd.CommandText = "sp_getCard";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
 
-                command.CommandText = "SELECT account FROM Customer WHERE ";
+                cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
-                reader = command.ExecuteReader();
+                myReader = cmd.ExecuteReader();
+                myReader.Read();
+                card.CardNumber = Convert.ToInt32(myReader["CardNumber"]);
+                card.isActivated = Convert.ToBoolean(myReader["IsActivated"]);
+                card.Pin = Convert.ToInt32("Pin");
+                card.PinFailsInRow = Convert.ToInt32("PinFailsInRow");
+                
             }
-            catch
-            { }
+            catch (Exception)
+            {
+                throw new Exception("Kontakt till banken kunde inte skapas");
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+
+            return card;
         }
 
-        static Customer GetCustomer(int cardNumber)
+        public static Customer GetCustomer(int cardNumber)
         {
             Customer customer = new Customer();
 
@@ -47,6 +71,8 @@ namespace Bank
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
@@ -67,7 +93,7 @@ namespace Bank
             return customer;
         }
 
-        static Account GetAccount(int cardNumber)
+        public static Account GetAccount(int cardNumber)
         {
             Account account = new Account();
 
@@ -84,10 +110,11 @@ namespace Bank
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
-                account.AccountID = Convert.ToInt32(myReader["AccountID"]);
                 account.AccountNumber = Convert.ToInt32(myReader["AccountNumber"]);
                 account.Balance = Convert.ToDecimal(myReader["Balance"]);
                 account.WithdrawalLimitPerDay = Convert.ToDecimal(myReader["WithdrawalLimitPerDay"]);
@@ -106,7 +133,7 @@ namespace Bank
 
         }
 
-        static List<Transaction> GetTransaction(int accountID, int count)
+        public static List<Transaction> GetTransaction(int accountID, int count)
         {
             List<Transaction> transactions = new List<Transaction>();
 
@@ -124,17 +151,17 @@ namespace Bank
 
                 cmd.Parameters.Add(new SqlParameter("@AccountID", accountID));
                 cmd.Parameters.Add(new SqlParameter("@Count", count));
+                cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
+                cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
 
                 myReader = cmd.ExecuteReader();
                 while (myReader.Read())
                 {
-                    Transaction transaction = new Transaction(); 
-
-                    //account.AccountID = Convert.ToInt32(myReader["AccountID"]);
-                    //account.AccountNumber = Convert.ToInt32(myReader["AccountNumber"]);
-                    //account.Balance = Convert.ToDecimal(myReader["Balance"]);
-                    //account.WithdrawalLimitPerDay = Convert.ToDecimal(myReader["WithdrawalLimitPerDay"]);
-                    //account.WithdrawalLimitPerTime = Convert.ToDecimal(myReader["WithdrawalLimitPerTime"]);
+                    Transaction transaction = new Transaction();
+                    transaction.Amount = Convert.ToDecimal(myReader["Amount"]);
+                    transaction.Date = DateTime.Parse(myReader["Date"].ToString());
+                    transaction.Description = myReader["Description"].ToString();
+                    transaction.TransactionID = Convert.ToInt32(myReader["TransactionID"]);
                 }
             }
             catch (Exception)
@@ -149,54 +176,38 @@ namespace Bank
             return transactions;
         }
 
-        //static decimal GetBalance(int accountNumber)
-        //{
-        //    decimal balance;
+        public static void WriteClickLog(int CustomerID, DateTime date, string type, string result)
+        {
 
-        //    SqlConnection myConnection = getConnection();
-        //    SqlDataReader myReader = null;
-        //    SqlCommand cmd = new SqlCommand();
+        }
 
-        //    try
-        //    {
-        //        myConnection.Open();
-        //        cmd.Connection = myConnection;
-        //        cmd.CommandText = "sp_getBalance";
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.Parameters.Clear();
+        public static void UpdateCardState(int pinFailsInRow, bool isActivated, int cardNumber)
+        {
+            SqlConnection myConnection = getConnection();
+            SqlCommand cmd = new SqlCommand();
 
-        //        cmd.Parameters.Add(new SqlParameter("@AccountNumber", accountNumber));
+            try
+            {
+                myConnection.Open();
+                cmd.Connection = myConnection;
+                cmd.CommandText = $"UPDATE Card SET PinFailsInRow='{pinFailsInRow}', IsActivated='{isActivated}' WHERE CardNumber='{cardNumber}'";
 
-        //        myReader = cmd.ExecuteReader();
-        //        myReader.Read();
-        //        balance = Convert.ToDecimal(myReader["Balance"]);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw new Exception("Kontakt till banken kunde inte skapas");
+            }
+            finally
+            {
+                myConnection.Close();
+            }
 
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw new Exception ("Kontakt till banken kunde inte skapas");
-        //    }
-        //    finally
-        //    {
-        //        myConnection.Close();
-        //    }
-
-        //    return balance;
-        //} 
-
-
-        //static List<Transaction> GetTransactions(int accountNumber, int count)
-        //{
-        //    List<Transaction> transactions = new List<Transaction>();
-
-
-
-        //    return transactions;
-        //}
+        }
 
         static SqlConnection getConnection()
         {
-            SqlConnection myConnection = new SqlConnection("Data Source=ANDREAS-PC\\SQLEXPRESS; Initial Catalog=Bank; Integrated Security=SSPI");
+            SqlConnection myConnection = new SqlConnection("Data Source=localhost\\SQLExpress;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             //ANDREAS-PC\\SQLEXPRESS
             return myConnection;
         }

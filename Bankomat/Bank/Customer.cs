@@ -8,6 +8,12 @@ namespace Bank
 {
     class Customer
     {
+        public decimal GetBalance(int cardNumber)
+        {
+            Account account = dbAdapter.GetAccount(cardNumber);
+
+            return account.Balance;
+        }
 
         public int ID { get; set; }
         public string FirstName { get; set; }

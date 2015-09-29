@@ -116,7 +116,7 @@ textarea {
     width: 25%;
     height: 300px;
     float: left;
-    margin-left: 9%;
+    margin-left: 36%;
     padding-left: 3%;
     padding-top: 3%;
     margin-top: 3%;
@@ -227,19 +227,52 @@ textarea {
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: 240px;
+    height: 230px;
 }
 
 .moveCard {
-    float: left;
+    position: absolute;
+    left: 40px;
+    top: 700px;
     background-image: url('../card.png');
     width: 120px;
     height: 190px;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.infoBox
-{
+
+.infoBox {
     width: 80%;
     float: left;
+}
+
+.softButtonTypeWrapper {
+    width: 10%;
+    float: left;
+    height: 400px;
+    margin-top: 2%;
+}
+
+.softRightButtonTypeWrapper {
+    width: 10%;
+    float: right;
+    height: 400px;
+    margin-top: 2%;
+}
+
+.softSoft {
+    width: 100%;
+    margin-bottom: 42%;
+    height: 10%;
+    display: block;
+    padding: 10px;
+}
+
+.myMoney {
+    width: 100%;
+    height: 100px;
+    background-image: url('../BankomatLogga.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    visibility: hidden;
 }

@@ -10,6 +10,7 @@ namespace Bank
     {
         public int CustomerID { get; set; }
         public DateTime Date { get; set; }
+        public string Type { get; set; }
         public string Result { get; set; }
     }
 }
