@@ -71,7 +71,7 @@
                 <div class="doButtons">
 
                     <asp:Button ID="Button1" runat="server" Text="Avbryt" CssClass="clickDoButton" />
-                    <asp:Button ID="Button2" runat="server" Text="Ångra" CssClass="clickDoButton" />
+                    <asp:Button ID="Button2" runat="server" Text="Ångra" CssClass="clickDoButton" OnClick="numberButtonClear_Click" />
                     <asp:Button ID="Button3" runat="server" Text="OK" CssClass="clickDoButton" />
                 </div>
             </div>
