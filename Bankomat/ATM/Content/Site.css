@@ -76,9 +76,8 @@ textarea {
 
 .buttonLeft {
     float: right;
-    margin: 15%;
     margin-left: 15%;
-    margin-right: 0px;
+    margin-top: 38%;
     height: 10%;
     width: 50%;
     display: block;
@@ -95,9 +94,8 @@ textarea {
 
 .buttonRight {
     float: left;
-    margin: 15%;
-    margin-left: 0px;
     margin-right: 15%;
+    margin-top: 38%;
     height: 10%;
     width: 50%;
     display: block;
@@ -136,11 +134,10 @@ textarea {
     margin-bottom: 5px;
     vertical-align: middle;
     text-align: center;
-    padding-top: 20px;
     height: 52px;
     width: 52px;
     display: block;
-    font: bold 11px Arial;
+    font: bold 25px Arial;
     text-decoration: none;
     background-color: #EEEEEE;
     color: #333333;
@@ -167,13 +164,16 @@ textarea {
     width: 70px;
 }
 
-
 .recipeOutput {
     float: left;
     margin-left: 40%;
-    height: 5px;
+    height: 2px;
     width: 280px;
     background-color: #000000;
+    border-top: 2px solid #CCCCCC;
+    border-right: 2px solid #333333;
+    border-bottom: 2px solid #333333;
+    border-left: 2px solid #CCCCCC;
 }
 
 .cardInput {
@@ -181,28 +181,46 @@ textarea {
     margin-left: 40%;
     margin-top: 10%;
     border: solid;
-    border-color: #000;
+    border-color: #333333;
     border-radius: 5px;
     padding: 5%;
     height: 15px;
     width: 250px;
-    background-color: #4cff00;
+    background-image: url('../metall.jpg');
+    border-top: 2px solid #CCCCCC;
+    border-right: 2px solid #333333;
+    border-bottom: 2px solid #333333;
+    border-left: 2px solid #CCCCCC;
 }
 
 .cardInputter {
-    background-color: #000;
+    background-color: #333333;
     height: 3px;
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
+    border-top: 2px solid #CCCCCC;
+    border-right: 2px solid #333333;
+    border-bottom: 2px solid #333333;
+    border-left: 2px solid #CCCCCC;
+}
+
+.cardMiddleInput{
+    background: #2efd05;
+    width: 100%;
+    height: 10px;
+    padding-top: 3px;
+        border-radius: 3px;
 }
 
 .moneyOutput {
     float: left;
     margin-left: 40%;
     margin-top: 5%;
-    border: solid;
-    border-color: #000;
+    border-top: 2px solid #CCCCCC;
+    border-right: 2px solid #333333;
+    border-bottom: 2px solid #333333;
+    border-left: 2px solid #CCCCCC;
     border-radius: 5px;
     padding: 5%;
     margin-left: 20%;
@@ -215,11 +233,15 @@ textarea {
 }
 
 .moneyOutputter {
-    background-color: #000;
-    height: 7px;
+    background-color: #333333;
+    height: 5px;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
+    border-top: 5px solid #CCCCCC;
+    border-right: 5px solid #333333;
+    border-bottom: 5px solid #333333;
+    border-left: 5x solid #CCCCCC;
 }
 
 .bankomatPicture {
