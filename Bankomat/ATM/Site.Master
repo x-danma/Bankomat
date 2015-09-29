@@ -33,6 +33,11 @@
             window.location.href = 'Login.aspx';;
         }
 
+        function toggleMoney() {
+            $('.myMoney').toggle();
+        }
+
+
     </script>
 </head>
 <body>
@@ -93,6 +98,7 @@
         </div>
         <div class="moneyOutput">
             <div class="moneyOutputter">
+                <div class="myMoney"></div>
             </div>
         </div>
     </form>
