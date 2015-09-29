@@ -14,6 +14,43 @@ namespace Bank
         {
 
         }
+        public static Card GetCard(int cardNumber)
+        {
+            Card card = new Card();
+
+            SqlConnection myConnection = getConnection();
+            SqlDataReader myReader = null;
+            SqlCommand cmd = new SqlCommand();
+
+            try
+            {
+                myConnection.Open();
+                cmd.Connection = myConnection;
+                cmd.CommandText = "sp_getCard";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(new SqlParameter("@CardNumber", cardNumber));
+
+                myReader = cmd.ExecuteReader();
+                myReader.Read();
+                card.CardNumber = Convert.ToInt32(myReader["CardNumber"]);
+                card.isActivated = Convert.ToBoolean(myReader["isActivated"]);
+                card.Pin = Convert.ToInt32("Pin");
+                card.PinFailsInRow = Convert.ToInt32("PinFailsInRow");
+                
+            }
+            catch (Exception)
+            {
+                throw new Exception("Kontakt till banken kunde inte skapas");
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+
+            return card;
+        }
 
         public static Customer GetCustomer(int cardNumber)
         {
@@ -72,7 +109,6 @@ namespace Bank
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
-                account.AccountID = Convert.ToInt32(myReader["AccountID"]);
                 account.AccountNumber = Convert.ToInt32(myReader["AccountNumber"]);
                 account.Balance = Convert.ToDecimal(myReader["Balance"]);
                 account.WithdrawalLimitPerDay = Convert.ToDecimal(myReader["WithdrawalLimitPerDay"]);

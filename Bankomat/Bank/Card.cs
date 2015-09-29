@@ -9,14 +9,11 @@ namespace Bank
 {
     class Card
     {
-        public string CardNumber { get; set; }
+        public int CardNumber { get; set; }
+        //public int AcountNumber { get; set; }
         public int Pin { get; set; }
         public int PinFailsInRow { get; set; }
         public bool isActivated { get; set; }
-
-
-        public Account Account { get; set; }
-
 
         private void CardLogin()
         {
