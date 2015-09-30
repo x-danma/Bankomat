@@ -23,7 +23,7 @@ namespace ATM
         }
 
         public int AtmID { get; set; }
-        public int Reciept { get; set; }
+        public int Receipt { get; set; }
         public int Hundreds { get; set; }
         public int Fivehundreds { get; set; }
 
@@ -59,7 +59,7 @@ namespace ATM
 
         private bool IsRecieptAvailable()
         {
-            if (1 > Reciept)
+            if (1 > Receipt)
             {
                 return false;
             }
@@ -137,7 +137,7 @@ namespace ATM
                 myReader = cmd.ExecuteReader();
 
                 myReader.Read();
-                Reciept = Convert.ToInt32(myReader["NumberOfReceipts"]);
+                Receipt = Convert.ToInt32(myReader["NumberOfReceipts"]);
                 Hundreds = Convert.ToInt32(myReader["NumberOfHundreds"]);
                 Fivehundreds = Convert.ToInt32(myReader["NumberOfFiveHundreds"]);
             }
@@ -165,7 +165,7 @@ namespace ATM
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@ATMID", AtmID));
-                cmd.Parameters.Add(new SqlParameter("@NumberOfReceipts", Reciept));
+                cmd.Parameters.Add(new SqlParameter("@NumberOfReceipts", Receipt));
                 cmd.Parameters.Add(new SqlParameter("@NumberOfHundreds", Hundreds));
                 cmd.Parameters.Add(new SqlParameter("@NumberOfFivehundreds", Fivehundreds));
                 cmd.ExecuteNonQuery();
