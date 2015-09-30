@@ -165,7 +165,7 @@ namespace ATM
             {
                 myConnection.Open();
                 cmd.Connection = myConnection;
-                cmd.CommandText = "sp_getATMInfo";
+                cmd.CommandText = "sp_updateATMInfo";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
 
