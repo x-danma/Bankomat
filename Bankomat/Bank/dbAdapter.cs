@@ -84,8 +84,8 @@ namespace Bank
                 myReader.Read();
                 card.CardNumber = Convert.ToInt32(myReader["CardNumber"]);
                 card.isActivated = Convert.ToBoolean(myReader["IsActivated"]);
-                card.Pin = Convert.ToInt32("Pin");
-                card.PinFailsInRow = Convert.ToInt32("PinFailsInRow");
+                card.Pin = Convert.ToInt32(myReader["Pin"]);
+                card.PinFailsInRow = Convert.ToInt32(myReader["PinFailsInRow"]);
 
             }
             catch (Exception)
