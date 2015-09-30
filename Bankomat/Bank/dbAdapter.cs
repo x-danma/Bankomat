@@ -10,10 +10,10 @@ namespace Bank
 {
     class dbAdapter
     {
-        public static bool Withdrawal(int accountNumber, decimal amount)
+        public static bool Withdrawal(int accountNumber, decimal amount, string description)
         {
             SqlConnection myConnection = getConnection();
-            SqlDataReader myReader = null;
+            //SqlDataReader myReader = null;
             SqlCommand cmd = new SqlCommand();
 
             //ERROR ID
@@ -32,21 +32,21 @@ namespace Bank
 
                 cmd.Parameters.Add(new SqlParameter("@AccountNumber", accountNumber));
                 cmd.Parameters.Add(new SqlParameter("@Amount", amount));
+                cmd.Parameters.Add(new SqlParameter("@Description", description));
                 cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
                 cmd.Parameters.Add(new SqlParameter("@ErrorID", SqlDbType.VarChar));
                 cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
                 cmd.Parameters["@ErrorID"].Direction = ParameterDirection.Output;
 
-                myReader = cmd.ExecuteReader();
-                myReader.Read();
-                int errorID = Convert.ToInt32(myReader["ErrorID"]);
-                int errorMsg = Convert.ToInt32(myReader["ErrorMsg"]);
+                cmd.ExecuteNonQuery();
+                int errorID = Convert.ToInt32(cmd.Parameters["ErrorID"].Value);
+                string errorMsg = cmd.Parameters["ErrorMsg"].Value.ToString();
 
-                if (errorID > 0 || errorMsg > 2)
+                if (errorMsg != "0" || errorID > 2)
                     throw new CustomException("Tekniskt fel.");
-                else if (errorMsg == 1)
+                else if (errorID == 1)
                     throw new CustomException("Konotot saknar täckning för uttaget");
-                else if (errorMsg == 2)
+                else if (errorID == 2)
                     throw new CustomException("Maxgränsen för dagligt uttag överskriden");
                 else
                     return true;

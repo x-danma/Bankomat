@@ -39,9 +39,10 @@ namespace ATM
 
         public void Withdrawal (int cardNumber, decimal amount)
         {
+            
             if (IsMoneyAvailable(amount))
             {
-                bank.Withdrawal(cardNumber, amount);
+                bank.Withdrawal(cardNumber, amount, "Bankomat");
             }
             else
             {

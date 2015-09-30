@@ -21,10 +21,10 @@ namespace Bank
             return account.GetTransactions(cardNumber, count);
         }
 
-        public bool Withdrawal(int cardNumber, decimal amount)
+        public bool Withdrawal(int cardNumber, decimal amount, string description)
         {
             Account account = dbAdapter.GetAccount(cardNumber);
-            return account.Withdrawal(amount);
+            return account.Withdrawal(amount, description);
         }
 
         public int ID { get; set; }
