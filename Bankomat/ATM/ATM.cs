@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Bank;
-
+using System.Data.SqlClient;
+using System.Data;
 
 namespace ATM
 {
@@ -13,11 +14,15 @@ namespace ATM
         decimal needOfFivehundreds;
         Bank.Bank bank;
 
-        public ATM()
+        public ATM(int atmID)
         {
+            AtmID = atmID;
+            LoadATM(AtmID);
             bank = new Bank.Bank();
+           
         }
 
+        public int AtmID { get; set; }
         public int Reciept { get; set; }
         public int Hundreds { get; set; }
         public int Fivehundreds { get; set; }
@@ -118,6 +123,65 @@ namespace ATM
             }
         }
 
+        public void LoadATM(int atmID)
+        {
+            SqlConnection myConnection = new SqlConnection(@"Data Source=ACADEMY18;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
+            SqlDataReader myReader = null;
+            SqlCommand cmd = new SqlCommand();
+
+            try
+            {
+                myConnection.Open();
+                cmd.Connection = myConnection;
+                cmd.CommandText = "sp_getATMInfo";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(new SqlParameter("@ATMID", atmID));
+                myReader = cmd.ExecuteReader();
+
+                myReader.Read();
+                Reciept = Convert.ToInt32(myReader["NumberOfReceipts"]);
+                Hundreds = Convert.ToInt32(myReader["NumberOfHundreds"]);
+                Fivehundreds = Convert.ToInt32(myReader["NumberOfFiveHundreds"]);
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
+        public void SaveATM(int amtID)
+        {
+            SqlConnection myConnection = new SqlConnection(@"Data Source=ACADEMY18;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            SqlCommand cmd = new SqlCommand();
+
+            try
+            {
+                myConnection.Open();
+                cmd.Connection = myConnection;
+                cmd.CommandText = "sp_getATMInfo";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.Add(new SqlParameter("@ATMID", AtmID));
+                cmd.Parameters.Add(new SqlParameter("@NumberOFReceipts", Reciept));
+                cmd.Parameters.Add(new SqlParameter("@NumberOFHundreds", Hundreds));
+                cmd.Parameters.Add(new SqlParameter("@NumberOFFivehundreds", Fivehundreds));
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
     }
 }

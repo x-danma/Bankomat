@@ -21,7 +21,7 @@ namespace ATM
                 HttpContext.Current.Response.Redirect("Default.aspx");
             }
 
-            theAtm = new ATM();
+            theAtm = new ATM(1);
             cardNumber = Convert.ToInt32(Session["LoggedIn"]);
 
             try
