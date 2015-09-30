@@ -96,6 +96,7 @@ namespace ATM
                 }
                 PanelRecipe.Controls.Add(new LiteralControl("</div>"));
 
+                Session["PanelRecipe"] = PanelRecipe;
 
             }
             catch (Exception ex)
