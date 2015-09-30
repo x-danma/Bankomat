@@ -70,7 +70,14 @@ namespace ATM
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            atm = Session["theATM"] as ATM;
+             atm = new ATM(1);
+
+            if (Session["PanelRecipe"] != null)
+            {
+                PanelRecipe = Session["PanelRecipe"] as Panel;
+                Session["PanelRecipe"] = null;
+            }
+            
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
@@ -109,6 +116,9 @@ namespace ATM
             TextBox inputField = (TextBox)MainContent.FindControl("inputField");
 
             inputField.Text = "";
+
+            TextBox textBox1 = (TextBox)MainContent.FindControl("textBox1");
+            textBox1.Text = "";
 
 
         }

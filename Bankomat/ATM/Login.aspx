@@ -11,7 +11,7 @@
             <h1 style="font-size: xx-large">Välkommen till banken</h1>
             <span style="font-size: x-large">Skriv in din Pinkod</span><br />
             <br />
-            Du har enbart tre försök på dig<br />
+            <br />
             <br />
             <br />
             <asp:Label ID="warningLabel" runat="server" Text=""></asp:Label>

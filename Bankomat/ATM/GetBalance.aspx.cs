@@ -74,7 +74,7 @@ namespace ATM
         protected void button2Right_Click(object sender, EventArgs e)
         {
             try
-            {         
+            {
                 Panel PanelRecipe = Page.Master.FindControl("PanelRecipe") as Panel;
 
                 List<string> theTransactions = theAtm.GetTransactions(cardNumber, 25);
@@ -99,6 +99,9 @@ namespace ATM
                     LabelBalance.Text = ex.Message;
                 }
 
+                Session["PanelRecipe"] = PanelRecipe;
+
+                theAtm.Receipt--;
                 theAtm.SaveATM();
                 Session["LoggedIn"] = null;
                 HttpContext.Current.Response.Redirect("Default.aspx");
