@@ -124,6 +124,8 @@ namespace ATM
                 if (atm.Login(CardNumber, Pin))
                 {
                     Session["LoggedIn"] = CardNumber;
+                    System.Threading.Thread.Sleep(2000);
+                    HttpContext.Current.Response.Redirect("GetMoney.aspx");
                 }
             }
             catch (Exception ex )
@@ -132,6 +134,8 @@ namespace ATM
                 Label warninglabel2 = (Label)MainContent.FindControl("warninglabel");
                 warninglabel2.Text = ex.Message;
             }
+
+
 
             
 
