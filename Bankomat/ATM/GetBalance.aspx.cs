@@ -78,25 +78,11 @@ namespace ATM
             try
             {
 
+
                
-                Panel PanelRecipe = Page.Master.FindControl("PanelRecipe") as Panel;
 
                 List<string> theTransactions = theAtm.GetTransactions(cardNumber, 25);
-
-                PanelRecipe.Controls.Add(new LiteralControl("<div class='transactionsRecipe'>")); // Css-referens!!!
-                foreach (var transaction in theTransactions)
-                {
-                    Label theTransaction = new Label();
-                    theTransaction.ID = transaction;
-                    theTransaction.Text = transaction;
-                    theTransaction.CssClass = "singleTransaction";
-                    PanelTransactions.Controls.Add(theTransaction);
-                    PanelTransactions.Controls.Add(new LiteralControl("<br />"));
-
-                }
-                PanelRecipe.Controls.Add(new LiteralControl("</div>"));
-
-                Session["PanelRecipe"] = PanelRecipe;
+                Session["PanelRecipe"] = theTransactions;
 
                 theAtm.Receipt--;
                 theAtm.SaveATM();
