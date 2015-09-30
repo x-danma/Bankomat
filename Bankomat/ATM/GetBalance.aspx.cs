@@ -78,7 +78,7 @@ namespace ATM
             try
             {
 
-                
+               
                 Panel PanelRecipe = Page.Master.FindControl("PanelRecipe") as Panel;
 
                 List<string> theTransactions = theAtm.GetTransactions(cardNumber, 25);
