@@ -55,9 +55,9 @@ namespace ATM
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                getMoneyMessage.Text = "Fel";
+                getMoneyMessage.Text = ex.Message;
                 
             }
             

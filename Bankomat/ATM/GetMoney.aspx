@@ -8,9 +8,7 @@
         <asp:Button ID="button4Left" runat="server" Text=" " CssClass="buttonLeft" />
     </div>
 
-
-    <div class="atmScreen">
-        <div class="infoBox">
+            <div class="infoBox">
             <div class="softButtonTypeWrapper">
             <div class="softSoft">Uttag</div>
             <div class="softSoft">Saldo</div>
@@ -23,6 +21,8 @@
             
             <asp:TextBox ID="inputField" runat="server"></asp:TextBox>
         </div>
+    <div class="atmScreen">
+
 
         <div class="softRightButtonTypeWrapper">
             <div class="softSoft">100</div>
