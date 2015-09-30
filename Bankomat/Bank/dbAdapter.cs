@@ -34,25 +34,30 @@ namespace Bank
                 cmd.Parameters.Add(new SqlParameter("@Amount", amount));
                 cmd.Parameters.Add(new SqlParameter("@Description", description));
                 cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
-                cmd.Parameters.Add(new SqlParameter("@ErrorID", SqlDbType.VarChar));
+                cmd.Parameters.Add(new SqlParameter("@ErrorID", SqlDbType.Int));
+                //cmd.Parameters["@Description"].Value = description;
+                //cmd.Parameters["@Description"].Size = 4000;
                 cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
+                cmd.Parameters["@ErrorMsg"].Size = 4000;
                 cmd.Parameters["@ErrorID"].Direction = ParameterDirection.Output;
 
                 cmd.ExecuteNonQuery();
-                int errorID = Convert.ToInt32(cmd.Parameters["ErrorID"].Value);
-                string errorMsg = cmd.Parameters["ErrorMsg"].Value.ToString();
+                int errorID = Convert.ToInt32(cmd.Parameters["@ErrorID"].Value);
+                string errorMsg = cmd.Parameters["@ErrorMsg"].Value.ToString();
 
-                if (errorMsg != "0" || errorID > 2)
+                if (errorMsg != "0" || errorID > 3)
                     throw new CustomException("Tekniskt fel.");
                 else if (errorID == 1)
                     throw new CustomException("Konotot saknar täckning för uttaget");
                 else if (errorID == 2)
                     throw new CustomException("Maxgränsen för dagligt uttag överskriden");
+                else if (errorID == 3)
+                    throw new CustomException("Maxgränsen för ett uttag överskriden");
                 else
                     return true;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new Exception("Kontakt till banken misslyckades.");
             }
@@ -188,7 +193,7 @@ namespace Bank
             {
                 myConnection.Open();
                 cmd.Connection = myConnection;
-                cmd.CommandText = "sp_getAccount";
+                cmd.CommandText = "sp_getTransactions";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
 
@@ -203,6 +208,7 @@ namespace Bank
                     transaction.Date = DateTime.Parse(myReader["Date"].ToString());
                     transaction.Description = myReader["Description"].ToString();
                     transaction.TransactionID = Convert.ToInt32(myReader["TransactionID"]);
+                    transactions.Add(transaction);
                 }
             }
             catch (Exception)
@@ -272,7 +278,7 @@ namespace Bank
 
         static SqlConnection getConnection()
         {
-            SqlConnection myConnection = new SqlConnection(@"Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection myConnection = new SqlConnection(@"Data Source=ACADEMY18;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             //ANDREAS-PC\\SQLEXPRESS
             return myConnection;
         }

@@ -23,6 +23,7 @@
             Välj önskat belopp på knapparna eller skriv in belopp från knappsatsen.<br />
             
             <asp:TextBox ID="inputField" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBox1" runat="server" Visible="false"></asp:TextBox>
         </div>
 
         <div class="softRightButtonTypeWrapper">

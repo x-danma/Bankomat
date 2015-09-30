@@ -15,7 +15,7 @@ namespace tesConsole
 
             try
             {
-                Console.WriteLine(bank.Login(1000, 1234));
+                Console.WriteLine(bank.Withdrawal(1001, 500, "Bankomat"));
 
             }
             catch (Exception ex)

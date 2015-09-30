@@ -14,21 +14,14 @@ namespace Bank
 
         public bool Withdrawal(decimal amount, string description)
         {
-            if (amount < WithdrawalLimitPerTime)
+            if (amount <= WithdrawalLimitPerTime)
             {
-                if (Transactions.Where(t => t.Date.Date == DateTime.Now.Date && t.Amount < 0).Select(t => t.Amount).Sum() < WithdrawalLimitPerDay)
-                {
-                    dbAdapter.Withdrawal(AccountNumber, amount, description);
-                    return true;
-                }
-                else
-                {
-                    throw new Exception($"Du kan inte ta ut mer än {WithdrawalLimitPerDay} per dag");
-                }
+                dbAdapter.Withdrawal(AccountNumber, amount, description);
+                return true;
             }
             else
             {
-                throw new Exception($"Du kan inte ta ut mer än {WithdrawalLimitPerTime} åt gången");
+                throw new CustomException($"Du kan inte ta ut mer än {WithdrawalLimitPerTime} åt gången");
             }
         }
 

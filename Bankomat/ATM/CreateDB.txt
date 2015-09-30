@@ -263,6 +263,22 @@ END
 GO
 
 
+CREATE PROCEDURE [dbo].[sp_getTransactions]
+	@AccountID int,
+	@Count int
+AS
+		BEGIN 
+			set nocount on
+			PRINT 'Getting Customer Info'
+				SELECT TOP (@Count) 
+				[TransactionID]
+				,[Amount]
+				,[Date]
+				,[Description]
+  FROM [BankDB].[dbo].[TransactionHistory] order by Date desc 
+  PRINT 'Customer info retrieved'
+END 
+GO
 
 CREATE PROCEDURE [dbo].[sp_Withdrawal]
 	@AccountNumber int,
@@ -303,6 +319,13 @@ BEGIN
 			set @currentCustomerID = (select CustomerID from Account where AccountNumber=@AccountNumber);
 			EXECUTE dbo.sp_WriteToClickLog	@currentCustomerID, @Description, 'ErrorID = 2'
 		end
+		else if (@Amount > (select WithdrawalLimitPerTime from Account where AccountNumber=@AccountNumber))
+		begin
+			set @ErrorID=3
+			set @currentCustomerID = (select CustomerID from Account where AccountNumber=@AccountNumber);
+			EXECUTE dbo.sp_WriteToClickLog	@currentCustomerID, @Description, 'ErrorID = 3'
+		end
+
 		else
 		begin
 			declare @newBalance int;
@@ -365,12 +388,12 @@ INSERT INTO [dbo].[Customer]
 INSERT INTO [dbo].[Account]
 		([CustomerID], [Balance], [WithdrawalLimitPerDay], [WithdrawalLimitPerTime])
 	VALUES
-		(1, 1000000, 5000, 20000)
+		(1, 1000000, 20000, 5000)
 GO 
 INSERT INTO [dbo].[Account]
 		([CustomerID],[Balance], [WithdrawalLimitPerDay], [WithdrawalLimitPerTime])
 	VALUES
-		(2, 11000, 5000, 20000)
+		(2, 11000, 20000, 5000)
 GO 
 
 INSERT INTO [dbo].[Card]
@@ -912,6 +935,7 @@ declare @AccountNumber int, @Amount int, @ErrorMsg varchar(4000);
 Execute dbo.sp_Withdrawal 10, 100, 'Bankomat', @ErrorMessage, @ErrorID;
 
 execute dbo.sp_Withdrawal 1, 400, 'Bankomat', @ErrorMsg out, @ErrorID out
+execute dbo.sp_Withdrawal 1, 10000000, 'Bankomat', @ErrorMsg out, @ErrorID out
 execute dbo.sp_Withdrawal 1, 11000, 'Bankomat', @ErrorMsg out, @ErrorID out
 execute dbo.sp_Withdrawal 1, 5000, 'Bankomat', @ErrorMsg out, @ErrorID out
 execute dbo.sp_Withdrawal 1, 5000, 'Bankomat', @ErrorMsg out, @ErrorID out
