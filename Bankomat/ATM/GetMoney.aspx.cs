@@ -24,7 +24,7 @@ namespace ATM
 
             cardNumber = Convert.ToInt32(Session["LoggedIn"]);
 
-            theAtm = new ATM();
+            theAtm = Session["theAtm"] as ATM;
 
             if (!theAtm.IsthereHundreds())
             {
