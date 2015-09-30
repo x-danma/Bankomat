@@ -39,7 +39,7 @@ namespace ATM
 
             if (!theAtm.IsthereFiveHundreds() && !theAtm.IsthereFiveHundreds())
             {
-                getMoneyMessage.Text = "Det finns inga femhundralappar i denna bankomat";
+                getMoneyMessage.Text = "Det finns inga sedlar i denna bankomat";
 
             }
 
