@@ -42,7 +42,7 @@ namespace ATM
             
             if (IsMoneyAvailable(amount))
             {
-                bank.Withdrawal(cardNumber, amount);
+                bank.Withdrawal(cardNumber, amount, "Bankomat");
             }
             else
             {
