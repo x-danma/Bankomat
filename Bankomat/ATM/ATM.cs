@@ -10,8 +10,8 @@ namespace ATM
 {
     public class ATM
     {
-        int needOfHundreds;
-        int needOfFivehundreds;
+        public int needOfHundreds;
+        public int needOfFivehundreds;
         Bank.Bank bank;
 
         public ATM(int atmID)
