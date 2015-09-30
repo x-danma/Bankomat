@@ -15,7 +15,12 @@ namespace tesConsole
 
             try
             {
-                Console.WriteLine(bank.Withdrawal(1001, 500, "Bankomat"));
+                List<string> transactions = bank.GetTransactions(1000, 5);
+
+                foreach (var item in transactions)
+                {
+                    Console.WriteLine(item);
+                }
 
             }
             catch (Exception ex)
