@@ -129,8 +129,8 @@ namespace ATM
             catch (Exception ex )
             {
 
-                Label warninglabel2 = (Label)MainContent.FindControl("warninglabel");
-                warninglabel2.Text = ex.Message;
+                Label warninglabel = (Label)MainContent.FindControl("warninglabel");
+                warninglabel.Text = ex.Message;
             }
 
             
