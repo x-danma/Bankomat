@@ -153,13 +153,16 @@ textarea {
 }
 
 .doButtons {
-    margin-top: 73px;
+    margin-top: 85px;
     width: 25%;
     float: left;
+    font: bold 20px Arial;
+    text-decoration: none;
+    text-align: center;
 }
 
 .clickDoButton {
-    margin: 1%;
+    margin: 4%;
     height: 42px;
     width: 70px;
 }
@@ -272,14 +275,22 @@ textarea {
     width: 10%;
     float: left;
     height: 400px;
-    margin-top: 2%;
+    margin-top: 6%;
 }
 
 .softRightButtonTypeWrapper {
     width: 10%;
     float: right;
-    height: 400px;
-    margin-top: 2%;
+    height: 400px;  
+    margin-top: 6%;    
+}
+
+.softRightButtonTypeWrapperGetBalance
+{
+    width: 14%;
+    float: right;
+    height: 380px;  
+    margin-top: 6%; 
 }
 
 .softSoft {
@@ -288,6 +299,9 @@ textarea {
     height: 10%;
     display: block;
     padding: 10px;
+    font: bold 20px Arial;
+    text-decoration: none;
+    text-align: center;
 }
 
 .myMoney {
