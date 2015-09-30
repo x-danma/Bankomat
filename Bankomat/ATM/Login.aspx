@@ -17,11 +17,13 @@
             <asp:Label ID="warningLabel" runat="server" Text=""></asp:Label>
             <br />
             
- <asp:TextBox ID="inputField" runat="server" Height="65px" Width="226px"></asp:TextBox>
+ <asp:TextBox ID="inputField" runat="server" Height="65px" Width="226px" Visible="false"></asp:TextBox>
+            <asp:TextBox ID="TextBox1" runat="server" Height="65px" Width="226px" Visible="true"></asp:TextBox>
+        </div>
         </div>
 
 
-    </div>
+    
 
     <div class="softRightButtonWrapper">
         <asp:Button ID="button1Right" runat="server" Text=" " CssClass="buttonRight" />

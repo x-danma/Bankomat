@@ -84,6 +84,7 @@ namespace ATM
             string input = tmpButton.Text;
 
             TextBox inputField = (TextBox)MainContent.FindControl("inputField");
+            TextBox textbox1 = (TextBox)MainContent.FindControl("textbox1");
 
             if (inputField.Text.Length >= 4)
             {
@@ -93,6 +94,7 @@ namespace ATM
             else
             {
                 inputField.Text = inputField.Text + "" + input;
+                textbox1.Text = "*" + textbox1.Text;
             }
           
         }
