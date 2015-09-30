@@ -145,6 +145,15 @@ CREATE TABLE [dbo].[ClickLog] (
 
 GO
 
+CREATE TABLE [dbo].[ATMInfo] 
+([ATMID] INT PRIMARY KEY IDENTITY (1, 1) NOT NULL, 
+[NumberOfReciepts] INT NOT NULL,
+[NumberOfHundreds] INT NOT NULL,
+[NumberOfFivehundreds] INT NOT NULL,
+);
+
+GO
+
 CREATE PROCEDURE [dbo].[sp_WriteToClickLog]
 	@CustomerID int,
 	@Type VARCHAR(255),
@@ -280,6 +289,33 @@ AS
 END 
 GO
 
+CREATE PROCEDURE [dbo].[sp_getATMInfo]
+	@ATMID int
+AS
+		BEGIN 
+			set nocount on
+			PRINT 'Getting ATM Info'
+				SELECT NumberOfReciepts, NumberOfHundreds, NumberOfFivehundreds FROM ATMInfo where ATMID = @ATMID				
+  PRINT 'Customer info retrieved'
+END 
+GO
+
+CREATE PROCEDURE [dbo].[sp_updateATMInfo]
+	@ATMID int,
+	@NumberOfReciepts int,
+	@NumberOfHundreds int,
+	@NumberOfFivehundreds int
+AS
+		BEGIN 
+			set nocount on
+			UPDATE [dbo].[ATMInfo]
+   SET [NumberOfReciepts] = @NumberOfReciepts
+      ,[NumberOfHundreds] = @NumberOfHundreds
+      ,[NumberOfFivehundreds] = @NumberOfFivehundreds
+ WHERE ATMID = @ATMID
+END 
+GO
+
 CREATE PROCEDURE [dbo].[sp_Withdrawal]
 	@AccountNumber int,
 	@Amount int,
@@ -408,6 +444,11 @@ INSERT INTO [dbo].[Card]
 		(2, 1111, 0, 'True')
 GO
 
+INSERT INTO [dbo].ATMInfo
+		(NumberOfReciepts, NumberOfHundreds, NumberOfFivehundreds)
+	VALUES
+		(1000, 100, 500)
+GO
 
 
 --ALTER TABLE [dbo].[Account]
@@ -942,6 +983,9 @@ execute dbo.sp_Withdrawal 1, 5000, 'Bankomat', @ErrorMsg out, @ErrorID out
 execute dbo.sp_Withdrawal 1, 5000, 'Bankomat', @ErrorMsg out, @ErrorID out
 execute dbo.sp_Withdrawal 1, 5000, 'Bankomat', @ErrorMsg out, @ErrorID out
 execute dbo.sp_Withdrawal 1, 5000, 'Bankomat', @ErrorMsg out, @ErrorID out
+execute dbo.sp_getATMInfo 1
+execute dbo.sp_updateATMInfo 1, 99, 999, 499;
+
 
 /****** Script for SelectTopNRows command from SSMS  ******/
 SELECT TOP 1000 [AccountNumber]
@@ -966,3 +1010,9 @@ SELECT TOP 1000 [TransactionID]
       ,[Date]
       ,[Description]
   FROM [BankDB].[dbo].[TransactionHistory]
+
+  SELECT TOP 1000 [ATMID]
+      ,[NumberOfReciepts]
+      ,[NumberOfHundreds]
+      ,[NumberOfFivehundreds]
+  FROM [BankDB].[dbo].[ATMInfo]
