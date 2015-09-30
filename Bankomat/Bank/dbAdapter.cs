@@ -120,12 +120,12 @@ namespace Bank
 
                 myReader = cmd.ExecuteReader();
                 myReader.Read();
-                customer.ID = Convert.ToInt32(myReader["ID"]);
+                customer.ID = Convert.ToInt32(myReader["CustomerID"].ToString());
                 customer.FirstName = myReader["FirstName"].ToString();
                 customer.LastName = myReader["LastName"].ToString();
                 customer.SSN = myReader["SSN"].ToString();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new CustomException("Ogiltigt kort. Kontakta ditt bankkontor.");
             }
@@ -272,7 +272,7 @@ namespace Bank
 
         static SqlConnection getConnection()
         {
-            SqlConnection myConnection = new SqlConnection("Data Source=localhost\\SQLExpress;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection myConnection = new SqlConnection("Data Source=ACADEMY18;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             //ANDREAS-PC\\SQLEXPRESS
             return myConnection;
         }
