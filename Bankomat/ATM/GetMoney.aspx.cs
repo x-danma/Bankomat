@@ -71,9 +71,15 @@ namespace ATM
                         {
                             theAtm.Withdrawal(cardNumber, Convert.ToInt32(inputField.Text));
                             getMoneyMessage.Text = "Uttaget genomförs";
-                            Session["GetMoney"] = 1;
+                            int[] whatMoney = new int[2];
+                            whatMoney[0] = theAtm.needOfHundreds;
+                            whatMoney[1] = theAtm.needOfFivehundreds;
+
+                            Session["GetMoney"] = whatMoney;
                             theAtm.Receipt--;
                             theAtm.SaveATM();
+                            
+
                             System.Threading.Thread.Sleep(2000);
                             HttpContext.Current.Response.Redirect("Default.aspx");
                         }

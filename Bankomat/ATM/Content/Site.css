@@ -207,12 +207,12 @@ textarea {
     border-left: 2px solid #CCCCCC;
 }
 
-.cardMiddleInput{
+.cardMiddleInput {
     background: #2efd05;
     width: 100%;
     height: 10px;
     padding-top: 3px;
-        border-radius: 3px;
+    border-radius: 3px;
 }
 
 .moneyOutput {
@@ -279,15 +279,14 @@ textarea {
 .softRightButtonTypeWrapper {
     width: 10%;
     float: right;
-    height: 400px;  
+    height: 400px;
 }
 
-.softRightButtonTypeWrapperGetBalance
-{
+.softRightButtonTypeWrapperGetBalance {
     width: 14%;
     float: right;
-    height: 380px;  
-    margin-top: 6%; 
+    height: 380px;
+    margin-top: 6%;
 }
 
 .softSoft {
@@ -299,8 +298,7 @@ textarea {
     font: bold 20px Arial;
     text-decoration: none;
     text-align: center;
-
-        /*float: left;
+    /*float: left;
     margin-right: 15%;
     margin-top: 30%;
     height: 50px;
@@ -317,13 +315,50 @@ textarea {
     border-left: 1px solid #CCCCCC;*/
 }
 
-.myMoney {
+.visibleFive {
     width: 60%;
-    margin-left: 20%;
-    margin-top: 5px;
-    height: 100px;
-    background-image: url('../tusing.jpg');
+    margin-left: 20%;    
+    height: 120px;
+    background-image: url('../femhundring.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    visibility: hidden;
+}
+
+.hiddenFive {
+    width: 60%;
+    margin-left: 20%;
+    
+    height: 20px;
+    background-image: url('../femhundring.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.visibleHundred {
+    width: 60%;
+    margin-left: 20%;    
+    height: 120px;
+    background-image: url('../hundring.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hiddenHundred {
+    width: 60%;
+    margin-left: 20%;   
+    height: 20px;
+    background-image: url('../hundring.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#PanelRecipe {
+    position: absolute;
+    z-index: 999;
+    width: 280px;
+    background-color: #fff;
+    padding: 5px;
+}
+#PanelMoney{
+    margin-top: 5px;
 }

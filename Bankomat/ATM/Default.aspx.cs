@@ -13,12 +13,7 @@ namespace ATM
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Convert.ToInt16(Session["GetMoney"]) != 0)
-            {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "clientscript", "document.getElementById('myMoney').style.visibility = 'visible';", true);
-
-                Session["GetMoney"] = null;
-            }
+           
 
             atm = new ATM(1);
             Session["theATM"] = atm;

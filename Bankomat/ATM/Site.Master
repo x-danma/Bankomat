@@ -33,13 +33,21 @@
             window.location.href = 'Login.aspx';;
         }
 
-        function toggleMoney() {
-            $('.myMoney').toggle();
-        }
+        $(function toggleMoney() {
+            $('#PanelMoney').toggle();
+        });
+
+
+        $(function toggleRecipe(){
+            
+                $('#PanelRecipe').slideToggle();
+            
+        });
     </script>
 </head>
 <body>
     <form runat="server">
+        
         <div class="wrapper">
             <div class="bankomatPicture">
             </div>
@@ -75,7 +83,7 @@
             <div class="outputWrapper">
 
                 <div class="recipeOutput">
-                    <asp:Panel ID="PanelRecipe" runat="server"></asp:Panel>
+                    <asp:Panel ID="PanelRecipe" runat="server" style="display:none"></asp:Panel>
                 </div>
 
                 <div id="cardInput" class="cardInput">
@@ -88,7 +96,7 @@
         </div>
         <div class="moneyOutput">
             <div class="moneyOutputter">
-                <div id="myMoney" class="myMoney"></div>
+                <asp:Panel ID="PanelMoney" runat="server" style="display:none"></asp:Panel>
             </div>
         </div>
     </form>

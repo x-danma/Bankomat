@@ -8,10 +8,17 @@
         <asp:Button ID="button4Left" runat="server" Text=" " CssClass="buttonLeft" />
     </div>
     <div class="atmScreen">
+        <div class="softButtonTypeWrapper">
+            
+            </div>
         <div class="infoBox">
-            <h1>Welcome to da bank!</h1>
-            Sätt in ditt kort i kortläsaren och få cash!!!!<br />
- <asp:TextBox ID="inputField" runat="server"></asp:TextBox>
+            <h1>Välkommen</h1>
+            Sätt in ditt kort i kortläsaren.<br />
+ 
+        </div>
+
+        <div class="softRightButtonTypeWrapper">
+            
         </div>
 
 

@@ -72,17 +72,84 @@ namespace ATM
         {
              atm = new ATM(1);
 
+            // Testkod då databusen jävlas med mig
+            List<string> hej = new List<string>();//----------
+
+            hej.Add("tja"); //----------
+            hej.Add("hej");//----------
+            hej.Add("hallå");//----------
+            hej.Add("hejdå");//----------
+
+            Session["PanelRecipe"] =hej; //----------
+
+            // Slut på testkoden
+
             if (Session["PanelRecipe"] != null)
             {
                 Create25Recipe();
+                System.Threading.Thread.Sleep(500);
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Toogle", "toggleRecipe()", true);
             }
-            
+
+
+            // Testkod då databusen jävlas med mig
+            int[] nej = new int[2]; //----------
+
+            nej[0] = 3; //----------
+            nej[1] = 2; //----------
+
+            Session["GetMoney"] = nej; //----------
+            // Slut på testkoden
+
+            if (Session["GetMoney"] != null)
+            {
+                GetMyMoney();
+                System.Threading.Thread.Sleep(7000);
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "Toogle", "toggleMoney()", true);
+            }
+
+
+        }
+
+        private void GetMyMoney()
+        {
+            int[] theMoney = Session["GetMoney"] as int[];
+
+            for (int i = 0; i < theMoney[1]; i++)
+            {
+                if (theMoney[0] == 0 && i == theMoney[1] - 1)
+                {
+                    PanelMoney.Controls.Add(new LiteralControl("<div class='visibleFive'></div>"));
+                }
+                else
+                {
+                    PanelMoney.Controls.Add(new LiteralControl("<div class='hiddenFive'></div>"));
+                }             
+            }
+
+            for (int i = 0; i < theMoney[0]; i++)
+            {
+                if (i == theMoney[0] - 1)
+                {
+                    PanelMoney.Controls.Add(new LiteralControl("<div class='visibleHundred'></div>"));
+                }
+                else
+                {
+                    PanelMoney.Controls.Add(new LiteralControl("<div class='hiddenHundred'></div>"));
+                }
+                
+            }
+
+
+
+
+            Session["GetMoney"] = null;
         }
 
         private void Create25Recipe()
         {
             List<string> theTransactions = Session["PanelRecipe"] as List<string>;
-            PanelRecipe.Controls.Add(new LiteralControl("<div class='transactionsRecipe'>")); // Css-referens!!!
+            
             foreach (var transaction in theTransactions)
             {
                 Label theTransaction = new Label();
@@ -93,7 +160,7 @@ namespace ATM
                 PanelRecipe.Controls.Add(new LiteralControl("<br />"));
 
             }
-            PanelRecipe.Controls.Add(new LiteralControl("</div>"));
+            
             Session["PanelRecipe"] = null;
         }
 
