@@ -263,6 +263,22 @@ END
 GO
 
 
+CREATE PROCEDURE [dbo].[sp_getTransactions]
+	@AccountID int,
+	@Count int
+AS
+		BEGIN 
+			set nocount on
+			PRINT 'Getting Customer Info'
+				SELECT TOP (@Count) 
+				[TransactionID]
+				,[Amount]
+				,[Date]
+				,[Description]
+  FROM [BankDB].[dbo].[TransactionHistory] order by Date desc 
+  PRINT 'Customer info retrieved'
+END 
+GO
 
 CREATE PROCEDURE [dbo].[sp_Withdrawal]
 	@AccountNumber int,
