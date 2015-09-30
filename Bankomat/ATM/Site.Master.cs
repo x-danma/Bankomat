@@ -74,10 +74,27 @@ namespace ATM
 
             if (Session["PanelRecipe"] != null)
             {
-                PanelRecipe = Session["PanelRecipe"] as Panel;
-                Session["PanelRecipe"] = null;
+                Create25Recipe();
             }
             
+        }
+
+        private void Create25Recipe()
+        {
+            List<string> theTransactions = Session["PanelRecipe"] as List<string>;
+            PanelRecipe.Controls.Add(new LiteralControl("<div class='transactionsRecipe'>")); // Css-referens!!!
+            foreach (var transaction in theTransactions)
+            {
+                Label theTransaction = new Label();
+                theTransaction.ID = transaction;
+                theTransaction.Text = transaction;
+                theTransaction.CssClass = "singleTransaction";
+                PanelRecipe.Controls.Add(theTransaction);
+                PanelRecipe.Controls.Add(new LiteralControl("<br />"));
+
+            }
+            PanelRecipe.Controls.Add(new LiteralControl("</div>"));
+            Session["PanelRecipe"] = null;
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
