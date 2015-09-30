@@ -66,19 +66,15 @@ namespace ATM
             }
             catch (Exception ex)
             {
-                //LabelBalance.Text = ex.Message;
-
+                LabelBalance.Text = ex.Message;
             }
-
         }
     
 
         protected void button2Right_Click(object sender, EventArgs e)
         {
             try
-            {
-
-               
+            {         
                 Panel PanelRecipe = Page.Master.FindControl("PanelRecipe") as Panel;
 
                 List<string> theTransactions = theAtm.GetTransactions(cardNumber, 25);
@@ -92,11 +88,17 @@ namespace ATM
                     theTransaction.CssClass = "singleTransaction";
                     PanelTransactions.Controls.Add(theTransaction);
                     PanelTransactions.Controls.Add(new LiteralControl("<br />"));
-
                 }
                 PanelRecipe.Controls.Add(new LiteralControl("</div>"));
+                try
+                {
+                    theAtm.PrintReciept();
+                }
+                catch (Exception ex)
+                {
+                    LabelBalance.Text = ex.Message;
+                }
 
-                theAtm.Receipt--;
                 theAtm.SaveATM();
                 Session["LoggedIn"] = null;
                 HttpContext.Current.Response.Redirect("Default.aspx");
