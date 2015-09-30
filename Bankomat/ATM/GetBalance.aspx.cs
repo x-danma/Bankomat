@@ -13,7 +13,7 @@ namespace ATM
         int cardNumber;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["LoggedIn"] = "1234"; //Ful hack för att vara inloggad när vi kodar
+            
 
             if (Session["LoggedIn"] == null)
             {
