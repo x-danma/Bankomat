@@ -31,8 +31,19 @@ namespace ATM
                 getMoneyMessage.Text = "Det finns inga hundralappar i denna bankomat";
                 
             }
+            if (!theAtm.IsthereFiveHundreds())
+            {
+                getMoneyMessage.Text = "Det finns inga femhundralappar i denna bankomat";
 
-		}
+            }
+
+            if (!theAtm.IsthereFiveHundreds() && !theAtm.IsthereFiveHundreds())
+            {
+                getMoneyMessage.Text = "Det finns inga sedlar i denna bankomat";
+
+            }
+
+        }
 
         protected void button1Right_Click(object sender, EventArgs e)
         {
@@ -54,11 +65,19 @@ namespace ATM
             {
                 if(theAtm.IsMoneyAvailable(Convert.ToInt32(inputField.Text)))               
                 {
-                    theAtm.Withdrawal(cardNumber, Convert.ToInt32(inputField.Text));
-                    getMoneyMessage.Text = "Uttaget genomförs";
-                    Session["GetMoney"] = 1;                    
-                    System.Threading.Thread.Sleep(2000);
-                    HttpContext.Current.Response.Redirect("Default.aspx");
+                    if (Convert.ToInt32(inputField.Text) <= 5000)
+                    {
+                        theAtm.Withdrawal(cardNumber, Convert.ToInt32(inputField.Text));
+                        getMoneyMessage.Text = "Uttaget genomförs";
+                        Session["GetMoney"] = 1;
+                        System.Threading.Thread.Sleep(2000);
+                        HttpContext.Current.Response.Redirect("Default.aspx");
+                    }
+                    else
+                    {
+                        getMoneyMessage.Text = "Du får som mest ta ut 5000 kr per tillfället";
+                    }
+                    
                 }
 
             }

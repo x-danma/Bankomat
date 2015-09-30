@@ -72,6 +72,16 @@ namespace ATM
             }
             return hundreds;
         }
+        public bool IsthereFiveHundreds()
+        {
+            bool hundreds = false;
+
+            if (Fivehundreds> 0)
+            {
+                hundreds = true;
+            }
+            return hundreds;
+        }
 
         public bool IsMoneyAvailable(decimal amount) //amount = 800
         {
