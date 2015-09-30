@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="softButtonWrapper">
-        <asp:Button ID="button1Left" runat="server" Text=" " CssClass="buttonLeft" />
+        <asp:Button ID="button1Left" runat="server" Text=" " CssClass="buttonLeft" OnClick="button1Left_Click" />
         <asp:Button ID="button2Left" runat="server" Text=" " CssClass="buttonLeft" />
         <asp:Button ID="button3Left" runat="server" Text=" " CssClass="buttonLeft" OnClick="button3Left_Click" />
         <asp:Button ID="button4Left" runat="server" Text=" " CssClass="buttonLeft" />
@@ -31,8 +31,8 @@
         <div class="softRightButtonTypeWrapperGetBalance">
             <div class="softSoft">5 senaste</div>
             <div class="softSoft">Skriv ut 25 senaste</div>
-            <div class="softSoft"> </div>
-            <div class="softSoft"> </div>
+            <div class="softSoft">&nbsp</div>
+            <div class="softSoft">&nbsp</div>
         </div>
     </div>
 

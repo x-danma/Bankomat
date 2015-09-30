@@ -277,7 +277,7 @@ namespace Bank
 
         static SqlConnection getConnection()
         {
-            SqlConnection myConnection = new SqlConnection("Data Source=ACADEMY18;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection myConnection = new SqlConnection(@"Data Source=ACADEMY01-VM\SQLEXPRESS;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             //ANDREAS-PC\\SQLEXPRESS
             return myConnection;
         }

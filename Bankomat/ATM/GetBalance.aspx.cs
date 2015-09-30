@@ -13,7 +13,7 @@ namespace ATM
         int cardNumber;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["LoggedIn"] = "1234"; //Ful hack för att vara inloggad när vi kodar
+            
 
             if (Session["LoggedIn"] == null)
             {
@@ -66,7 +66,7 @@ namespace ATM
             }
             catch (Exception ex)
             {
-                LabelBalance.Text = ex.Message;
+                //LabelBalance.Text = ex.Message;
 
             }
 
@@ -130,6 +130,11 @@ namespace ATM
         {
             
             HttpContext.Current.Response.Redirect("Default.aspx");
+        }
+
+        protected void button1Left_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.Response.Redirect("GetMoney.aspx");
         }
     }
 }

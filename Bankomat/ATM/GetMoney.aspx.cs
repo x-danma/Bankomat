@@ -13,7 +13,7 @@ namespace ATM
         ATM theAtm;
         protected void Page_Load(object sender, EventArgs e)
 		{
-            Session["LoggedIn"] = "1000"; //Ful hack för att vara inloggad när vi kodar
+            
 
             if (Session["LoggedIn"] == null)
             {
@@ -67,11 +67,18 @@ namespace ATM
                 {
                     if (Convert.ToInt32(inputField.Text) <= 5000)
                     {
-                        theAtm.Withdrawal(cardNumber, Convert.ToInt32(inputField.Text));
-                        getMoneyMessage.Text = "Uttaget genomförs";
-                        Session["GetMoney"] = 1;
-                        System.Threading.Thread.Sleep(2000);
-                        HttpContext.Current.Response.Redirect("Default.aspx");
+                        if ((Convert.ToDecimal(inputField.Text) % 100) % 1 == 0)
+                        {
+                            theAtm.Withdrawal(cardNumber, Convert.ToInt32(inputField.Text));
+                            getMoneyMessage.Text = "Uttaget genomförs";
+                            Session["GetMoney"] = 1;
+                            System.Threading.Thread.Sleep(2000);
+                            HttpContext.Current.Response.Redirect("Default.aspx");
+                        }
+                        else
+                        {
+                            getMoneyMessage.Text = "Du får inte göra orimliga uttag. Uttag måste vara i jämna hundrabelopp";
+                        }
                     }
                     else
                     {
