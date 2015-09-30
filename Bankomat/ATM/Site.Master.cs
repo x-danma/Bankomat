@@ -125,7 +125,9 @@ namespace ATM
                 {
                     Session["LoggedIn"] = CardNumber;
                     System.Threading.Thread.Sleep(2000);
+                    Session["theAtm"] = atm;
                     HttpContext.Current.Response.Redirect("GetMoney.aspx");
+                    
                 }
             }
             catch (Exception ex )
