@@ -10,6 +10,7 @@ namespace Bank
     class Card
     {
         public int CardNumber { get; set; }
+        public int CustomerID { get; set; }
         public int Pin { get; set; }
         public int PinFailsInRow { get; set; }
         public bool isActivated { get; set; }
@@ -22,6 +23,8 @@ namespace Bank
                 {
                     PinFailsInRow = 0;
                     dbAdapter.UpdateCardState(PinFailsInRow, isActivated, CardNumber);
+                    dbAdapter.WriteClickLog(CustomerID, "Log in attempt", "Succeeded");
+
                     return true;
                 }
                 else
@@ -31,13 +34,18 @@ namespace Bank
                         PinFailsInRow++;
                         isActivated = false;
                         dbAdapter.UpdateCardState(PinFailsInRow, isActivated, CardNumber);
+                        dbAdapter.WriteClickLog(CustomerID, "Log in attempt", "Wrong pin, card deactivated");
+
                         throw new CustomException("Fel pin. Kortet spärrat.");
                     }
                     else
                     {
                         PinFailsInRow++;
                         dbAdapter.UpdateCardState(PinFailsInRow, isActivated, CardNumber);
+                        dbAdapter.WriteClickLog(CustomerID, "Log in attempt", "Wrong pin");
+
                         throw new CustomException($"Fel pin. Du har {3 - PinFailsInRow} försök kvar");
+
                     }
                 }
             }
