@@ -13,11 +13,20 @@ namespace ATM
         int cardNumber;
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["LoggedIn"] = "1234"; //Ful hack för att vara inloggad när vi kodar
+
+            if (Session["LoggedIn"] == null)
+            {
+                System.Threading.Thread.Sleep(2000);
+                HttpContext.Current.Response.Redirect("Default.aspx");
+            }
+
             theAtm = new ATM();
-            cardNumber = 1000;
+            cardNumber = Convert.ToInt32(Session["LoggedIn"]);
+
             try
             {
-                LabelBalance.Text = theAtm.GetBalance(cardNumber).ToString(); // Vadå kortnummer????
+                LabelBalance.Text = theAtm.GetBalance(cardNumber).ToString(); 
             }
             catch (Exception ex)
             {
@@ -39,22 +48,20 @@ namespace ATM
         {
             try
             {
-
-                List<string> theTransactions = new List<string>();//theAtm.GetTransactions(cardNumber, 5);
+                List<string> theTransactions = theAtm.GetTransactions(cardNumber, 5);
 
                 PanelTransactions.Controls.Add(new LiteralControl("<div class='transactions'>")); // Css-referens!!!
                 foreach (var transaction in theTransactions)
                 {
                     Label theTransaction = new Label();
-                    //theTransaction.ID = transaction.;
-                    //theTransaction.Text = transaction.;
+                    theTransaction.ID = transaction;
+                    theTransaction.Text = transaction;
                     theTransaction.CssClass = "singleTransaction";
                     PanelTransactions.Controls.Add(theTransaction);
                     PanelTransactions.Controls.Add(new LiteralControl("<br />"));
 
                 }
                 PanelTransactions.Controls.Add(new LiteralControl("</div>"));
-
 
             }
             catch (Exception ex)
@@ -80,8 +87,8 @@ namespace ATM
                 foreach (var transaction in theTransactions)
                 {
                     Label theTransaction = new Label();
-                    //theTransaction.ID = transaction.;
-                    //theTransaction.Text = transaction.;
+                    theTransaction.ID = transaction;
+                    theTransaction.Text = transaction;
                     theTransaction.CssClass = "singleTransaction";
                     PanelTransactions.Controls.Add(theTransaction);
                     PanelTransactions.Controls.Add(new LiteralControl("<br />"));
