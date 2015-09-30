@@ -117,6 +117,9 @@ namespace ATM
 
             inputField.Text = "";
 
+            TextBox textBox1 = (TextBox)MainContent.FindControl("textBox1");
+            textBox1.Text = "";
+
 
         }
 
