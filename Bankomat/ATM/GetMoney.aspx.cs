@@ -54,11 +54,19 @@ namespace ATM
             {
                 if(theAtm.IsMoneyAvailable(Convert.ToInt32(inputField.Text)))               
                 {
-                    theAtm.Withdrawal(cardNumber, Convert.ToInt32(inputField.Text));
-                    getMoneyMessage.Text = "Uttaget genomförs";
-                    Session["GetMoney"] = 1;                    
-                    System.Threading.Thread.Sleep(2000);
-                    HttpContext.Current.Response.Redirect("Default.aspx");
+                    if (Convert.ToInt32(inputField.Text) < 5000)
+                    {
+                        theAtm.Withdrawal(cardNumber, Convert.ToInt32(inputField.Text));
+                        getMoneyMessage.Text = "Uttaget genomförs";
+                        Session["GetMoney"] = 1;
+                        System.Threading.Thread.Sleep(2000);
+                        HttpContext.Current.Response.Redirect("Default.aspx");
+                    }
+                    else
+                    {
+                        getMoneyMessage.Text = "Du får som mest ta ut 5000 kr per tillfället";
+                    }
+                    
                 }
 
             }
