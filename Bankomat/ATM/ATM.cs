@@ -155,7 +155,7 @@ namespace ATM
             }
         }
 
-        public void SaveATM(int amtID)
+        public void SaveATM()
         {
             SqlConnection myConnection = new SqlConnection(@"Data Source=ACADEMY18;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
