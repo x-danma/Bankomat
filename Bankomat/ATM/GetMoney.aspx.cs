@@ -31,8 +31,19 @@ namespace ATM
                 getMoneyMessage.Text = "Det finns inga hundralappar i denna bankomat";
                 
             }
+            if (!theAtm.IsthereFiveHundreds())
+            {
+                getMoneyMessage.Text = "Det finns inga femhundralappar i denna bankomat";
 
-		}
+            }
+
+            if (!theAtm.IsthereFiveHundreds() && !theAtm.IsthereFiveHundreds())
+            {
+                getMoneyMessage.Text = "Det finns inga femhundralappar i denna bankomat";
+
+            }
+
+        }
 
         protected void button1Right_Click(object sender, EventArgs e)
         {
