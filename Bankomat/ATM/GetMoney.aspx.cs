@@ -51,11 +51,11 @@ namespace ATM
         }
         protected void button2Right_Click(object sender, EventArgs e)
         {
-            inputField.Text = "200";
+            inputField.Text = "300";
         }
         protected void button3Right_Click(object sender, EventArgs e)
         {
-            inputField.Text = "300";
+            inputField.Text = "500";
         }
         protected void button4Right_Click(object sender, EventArgs e)
         {
