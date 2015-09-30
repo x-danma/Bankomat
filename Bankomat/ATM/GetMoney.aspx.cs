@@ -9,7 +9,7 @@ namespace ATM
 {
 	public partial class GetMoney : System.Web.UI.Page
 	{
-
+        int cardNumber;
         ATM theAtm;
         protected void Page_Load(object sender, EventArgs e)
 		{
@@ -22,6 +22,8 @@ namespace ATM
 
             }
 
+            cardNumber = Convert.ToInt32(Session["LoggedIn"]);
+
             theAtm = new ATM();
 
             if (!theAtm.IsthereHundreds())
@@ -29,8 +31,6 @@ namespace ATM
                 getMoneyMessage.Text = "Det finns inga hundralappar i denna bankomat";
                 
             }
-        
-
 
 		}
 
@@ -52,13 +52,11 @@ namespace ATM
          
             try
             {
-
-                if (GetMyMoney(Convert.ToInt32(inputField.Text)))
+                if(theAtm.IsMoneyAvailable(Convert.ToInt32(inputField.Text)))               
                 {
-                    
+                    theAtm.Withdrawal(cardNumber, Convert.ToInt32(inputField.Text));
                     getMoneyMessage.Text = "Uttaget genomförs";
-                    Session["GetMoney"] = 1;
-                    
+                    Session["GetMoney"] = 1;                    
                     System.Threading.Thread.Sleep(2000);
                     HttpContext.Current.Response.Redirect("Default.aspx");
                 }
@@ -66,8 +64,7 @@ namespace ATM
             }
             catch (Exception ex)
             {
-                getMoneyMessage.Text = ex.Message;
-                
+                getMoneyMessage.Text = ex.Message;                
             }
             
         }
