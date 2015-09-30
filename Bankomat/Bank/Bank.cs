@@ -75,7 +75,7 @@ namespace Bank
         public bool Login(int cardNumber, int pin)          //ClickLog UserID?
         {
             try
-            {
+            { 
                 Card card = dbAdapter.GetCard(cardNumber);
                 return card.LogIn(cardNumber, pin);
             }
