@@ -36,15 +36,15 @@ namespace ATM
 
         protected void button1Right_Click(object sender, EventArgs e)
         {
-
+            inputField.Text = "100";
         }
         protected void button2Right_Click(object sender, EventArgs e)
         {
-            
+            inputField.Text = "200";
         }
         protected void button3Right_Click(object sender, EventArgs e)
         {
-            
+            inputField.Text = "300";
         }
         protected void button4Right_Click(object sender, EventArgs e)
         {
@@ -78,5 +78,21 @@ namespace ATM
             return isItTrue;
         }
 
+        protected void button4Left_Click(object sender, EventArgs e)
+        {
+            inputField.Text = "";
+        }
+
+        protected void button3Left_Click(object sender, EventArgs e)
+        {
+            Session["LoggedIn"] = null;
+            System.Threading.Thread.Sleep(2000);
+            HttpContext.Current.Response.Redirect("Default.aspx");
+        }
+
+        protected void button2Left_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.Response.Redirect("GetBalance.aspx");
+        }
     }
 }
