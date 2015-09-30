@@ -12,6 +12,7 @@ namespace ATM
 {
     public partial class SiteMaster : MasterPage
     {
+        ATM atm;
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
@@ -69,7 +70,7 @@ namespace ATM
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+             atm = new ATM();
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
@@ -114,16 +115,28 @@ namespace ATM
 
         protected void numberButtonOk_Click(object sender, EventArgs e)
         {
-            Button tmpButton = sender as Button;
-
-            string input = tmpButton.Text;
-
             TextBox inputField = (TextBox)MainContent.FindControl("inputField");
+            int CardNumber = 1000;
+            int Pin = Convert.ToInt32(inputField.Text);
 
-            inputField.Text = "";
+            try
+            {
+                if (atm.Login(CardNumber, Pin))
+                {
+                    Session["LoggedIn"] = CardNumber;
+                }
+            }
+            catch (Exception ex )
+            {
 
+                Label warninglabel2 = (Label)MainContent.FindControl("warninglabel");
+                warninglabel2.Text = ex.Message;
+            }
+
+            
 
         }
+        
     }
 
 }
