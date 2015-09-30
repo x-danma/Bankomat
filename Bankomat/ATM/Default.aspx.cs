@@ -9,6 +9,8 @@ namespace ATM
 {
     public partial class _Default : Page
     {
+        ATM atm;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Convert.ToInt16(Session["GetMoney"]) != 0)
@@ -17,6 +19,9 @@ namespace ATM
 
                 Session["GetMoney"] = null;
             }
+
+            atm = new ATM(1);
+            Session["theATM"] = atm;
         }
     }
 }

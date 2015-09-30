@@ -98,6 +98,10 @@ namespace ATM
 
                 Session["PanelRecipe"] = PanelRecipe;
 
+                theAtm.Receipt--;
+                theAtm.SaveATM();
+                Session["LoggedIn"] = null;
+                HttpContext.Current.Response.Redirect("Default.aspx");
             }
             catch (Exception ex)
             {

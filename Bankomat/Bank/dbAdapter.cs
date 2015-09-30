@@ -91,7 +91,7 @@ namespace Bank
                 card.isActivated = Convert.ToBoolean(myReader["IsActivated"]);
                 card.Pin = Convert.ToInt32(myReader["Pin"]);
                 card.PinFailsInRow = Convert.ToInt32(myReader["PinFailsInRow"]);
-                card.CustomerID = Convert.ToInt32("CustomerID");
+                card.CustomerID = Convert.ToInt32(myReader["CustomerID"]);
             }
             catch (Exception)
             {
@@ -278,7 +278,7 @@ namespace Bank
 
         static SqlConnection getConnection()
         {
-            SqlConnection myConnection = new SqlConnection(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection myConnection = new SqlConnection(@"Data Source=ACADEMY18;Initial Catalog=BankDB;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             //ANDREAS-PC\\SQLEXPRESS
             return myConnection;
         }

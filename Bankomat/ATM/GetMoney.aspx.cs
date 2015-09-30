@@ -26,22 +26,22 @@ namespace ATM
 
             theAtm = Session["theAtm"] as ATM;
 
-            if (!theAtm.IsthereHundreds())
-            {
-                getMoneyMessage.Text = "Det finns inga hundralappar i denna bankomat";
+            //if (!theAtm.IsthereHundreds())
+            //{
+            //    getMoneyMessage.Text = "Det finns inga hundralappar i denna bankomat";
                 
-            }
-            if (!theAtm.IsthereFiveHundreds())
-            {
-                getMoneyMessage.Text = "Det finns inga femhundralappar i denna bankomat";
+            //}
+            //if (!theAtm.IsthereFiveHundreds())
+            //{
+            //    getMoneyMessage.Text = "Det finns inga femhundralappar i denna bankomat";
 
-            }
+            //}
 
-            if (!theAtm.IsthereFiveHundreds() && !theAtm.IsthereFiveHundreds())
-            {
-                getMoneyMessage.Text = "Det finns inga sedlar i denna bankomat";
+            //if (!theAtm.IsthereFiveHundreds() && !theAtm.IsthereFiveHundreds())
+            //{
+            //    getMoneyMessage.Text = "Det finns inga sedlar i denna bankomat";
 
-            }
+            //}
 
         }
 
@@ -51,11 +51,11 @@ namespace ATM
         }
         protected void button2Right_Click(object sender, EventArgs e)
         {
-            inputField.Text = "200";
+            inputField.Text = "300";
         }
         protected void button3Right_Click(object sender, EventArgs e)
         {
-            inputField.Text = "300";
+            inputField.Text = "500";
         }
         protected void button4Right_Click(object sender, EventArgs e)
         {
@@ -72,6 +72,8 @@ namespace ATM
                             theAtm.Withdrawal(cardNumber, Convert.ToInt32(inputField.Text));
                             getMoneyMessage.Text = "Uttaget genomförs";
                             Session["GetMoney"] = 1;
+                            theAtm.Receipt--;
+                            theAtm.SaveATM();
                             System.Threading.Thread.Sleep(2000);
                             HttpContext.Current.Response.Redirect("Default.aspx");
                         }

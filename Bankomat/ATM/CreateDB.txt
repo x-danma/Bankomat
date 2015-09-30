@@ -147,7 +147,7 @@ GO
 
 CREATE TABLE [dbo].[ATMInfo] 
 ([ATMID] INT PRIMARY KEY IDENTITY (1, 1) NOT NULL, 
-[NumberOfReciepts] INT NOT NULL,
+[NumberOfReceipts] INT NOT NULL,
 [NumberOfHundreds] INT NOT NULL,
 [NumberOfFivehundreds] INT NOT NULL,
 );
@@ -295,21 +295,21 @@ AS
 		BEGIN 
 			set nocount on
 			PRINT 'Getting ATM Info'
-				SELECT NumberOfReciepts, NumberOfHundreds, NumberOfFivehundreds FROM ATMInfo where ATMID = @ATMID				
+				SELECT NumberOfReceipts, NumberOfHundreds, NumberOfFivehundreds FROM ATMInfo where ATMID = @ATMID				
   PRINT 'Customer info retrieved'
 END 
 GO
 
 CREATE PROCEDURE [dbo].[sp_updateATMInfo]
 	@ATMID int,
-	@NumberOfReciepts int,
+	@NumberOfReceipts int,
 	@NumberOfHundreds int,
 	@NumberOfFivehundreds int
 AS
 		BEGIN 
 			set nocount on
 			UPDATE [dbo].[ATMInfo]
-   SET [NumberOfReciepts] = @NumberOfReciepts
+   SET [NumberOfReceipts] = @NumberOfReceipts
       ,[NumberOfHundreds] = @NumberOfHundreds
       ,[NumberOfFivehundreds] = @NumberOfFivehundreds
  WHERE ATMID = @ATMID
@@ -445,7 +445,7 @@ INSERT INTO [dbo].[Card]
 GO
 
 INSERT INTO [dbo].ATMInfo
-		(NumberOfReciepts, NumberOfHundreds, NumberOfFivehundreds)
+		(NumberOfReceipts, NumberOfHundreds, NumberOfFivehundreds)
 	VALUES
 		(1000, 100, 500)
 GO
@@ -1165,7 +1165,7 @@ SELECT TOP 1000 [TransactionID]
   FROM [BankDB].[dbo].[TransactionHistory]
 
   SELECT TOP 1000 [ATMID]
-      ,[NumberOfReciepts]
+      ,[NumberOfReceipts]
       ,[NumberOfHundreds]
       ,[NumberOfFivehundreds]
   FROM [BankDB].[dbo].[ATMInfo]
