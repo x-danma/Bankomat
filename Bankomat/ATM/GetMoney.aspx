@@ -10,13 +10,14 @@
 
 
     <div class="atmScreen">
-        <div class="infoBox">
-            <div class="softButtonTypeWrapper">
+        <div class="softButtonTypeWrapper">
             <div class="softSoft">Uttag</div>
             <div class="softSoft">Saldo</div>
             <div class="softSoft">Abryt</div>
-            <div class="softSoft">Något?</div>
+            <div class="softSoft">Ångra</div>
             </div>
+        <div class="infoBox">
+            
             <h1>Uttag</h1>
             <asp:Label ID="getMoneyMessage" runat="server" Visible="False" Font-Size="Large" ForeColor="Red"></asp:Label><br />
             Välj önskat belopp på knappaarna eller skriv in belopp från knappsatsen.<br />
@@ -26,9 +27,9 @@
 
         <div class="softRightButtonTypeWrapper">
             <div class="softSoft">100</div>
-            <div class="softSoft">200</div>
             <div class="softSoft">300</div>
-            <div class="softSoft">400</div>
+            <div class="softSoft">500</div>
+            <div class="softSoft">OK</div>
         </div>
     </div>
 
