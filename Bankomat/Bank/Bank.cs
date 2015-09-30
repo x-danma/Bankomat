@@ -36,12 +36,12 @@ namespace Bank
             }
         }
 
-        public bool Withdrawal(int cardNumber, decimal amount)
+        public bool Withdrawal(int cardNumber, decimal amount, string description)
         {
             try
             {
                 Customer customer = dbAdapter.GetCustomer(cardNumber);
-                return customer.Withdrawal(cardNumber, amount);
+                return customer.Withdrawal(cardNumber, amount, description);
             }
             catch (CustomException ex)
             {

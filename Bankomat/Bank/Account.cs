@@ -12,13 +12,13 @@ namespace Bank
         {
         }
 
-        public bool Withdrawal(decimal amount)
+        public bool Withdrawal(decimal amount, string description)
         {
             if (amount < WithdrawalLimitPerTime)
             {
                 if (Transactions.Where(t => t.Date.Date == DateTime.Now.Date && t.Amount < 0).Select(t => t.Amount).Sum() < WithdrawalLimitPerDay)
                 {
-                    dbAdapter.Withdrawal(AccountNumber, amount);
+                    dbAdapter.Withdrawal(AccountNumber, amount, description);
                     return true;
                 }
                 else
