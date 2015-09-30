@@ -13,7 +13,7 @@ namespace ATM
         ATM theAtm;
         protected void Page_Load(object sender, EventArgs e)
 		{
-            Session["LoggedIn"] = "1000"; //Ful hack för att vara inloggad när vi kodar
+            
 
             if (Session["LoggedIn"] == null)
             {
