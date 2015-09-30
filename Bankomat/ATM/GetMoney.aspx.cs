@@ -26,22 +26,22 @@ namespace ATM
 
             theAtm = Session["theAtm"] as ATM;
 
-            if (!theAtm.IsthereHundreds())
-            {
-                getMoneyMessage.Text = "Det finns inga hundralappar i denna bankomat";
+            //if (!theAtm.IsthereHundreds())
+            //{
+            //    getMoneyMessage.Text = "Det finns inga hundralappar i denna bankomat";
                 
-            }
-            if (!theAtm.IsthereFiveHundreds())
-            {
-                getMoneyMessage.Text = "Det finns inga femhundralappar i denna bankomat";
+            //}
+            //if (!theAtm.IsthereFiveHundreds())
+            //{
+            //    getMoneyMessage.Text = "Det finns inga femhundralappar i denna bankomat";
 
-            }
+            //}
 
-            if (!theAtm.IsthereFiveHundreds() && !theAtm.IsthereFiveHundreds())
-            {
-                getMoneyMessage.Text = "Det finns inga sedlar i denna bankomat";
+            //if (!theAtm.IsthereFiveHundreds() && !theAtm.IsthereFiveHundreds())
+            //{
+            //    getMoneyMessage.Text = "Det finns inga sedlar i denna bankomat";
 
-            }
+            //}
 
         }
 

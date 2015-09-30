@@ -13,21 +13,7 @@ namespace tesConsole
         {
             Bank.Bank bank = new Bank.Bank();
 
-            try
-            {
-                List<string> transactions = bank.GetTransactions(1000, 5);
-
-                foreach (var item in transactions)
-                {
-                    Console.WriteLine(item);
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex.Message);
-            }
+            Console.WriteLine( bank.Login(1000, 1234));
         }
     }
 }
