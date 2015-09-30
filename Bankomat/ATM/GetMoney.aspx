@@ -8,21 +8,22 @@
         <asp:Button ID="button4Left" runat="server" Text=" " CssClass="buttonLeft" />
     </div>
 
-            <div class="infoBox">
-            <div class="softButtonTypeWrapper">
+
+    <div class="atmScreen">
+        <div class="softButtonTypeWrapper">
             <div class="softSoft">Uttag</div>
             <div class="softSoft">Saldo</div>
             <div class="softSoft">Abryt</div>
             <div class="softSoft">Något?</div>
             </div>
+        <div class="infoBox">
+            
             <h1>Uttag</h1>
             <asp:Label ID="getMoneyMessage" runat="server" Visible="False" Font-Size="Large" ForeColor="Red"></asp:Label><br />
             Välj önskat belopp på knappaarna eller skriv in belopp från knappsatsen.<br />
             
             <asp:TextBox ID="inputField" runat="server"></asp:TextBox>
         </div>
-    <div class="atmScreen">
-
 
         <div class="softRightButtonTypeWrapper">
             <div class="softSoft">100</div>
