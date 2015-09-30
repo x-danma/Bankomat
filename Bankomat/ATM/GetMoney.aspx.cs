@@ -111,6 +111,7 @@ namespace ATM
 
         protected void button3Left_Click(object sender, EventArgs e)
         {
+            theAtm.SaveATM();
             Session["LoggedIn"] = null;
             System.Threading.Thread.Sleep(2000);
             HttpContext.Current.Response.Redirect("Default.aspx");
