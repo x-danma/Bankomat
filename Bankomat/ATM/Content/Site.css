@@ -33,7 +33,6 @@ textarea {
     width: 10%;
     float: left;
     height: 400px;
-    padding-left: 10px;
 }
 
 .softRightButtonWrapper {
@@ -77,8 +76,8 @@ textarea {
 .buttonLeft {
     float: right;
     margin-left: 15%;
-    margin-top: 38%;
-    height: 10%;
+    margin-top: 30%;
+    height: 50px;
     width: 50%;
     display: block;
     padding: 10px;
@@ -95,8 +94,8 @@ textarea {
 .buttonRight {
     float: left;
     margin-right: 15%;
-    margin-top: 38%;
-    height: 10%;
+    margin-top: 30%;
+    height: 50px;
     width: 50%;
     display: block;
     padding: 10px;
@@ -275,14 +274,12 @@ textarea {
     width: 10%;
     float: left;
     height: 400px;
-    margin-top: 6%;
 }
 
 .softRightButtonTypeWrapper {
     width: 10%;
     float: right;
     height: 400px;  
-    margin-top: 6%;    
 }
 
 .softRightButtonTypeWrapperGetBalance
@@ -295,13 +292,29 @@ textarea {
 
 .softSoft {
     width: 100%;
-    margin-bottom: 42%;
-    height: 10%;
+    margin-top: 40%;
+    height: 50px;
     display: block;
     padding: 10px;
     font: bold 20px Arial;
     text-decoration: none;
     text-align: center;
+
+        /*float: left;
+    margin-right: 15%;
+    margin-top: 30%;
+    height: 50px;
+    width: 50%;
+    display: block;
+    padding: 10px;
+    font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;*/
 }
 
 .myMoney {

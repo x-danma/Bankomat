@@ -13,14 +13,14 @@
         <div class="softButtonTypeWrapper">
             <div class="softSoft">Uttag</div>
             <div class="softSoft">Saldo</div>
-            <div class="softSoft">Abryt</div>
+            <div class="softSoft">Avbryt</div>
             <div class="softSoft">Ångra</div>
             </div>
         <div class="infoBox">
             
             <h1>Uttag</h1>
             <asp:Label ID="getMoneyMessage" runat="server" Visible="False" Font-Size="Large" ForeColor="Red"></asp:Label><br />
-            Välj önskat belopp på knappaarna eller skriv in belopp från knappsatsen.<br />
+            Välj önskat belopp på knapparna eller skriv in belopp från knappsatsen.<br />
             
             <asp:TextBox ID="inputField" runat="server"></asp:TextBox>
         </div>
