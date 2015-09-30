@@ -10,7 +10,7 @@ namespace Bank
 {
     class dbAdapter
     {
-        public static bool Withdrawal(int accountNumber, decimal amount)
+        public static bool Withdrawal(int accountNumber, decimal amount, string description)
         {
             SqlConnection myConnection = getConnection();
             //SqlDataReader myReader = null;
@@ -32,6 +32,7 @@ namespace Bank
 
                 cmd.Parameters.Add(new SqlParameter("@AccountNumber", accountNumber));
                 cmd.Parameters.Add(new SqlParameter("@Amount", amount));
+                cmd.Parameters.Add(new SqlParameter("@Description", description));
                 cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
                 cmd.Parameters.Add(new SqlParameter("@ErrorID", SqlDbType.VarChar));
                 cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
