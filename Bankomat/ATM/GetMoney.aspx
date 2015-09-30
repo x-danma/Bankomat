@@ -14,7 +14,7 @@
             <div class="softSoft">Uttag</div>
             <div class="softSoft">Saldo</div>
             <div class="softSoft">Abryt</div>
-            <div class="softSoft">Något?</div>
+            <div class="softSoft">Ångra</div>
             </div>
         <div class="infoBox">
             
@@ -27,9 +27,9 @@
 
         <div class="softRightButtonTypeWrapper">
             <div class="softSoft">100</div>
-            <div class="softSoft">200</div>
             <div class="softSoft">300</div>
-            <div class="softSoft">400</div>
+            <div class="softSoft">500</div>
+            <div class="softSoft">OK</div>
         </div>
     </div>
 
