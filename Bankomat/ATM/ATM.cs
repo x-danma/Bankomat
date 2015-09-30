@@ -57,16 +57,28 @@ namespace ATM
             }
         }
 
-        private bool IsRecieptAvailable()
+        public bool PrintReciept()
         {
-            if (1 > Receipt)
+            if (Receipt == 0)
             {
-                return false;
+                Exception ex = new Exception("Slut på kvitton");
+                throw ex;
             }
             else
             {
+                Receipt--;
                 return true;
             }
+
+
+            //if ()
+            //{
+            //    return false;
+            //}
+            //else
+            //{
+            //    return true;
+            //}
         }
 
         public bool IsthereHundreds()

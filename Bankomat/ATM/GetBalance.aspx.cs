@@ -66,10 +66,8 @@ namespace ATM
             }
             catch (Exception ex)
             {
-                //LabelBalance.Text = ex.Message;
-
+                LabelBalance.Text = ex.Message;
             }
-
         }
     
 
@@ -79,7 +77,7 @@ namespace ATM
             {
 
 
-               
+
 
                 List<string> theTransactions = theAtm.GetTransactions(cardNumber, 25);
                 Session["PanelRecipe"] = theTransactions;
