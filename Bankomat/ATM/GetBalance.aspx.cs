@@ -128,7 +128,8 @@ namespace ATM
 
         protected void button3Left_Click(object sender, EventArgs e)
         {
-            
+            theAtm.SaveATM();
+            Session["LoggedIn"] = null;
             HttpContext.Current.Response.Redirect("Default.aspx");
         }
 
