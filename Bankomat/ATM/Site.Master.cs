@@ -70,7 +70,7 @@ namespace ATM
 
         protected void Page_Load(object sender, EventArgs e)
         {
-             atm = new ATM(1);
+            atm = Session["theATM"] as ATM;
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

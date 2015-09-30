@@ -10,8 +10,8 @@ namespace ATM
 {
     public class ATM
     {
-        decimal needOfHundreds;
-        decimal needOfFivehundreds;
+        int needOfHundreds;
+        int needOfFivehundreds;
         Bank.Bank bank;
 
         public ATM(int atmID)
@@ -48,6 +48,8 @@ namespace ATM
             if (IsMoneyAvailable(amount))
             {
                 bank.Withdrawal(cardNumber, amount, "Bankomat");
+                Hundreds -= needOfHundreds;
+                Fivehundreds -= needOfFivehundreds;
             }
             else
             {
@@ -90,14 +92,15 @@ namespace ATM
 
         public bool IsMoneyAvailable(decimal amount) //amount = 800
         {
-            decimal needOfHundred = amount % 500;  //needOfHundred = 300
+            int needOfHundred = (int)amount % 500;  //needOfHundred = 300
             needOfHundreds = needOfHundred / 100; //needOfHundreds = 3
 
-            needOfFivehundreds = (amount-needOfHundred)/500; //needOfFivehundreds = 1
+            needOfFivehundreds = (int)(amount-needOfHundred)/500; //needOfFivehundreds = 1
 
             if (needOfFivehundreds > Fivehundreds)  //fivehundreds = 0
             {
-                needOfHundreds = (needOfFivehundreds-Fivehundreds)*5; //needOfHundreds = 5
+                needOfHundreds += (needOfFivehundreds-Fivehundreds)*5; //needOfHundreds = 5        
+                needOfFivehundreds = needOfFivehundreds - Fivehundreds;
 
                 if (needOfHundreds > Hundreds)
                 {
@@ -109,17 +112,9 @@ namespace ATM
                     return true;
                 }
             }
-            else //if needOfFivehundreds < Fivehundreds
+            else // needOfFivehundreds < Fivehundreds
             {
-                if (needOfHundreds > Hundreds)
-                {
-                    return false;
-                }
-
-                else
-                {
-                    return true;
-                }            
+                return true;          
             }
         }
 
@@ -170,12 +165,12 @@ namespace ATM
                 cmd.Parameters.Clear();
 
                 cmd.Parameters.Add(new SqlParameter("@ATMID", AtmID));
-                cmd.Parameters.Add(new SqlParameter("@NumberOFReceipts", Reciept));
-                cmd.Parameters.Add(new SqlParameter("@NumberOFHundreds", Hundreds));
-                cmd.Parameters.Add(new SqlParameter("@NumberOFFivehundreds", Fivehundreds));
+                cmd.Parameters.Add(new SqlParameter("@NumberOfReceipts", Reciept));
+                cmd.Parameters.Add(new SqlParameter("@NumberOfHundreds", Hundreds));
+                cmd.Parameters.Add(new SqlParameter("@NumberOfFivehundreds", Fivehundreds));
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
             }
             finally
