@@ -78,10 +78,10 @@ namespace ATM
             try
             {
 
-                System.Web.UI.HtmlControls.HtmlGenericControl PanelRecipe = (System.Web.UI.HtmlControls.HtmlGenericControl)Master.FindControl("PanelRecipe");
+                
+                Panel PanelRecipe = Page.Master.FindControl("PanelRecipe") as Panel;
 
-
-                List<string> theTransactions = new List<string>();//theAtm.GetTransactions(cardNumber, 25);
+                List<string> theTransactions = theAtm.GetTransactions(cardNumber, 25);
 
                 PanelRecipe.Controls.Add(new LiteralControl("<div class='transactionsRecipe'>")); // Css-referens!!!
                 foreach (var transaction in theTransactions)
