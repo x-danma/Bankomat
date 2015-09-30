@@ -13,7 +13,7 @@
         <div class="softButtonTypeWrapper">
             <div class="softSoft">Uttag</div>
             <div class="softSoft">Saldo</div>
-            <div class="softSoft">Abryt</div>
+            <div class="softSoft">Avbryt</div>
             <div class="softSoft">Ångra</div>
             </div>
         <div class="infoBox">
