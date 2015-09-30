@@ -18,7 +18,8 @@ namespace Bank
             {
                 if (Transactions.Where(t => t.Date.Date == DateTime.Now.Date && t.Amount < 0).Select(t => t.Amount).Sum() < WithdrawalLimitPerDay)
                 {
-                    dbAdapter.Withdrawal(AccountNumber, amount);
+                    dbAdapter.Withdrawal(AccountNumber, amount, "Bankomat");
+
                     return true;
                 }
                 else
