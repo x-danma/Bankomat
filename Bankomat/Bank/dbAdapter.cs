@@ -35,7 +35,10 @@ namespace Bank
                 cmd.Parameters.Add(new SqlParameter("@Description", description));
                 cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
                 cmd.Parameters.Add(new SqlParameter("@ErrorID", SqlDbType.VarChar));
+                //cmd.Parameters["@Description"].Value = description;
+                //cmd.Parameters["@Description"].Size = 4000;
                 cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
+                cmd.Parameters["@ErrorMsg"].Size = 4000;
                 cmd.Parameters["@ErrorID"].Direction = ParameterDirection.Output;
 
                 cmd.ExecuteNonQuery();
@@ -48,11 +51,13 @@ namespace Bank
                     throw new CustomException("Konotot saknar täckning för uttaget");
                 else if (errorID == 2)
                     throw new CustomException("Maxgränsen för dagligt uttag överskriden");
+                else if (errorID == 3)
+                    throw new CustomException("Maxgränsen för ett uttag överskriden");
                 else
                     return true;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new Exception("Kontakt till banken misslyckades.");
             }
