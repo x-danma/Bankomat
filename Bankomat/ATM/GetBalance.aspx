@@ -15,7 +15,7 @@
                 <div class="softSoft">Uttag</div>
                 <div class="softSoft">Saldo</div>
                 <div class="softSoft">Abryt</div>
-                <div class="softSoft">Något?</div>
+                <div class="softSoft">Ångra</div>
             </div>
             <h1>Saldo</h1>
             <br />
@@ -26,16 +26,13 @@
             <br /><br />
             <asp:Panel ID="PanelTransactions" runat="server">
             </asp:Panel>
-
-
-
         </div>
 
-        <div class="softRightButtonTypeWrapper">
+        <div class="softRightButtonTypeWrapperGetBalance">
             <div class="softSoft">5 senaste</div>
             <div class="softSoft">Skriv ut 25 senaste</div>
-            <div class="softSoft"></div>
-            <div class="softSoft"></div>
+            <div class="softSoft"> </div>
+            <div class="softSoft"> </div>
         </div>
     </div>
 
