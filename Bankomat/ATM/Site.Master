@@ -36,26 +36,17 @@
         function toggleMoney() {
             $('.myMoney').toggle();
         }
-
-
     </script>
 </head>
 <body>
     <form runat="server">
-
-
         <div class="wrapper">
-
             <div class="bankomatPicture">
             </div>
 
             <div class="hardwareWrapper">
-
-
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
-
-
             </div>
 
             <div class="buttonWrapper">
@@ -83,7 +74,6 @@
 
             <div class="outputWrapper">
 
-
                 <div class="recipeOutput">
                     <asp:Panel ID="PanelRecipe" runat="server"></asp:Panel>
                 </div>
@@ -94,9 +84,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
         <div class="moneyOutput">
             <div class="moneyOutputter">
