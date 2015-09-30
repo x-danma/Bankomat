@@ -71,6 +71,13 @@ namespace ATM
         protected void Page_Load(object sender, EventArgs e)
         {
              atm = new ATM(1);
+
+            if (Session["PanelRecipe"] != null)
+            {
+                PanelRecipe = Session["PanelRecipe"] as Panel;
+                Session["PanelRecipe"] = null;
+            }
+            
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
