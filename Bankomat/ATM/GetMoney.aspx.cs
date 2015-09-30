@@ -54,7 +54,7 @@ namespace ATM
             {
                 if(theAtm.IsMoneyAvailable(Convert.ToInt32(inputField.Text)))               
                 {
-                    if (Convert.ToInt32(inputField.Text) < 5000)
+                    if (Convert.ToInt32(inputField.Text) <= 5000)
                     {
                         theAtm.Withdrawal(cardNumber, Convert.ToInt32(inputField.Text));
                         getMoneyMessage.Text = "Uttaget genomförs";
