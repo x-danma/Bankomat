@@ -302,14 +302,14 @@ GO
 
 CREATE PROCEDURE [dbo].[sp_updateATMInfo]
 	@ATMID int,
-	@NumberOfReciepts int,
+	@NumberOfReceipts int,
 	@NumberOfHundreds int,
 	@NumberOfFivehundreds int
 AS
 		BEGIN 
 			set nocount on
 			UPDATE [dbo].[ATMInfo]
-   SET [NumberOfReceipts] = @NumberOfReciepts
+   SET [NumberOfReceipts] = @NumberOfReceipts
       ,[NumberOfHundreds] = @NumberOfHundreds
       ,[NumberOfFivehundreds] = @NumberOfFivehundreds
  WHERE ATMID = @ATMID
