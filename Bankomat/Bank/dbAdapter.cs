@@ -34,7 +34,7 @@ namespace Bank
                 cmd.Parameters.Add(new SqlParameter("@Amount", amount));
                 cmd.Parameters.Add(new SqlParameter("@Description", description));
                 cmd.Parameters.Add(new SqlParameter("@ErrorMsg", SqlDbType.VarChar));
-                cmd.Parameters.Add(new SqlParameter("@ErrorID", SqlDbType.VarChar));
+                cmd.Parameters.Add(new SqlParameter("@ErrorID", SqlDbType.Int));
                 //cmd.Parameters["@Description"].Value = description;
                 //cmd.Parameters["@Description"].Size = 4000;
                 cmd.Parameters["@ErrorMsg"].Direction = ParameterDirection.Output;
@@ -42,10 +42,10 @@ namespace Bank
                 cmd.Parameters["@ErrorID"].Direction = ParameterDirection.Output;
 
                 cmd.ExecuteNonQuery();
-                int errorID = Convert.ToInt32(cmd.Parameters["ErrorID"].Value);
-                string errorMsg = cmd.Parameters["ErrorMsg"].Value.ToString();
+                int errorID = Convert.ToInt32(cmd.Parameters["@ErrorID"].Value);
+                string errorMsg = cmd.Parameters["@ErrorMsg"].Value.ToString();
 
-                if (errorMsg != "0" || errorID > 2)
+                if (errorMsg != "0" || errorID > 3)
                     throw new CustomException("Tekniskt fel.");
                 else if (errorID == 1)
                     throw new CustomException("Konotot saknar täckning för uttaget");
@@ -193,7 +193,7 @@ namespace Bank
             {
                 myConnection.Open();
                 cmd.Connection = myConnection;
-                cmd.CommandText = "sp_getAccount";
+                cmd.CommandText = "sp_getTransactions";
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
 
