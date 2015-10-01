@@ -10,30 +10,32 @@
 
 
     <div class="atmScreen">
+        <div class="softButtonTypeWrapper">
+            <div class="softSoft">Uttag</div>
+            <div class="softSoft">Saldo</div>
+            <div class="softSoft">Avbryt</div>
+            <div class="softSoft">Ångra</div>
+        </div>
         <div class="infoBox">
-            <div class="softButtonTypeWrapper">
-                <div class="softSoft">Uttag</div>
-                <div class="softSoft">Saldo</div>
-                <div class="softSoft">Avbryt</div>
-                <div class="softSoft">Ångra</div>
-            </div>
+
             <h1>Saldo</h1>
             <br />
 
             Ditt saldo är:
             <br />
             <asp:Label ID="LabelBalance" runat="server" Text="Label"></asp:Label>
-            <br /><br />
+            <br />
+            <br />
             <asp:Panel ID="PanelTransactions" runat="server">
             </asp:Panel>
         </div>
 
-        <div class="softRightButtonTypeWrapperGetBalance">
-            <div class="softSoft">5 senaste</div>
-            <div class="softSoft">Skriv ut 25 senaste</div>
-            <div class="softSoft">&nbsp</div>
-            <div class="softSoft">&nbsp</div>
-        </div>
+    <div class="softRightButtonTypeWrapper">
+        <div class="softSoft">5 senaste</div>
+        <div class="softSoft">Skriv ut 25 senaste</div>
+        <div class="softSoft">&nbsp</div>
+        <div class="softSoft">&nbsp</div>
+    </div>
     </div>
 
     <div class="softRightButtonWrapper">

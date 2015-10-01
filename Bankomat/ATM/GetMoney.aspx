@@ -15,13 +15,13 @@
             <div class="softSoft">Saldo</div>
             <div class="softSoft">Avbryt</div>
             <div class="softSoft">Ångra</div>
-            </div>
+        </div>
         <div class="infoBox">
-            
+
             <h1>Uttag</h1>
             <asp:Label ID="getMoneyMessage" runat="server" Visible="False" Font-Size="Large" ForeColor="Red"></asp:Label><br />
             Välj önskat belopp på knapparna eller skriv in belopp från knappsatsen.<br />
-            
+
             <asp:TextBox ID="inputField" runat="server"></asp:TextBox>
             <asp:TextBox ID="TextBox1" runat="server" Visible="false"></asp:TextBox>
         </div>
