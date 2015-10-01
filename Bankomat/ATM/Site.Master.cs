@@ -228,6 +228,11 @@ namespace ATM
             }
             catch (Exception ex )
             {
+                TextBox textbox1 = (TextBox)MainContent.FindControl("textbox1");
+                textbox1.Text = "";
+                inputField.Text = "";
+
+                
 
                 Label warninglabel = (Label)MainContent.FindControl("warninglabel");
                 warninglabel.Text = ex.Message;
