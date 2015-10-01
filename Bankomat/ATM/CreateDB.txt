@@ -1136,6 +1136,9 @@ execute dbo.sp_Withdrawal 1, 5000, 'Bankomat', @ErrorMsg out, @ErrorID out
 execute dbo.sp_Withdrawal 1, 5000, 'Bankomat', @ErrorMsg out, @ErrorID out
 execute dbo.sp_Withdrawal 1, 5000, 'Bankomat', @ErrorMsg out, @ErrorID out
 execute dbo.sp_Withdrawal 1, 5000, 'Bankomat', @ErrorMsg out, @ErrorID out
+execute dbo.sp_Withdrawal 1, 100, 'Bankomat', @ErrorMsg out, @ErrorID out
+execute dbo.sp_Withdrawal 1, 100, 'Bankomat', @ErrorMsg out, @ErrorID out
+execute dbo.sp_Withdrawal 1, 200, 'Bankomat', @ErrorMsg out, @ErrorID out
 execute dbo.sp_getATMInfo 1
 execute dbo.sp_updateATMInfo 1, 99, 999, 499;
 
