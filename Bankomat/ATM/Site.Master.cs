@@ -73,16 +73,18 @@ namespace ATM
              atm = new ATM(1);
 
             // Testkod då databusen jävlas med mig
-            List<string> hej = new List<string>();//----------
+            //List<string> hej = new List<string>();//----------
 
-            hej.Add("tja"); //----------
-            hej.Add("hej");//----------
-            hej.Add("hallå");//----------
-            hej.Add("hejdå");//----------
+            //hej.Add("tja"); //----------
+            //hej.Add("hej");//----------
+            //hej.Add("hallå");//----------
+            //hej.Add("hejdå");//----------
 
-            Session["PanelRecipe"] =hej; //----------
+            //Session["PanelRecipe"] =hej; //----------
 
             // Slut på testkoden
+
+
 
             if (Session["PanelRecipe"] != null)
             {
@@ -92,14 +94,14 @@ namespace ATM
             }
 
 
-            // Testkod då databusen jävlas med mig
-            int[] nej = new int[2]; //----------
+            //// Testkod då databusen jävlas med mig
+            //int[] nej = new int[2]; //----------
 
-            nej[0] = 3; //----------
-            nej[1] = 2; //----------
+            //nej[0] = 3; //----------
+            //nej[1] = 2; //----------
 
-            Session["GetMoney"] = nej; //----------
-            // Slut på testkoden
+            //Session["GetMoney"] = nej; //----------
+            //// Slut på testkoden
 
             if (Session["GetMoney"] != null)
             {
